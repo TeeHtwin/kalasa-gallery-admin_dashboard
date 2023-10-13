@@ -5,41 +5,50 @@ import IconEvent from '@/icons/nav/IconEvent';
 import IconCollection from '@/icons/nav/IconCollection';
 import IconBlog from '@/icons/nav/IconBlog';
 import IconContact from '@/icons/nav/IconContact';
+import {
+  HOME,
+  ARTISTS,
+  ARTWORKS,
+  BLOGS,
+  COLLECTIONS,
+  CONTACTS,
+  EVENTS,
+} from '@/constants/routes';
 
 export const menus = [
   {
     label: 'dashboard',
-    href: '/',
+    href: HOME,
     icon: IconHome,
   },
   {
     label: 'artwork',
-    href: '/artworks',
+    href: ARTWORKS,
     icon: IconArtwork,
   },
   {
     label: 'artist',
-    href: '/artists',
+    href: ARTISTS,
     icon: IconArtist,
   },
   {
     label: 'events',
-    href: '/events',
+    href: EVENTS,
     icon: IconEvent,
   },
   {
     label: 'collections',
-    href: '/collections',
+    href: COLLECTIONS,
     icon: IconCollection,
   },
   {
     label: 'blogs',
-    href: '/blogs',
+    href: BLOGS,
     icon: IconBlog,
   },
   {
     label: 'contact',
-    href: '/contact',
+    href: CONTACTS,
     icon: IconContact,
   },
 ];
