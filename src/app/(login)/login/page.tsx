@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
 import FormInput from '@/components/login/FormInput';
-import { signIn } from 'next-auth/react';
 import { FormEvent } from 'react';
+import { FORGOT_PASSWORD } from '@/constants/routes';
 
 const page = () => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -46,7 +46,7 @@ const page = () => {
           </div>
 
           <Link
-            href="/forgot-password"
+            href={FORGOT_PASSWORD}
             className="text-sm font-bold text-primary"
           >
             Forgot password
