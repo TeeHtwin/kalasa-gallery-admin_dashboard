@@ -14,12 +14,13 @@ const config: Config = {
           100: '#70525B',
         },
         secondary: {
-          DEfAULT: '##F9F2E0',
-          100: '#FFF1E8',
-          200: '#FBEADF',
+          DEFAULT: '#F8CEB2',
+          100: '#F9F2E0',
+          200: '#FFF1E8',
+          300: '#FBEADF',
         },
         white: {
-          DEfAULT: '#FFFFFF',
+          DEFAULT: '#FFFFFF',
           100: '#DFDFDF',
         },
         black: {
@@ -43,6 +44,12 @@ const config: Config = {
       },
       boxShadow: {
         '100': '0px 1px 4px 0px rgba(251, 234, 223, 1);',
+      },
+      fontSize: {
+        heading: '36px',
+      },
+      fontWeight: {
+        heading: '700',
       },
     },
   },
