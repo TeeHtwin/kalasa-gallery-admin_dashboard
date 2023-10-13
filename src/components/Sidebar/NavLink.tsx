@@ -23,7 +23,7 @@ const NavLink = ({ menu, pathname }: NavLinkProps) => {
       <span
         className={cn(
           'capitalize',
-          isActive ? 'text-primary' : 'text-black-100'
+          isActive ? 'text-primary' : 'text-black-100',
         )}
       >
         {menu.label}

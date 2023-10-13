@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
