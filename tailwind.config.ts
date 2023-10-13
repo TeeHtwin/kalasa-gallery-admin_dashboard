@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '##803806',
+          DEFAULT: '#803806',
           100: '#70525B',
         },
         secondary: {
@@ -40,6 +40,9 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      boxShadow: {
+        '100': '0px 1px 4px 0px rgba(251, 234, 223, 1);',
       },
     },
   },
