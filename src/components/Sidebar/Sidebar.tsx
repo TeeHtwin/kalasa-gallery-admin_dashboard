@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-// import navLogo from '@/assets/logo/nav-logo.svg';
+import navLogo from '@/assets/logo/kalasalogo.svg';
 import { menus } from '@/config/menus.config';
 import NavLink from './NavLink';
 import IconLogout from '@/icons/dashboard/IconLogout';
@@ -13,9 +13,12 @@ const Sidebar = () => {
     <aside className="w-[30%] xl:w-[20%] sticky top-0 p-4 h-full max-h-[851px] flex flex-col gap-4 py-6">
       <header>
         <Image
-          src={'@/assets/logo/nav-logo.svg'}
+          src={navLogo}
           width={124}
-          height={47}
+          height={80}
+          quality={100}
+          loading="lazy"
+          objectFit="cover"
           alt="logo"
         />
       </header>

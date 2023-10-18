@@ -1,43 +1,57 @@
 import React from 'react';
 import ToggleButton from '../common/ToggleButton';
+import Link from 'next/link';
 
-const TableCom = () => {
+const TableCom = ({
+  path,
+  tableHeader,
+  data,
+}: {
+  path: string;
+  tableHeader: string[];
+  data: ITableData[] | IArtistTable[];
+}) => {
+  const headerTag = tableHeader.map((h, idx) => (
+    <td key={`${h}_${idx}`} className="min-w-[60px] py-1.5">
+      {h.replace('_', ' ')}
+    </td>
+  ));
+
+  const bodyTag = data.map((d: any, idx: number) => {
+    const keys = Object.keys(d);
+    return (
+      <tr key={idx} className="text-center capitalize text-medium border-b">
+        {keys.map((k: string, i) =>
+          k === 'artwork_status' ? (
+            <td key={`${k}_${i}`} className="h-[60px] center">
+              <ToggleButton checked={d[k]} toggleNum={`toggle-${idx}`} />
+            </td>
+          ) : (
+            <td key={`${k}_${i}`} className="py-3.5">
+              {d[k]}
+            </td>
+          ),
+        )}
+        <td className="px-2">
+          <Link href={`${path}${path}info/${idx}`}>
+            <span className="text-primary underline underline-offset-2">
+              view
+            </span>
+          </Link>
+        </td>
+      </tr>
+    );
+  });
+
   return (
     <table className="w-full border">
       <thead>
-        <tr className="text-center text-btnText font-ariel bg-primary text-white font-light">
-          <td className="pl-2 py-1.5">No</td>
-          <td>Artwork Name</td>
-          <td>Artist's Name</td>
-          <td>Medium</td>
-          <td>Upload Date</td>
-          <td>Artwork Status</td>
-          <td> </td>
+        <tr className="text-center text-btnText capitalize font-ariel bg-primary text-white font-light">
+          {headerTag}
         </tr>
       </thead>
 
-      <tbody>
-        {Array.from({ length: 10 }).map((_, idx) => (
-          <tr key={idx} className="text-center text-medium border-b">
-            <td className="py-3">{idx + 1}</td>
-            <td>K-337-36-x-48</td>
-            <td>Kaung Min Khant</td>
-            <td>Painting</td>
-            <td>22.12.2002</td>
-            <td className="h-[60px] center">
-              <ToggleButton
-                checked={idx % 2 === 0 ? true : false}
-                toggleNum={`toggle-${idx}`}
-              />
-            </td>
-            <td className="px-2">
-              <span className="text-primary underline underline-offset-2">
-                view
-              </span>
-            </td>
-          </tr>
-        ))}
-      </tbody>
+      <tbody>{bodyTag}</tbody>
     </table>
   );
 };

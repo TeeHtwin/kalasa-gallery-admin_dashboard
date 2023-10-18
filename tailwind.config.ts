@@ -53,6 +53,7 @@ const config: Config = {
         24: '24px',
         btnText: '18px',
         medium: '16px',
+        toggleText: '10px',
       },
       fontWeight: {
         heading: '700',
