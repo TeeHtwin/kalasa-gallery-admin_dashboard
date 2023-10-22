@@ -1,47 +1,37 @@
 'use client';
-
 import React, { useState } from 'react';
-import { createPortal } from 'react-dom';
-import Header from '@/components/common/PageHeader';
 import CTAButton from '@/components/common/CTAButton';
+import { usePathname } from 'next/navigation';
 import ImageCom from '@/components/common/ImageCom';
 import cn from 'classnames';
 import Link from 'next/link';
+import { Breadcrumbs, DataInfo } from '@/components/common';
+import galleryIcon from '@/assets/icons/gallery.svg';
+import { ModalBox } from '@/components';
+import { modalBoxQNA } from '@/constants/ques';
+import editIcon from '@/assets/icons/edit.svg';
 
 const ArtworkInfo = () => {
+  const currentPath = usePathname();
+
   const [showDeleteModalBox, setShowDeleteModalBox] = useState<boolean>(false);
 
   const handleModalBox = () => setShowDeleteModalBox(!showDeleteModalBox);
 
-  const modalBoxStyle = cn(
-    'bg-overlay cursor-pointer w-full h-full absolute top-0 center duration-150',
-    {
-      'opacity-0 scale-0 invisible': !showDeleteModalBox,
-      'opacity-100 scale-100 visible': showDeleteModalBox,
-    },
-  );
+  const modalBoxStyle = cn({
+    'opacity-0 scale-0 invisible': !showDeleteModalBox,
+    'opacity-100 scale-100 visible': showDeleteModalBox,
+  });
 
   return (
     <section id="artworkinfo" className="pt-10 relative">
-      <div onClick={handleModalBox} className={modalBoxStyle}>
-        <article className="w-5/12 p-3 bg-white rounded-md">
-          <p className="text-primary font-primary">
-            Are you sure do you want to delete this artwork from your database?
-          </p>
-          <p className="text-black-100 text-sm font-ariel leading-6">
-            Please make sure to check the artwork before deleting it. Because it
-            will be wiped out permanently and there’s no way to recover it back.
-          </p>
-
-          <div className="flex gap-5 mt-4">
-            <CTAButton title="Go Back" fun={handleModalBox} />
-            <CTAButton title="Confirm" />
-          </div>
-        </article>
-      </div>
+      <ModalBox cn={modalBoxStyle} {...modalBoxQNA} closeFun={handleModalBox} />
 
       <section className="px-3">
-        <Header title="Gallery creates" />
+        <Breadcrumbs
+          icon={galleryIcon}
+          breadcrumbs={['gallery', 'artwork infos']}
+        />
 
         <nav className="flex justify-between mt-4">
           <div className="flex gap-5 items-center">
@@ -49,8 +39,8 @@ const ArtworkInfo = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Link href={'/artworks/artworkinfo/editartwork'}>
-              <CTAButton title="edit artwork" />{' '}
+            <Link href={`${currentPath}/editartwork`}>
+              <CTAButton icon={editIcon} title="edit artwork" />{' '}
               {/* the type of btn will change  */}
             </Link>
             <button
@@ -100,30 +90,6 @@ const ArtworkInfo = () => {
         </article>
       </section>
     </section>
-  );
-};
-
-const DataInfo = ({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number;
-}) => {
-  return (
-    <p className="flex gap-2 capitalize">
-      <span className="min-w-[220px] font-primary text-black-100 capitalize text-sm font-extralight flex justify-between items-center">
-        {label}
-        <span className="ml-3 inline-block w-1.5 h-1.5 rounded-full bg-red" />
-      </span>
-      <span
-        className={`flex-1 text-sm ${
-          label === "artist's name" && 'underline text-primary'
-        }`}
-      >
-        {value}
-      </span>
-    </p>
   );
 };
 

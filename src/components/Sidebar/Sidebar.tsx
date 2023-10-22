@@ -18,8 +18,8 @@ const Sidebar = () => {
           height={80}
           quality={100}
           loading="lazy"
-          objectFit="cover"
           alt="logo"
+          className="object-cover"
         />
       </header>
       <nav>
@@ -32,8 +32,8 @@ const Sidebar = () => {
 
       <div className="mt-auto flex justify-between items-start border-t border-black-100 px-2 pt-4">
         <div className="flex flex-col text-sm">
-          <span className="font-bold">Olivia Rhye</span>
-          <span>olivia@untitledui.com</span>
+          <span className="font-bold text-24">Olivia Rhye</span>
+          <span className="text-grey text-medium">olivia@untitledui.com</span>
         </div>
 
         <button aria-label="log out">

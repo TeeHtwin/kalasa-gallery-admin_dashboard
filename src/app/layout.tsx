@@ -1,11 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { getServerSession } from 'next-auth';
 import SessionProvider from '@/components/providers/SessionProvider';
 import Provider from '@/components/providers/Provider';
-
-const inter = Inter({ subsets: ['latin'] });
+import { cardo } from '@/fonts/font';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +19,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cardo.className}>
         <SessionProvider session={authSession}>
           <Provider>{children}</Provider>
         </SessionProvider>

@@ -37,6 +37,9 @@ const config: Config = {
         overlay: {
           DEFAULT: '#1f1f1f23',
         },
+        grey: {
+          DEFAULT: '#4F5154',
+        },
       },
       backgroundImage: {
         'primary-gradient':
@@ -53,14 +56,15 @@ const config: Config = {
         24: '24px',
         btnText: '18px',
         medium: '16px',
+        small: '14px',
         toggleText: '10px',
       },
       fontWeight: {
-        heading: '700',
+        heading: '600',
         subheading: '550',
       },
       fontFamily: {
-        primary: 'serif', //change actual font may be that gonna be Carddo font
+        primary: ['var(--font-cardo)'], //change actual font may be that gonna be Cardo font
         ariel: 'serif', //should be change
       },
     },

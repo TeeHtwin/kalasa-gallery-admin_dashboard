@@ -9,7 +9,7 @@ const TableCom = ({
 }: {
   path: string;
   tableHeader: string[];
-  data: ITableData[] | IArtistTable[];
+  data: ITableData[] | IArtistTable[] | IContactTable[];
 }) => {
   const headerTag = tableHeader.map((h, idx) => (
     <td key={`${h}_${idx}`} className="min-w-[60px] py-1.5">
@@ -20,14 +20,19 @@ const TableCom = ({
   const bodyTag = data.map((d: any, idx: number) => {
     const keys = Object.keys(d);
     return (
-      <tr key={idx} className="text-center capitalize text-medium border-b">
+      <tr key={idx} className={`text-center capitalize text-medium border-b`}>
         {keys.map((k: string, i) =>
           k === 'artwork_status' ? (
-            <td key={`${k}_${i}`} className="h-[60px] center">
+            <td key={`${k}_${i}`} className="h-[80px] center">
               <ToggleButton checked={d[k]} toggleNum={`toggle-${idx}`} />
             </td>
           ) : (
-            <td key={`${k}_${i}`} className="py-3.5">
+            <td
+              key={`${k}_${i}`}
+              className={`h-[80px] ${
+                (k === 'subject' || 'email') && 'lowercase'
+              }`}
+            >
               {d[k]}
             </td>
           ),

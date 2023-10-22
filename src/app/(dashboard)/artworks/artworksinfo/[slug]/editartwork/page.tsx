@@ -1,13 +1,37 @@
-import React from 'react';
-import Header from '@/components/common/PageHeader';
+'use client';
+import React, { useState } from 'react';
+import cn from 'classnames';
 import FormControl from '@/components/form/FormControl';
 import CTAButton from '@/components/common/CTAButton';
 import ImageCom from '@/components/common/ImageCom';
+import { Breadcrumbs } from '@/components/common';
+import galleryIcon from '@/assets/icons/gallery.svg';
+import { ModalBox } from '@/components';
+import { modalBoxQNA } from '@/constants/ques';
+import { useRouter, useParams } from 'next/navigation';
+import saveIcon from '@/assets/icons/imgsubmit.svg';
 
 const EditArtwork = () => {
+  const router = useRouter();
+  const { slug } = useParams();
+
+  const [showDeleteModalBox, setShowDeleteModalBox] = useState<boolean>(false);
+
+  const handleModalBox = () => setShowDeleteModalBox(!showDeleteModalBox);
+
+  const modalBoxStyle = cn({
+    'opacity-0 scale-0 invisible': !showDeleteModalBox,
+    'opacity-100 scale-100 visible': showDeleteModalBox,
+  });
+
   return (
     <section className="py-10 px-3 lg:text-medium xl:text-btnText">
-      <Header title="Gallery creates" />
+      <Breadcrumbs
+        icon={galleryIcon}
+        breadcrumbs={['gallery', 'artwork infos', 'edit an artwork']}
+      />
+
+      <ModalBox cn={modalBoxStyle} closeFun={handleModalBox} {...modalBoxQNA} />
 
       <form className="font-serif">
         <nav className="flex justify-between mt-4">
@@ -18,7 +42,12 @@ const EditArtwork = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <CTAButton title="Save" />
+            <CTAButton
+              title="Save"
+              icon={saveIcon}
+              fun={() => router.replace(`/artworks/artworksinfo/${slug}`)}
+            />
+
             {/* the type of btn will change  */}
             <button className="text-btnText underline underline-offset-4 text-red">
               Delete an artwork

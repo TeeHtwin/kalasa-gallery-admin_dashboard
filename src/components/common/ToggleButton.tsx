@@ -5,10 +5,7 @@ import './Toggle.css';
 
 const ToggleButton = ({ toggleNum, checked }: any) => {
   return (
-    <label
-      htmlFor={toggleNum}
-      className="toggle_container border drop-shadow-md"
-    >
+    <label htmlFor={toggleNum} className="toggle_container rop-shadow-md">
       <input
         type="checkbox"
         defaultChecked={checked}

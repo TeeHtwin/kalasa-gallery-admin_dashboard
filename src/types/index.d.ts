@@ -15,6 +15,14 @@ interface IArtistTable {
   sold_artworks: number;
 }
 
+interface IContactTable {
+  no: number;
+  customer_name: string;
+  subject: string;
+  email: string;
+  phone_number: string;
+}
+
 interface ICTAButton {
   icon?: string;
   title: string;

@@ -1,19 +1,20 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import CTAButton from '@/components/common/CTAButton';
 import Header from '@/components/common/PageHeader';
 import Link from 'next/link';
 import TableCom from '@/components/table/TableCom';
-import artwork from '../../../data/artdata.json';
 import PagiBtn from '@/components/common/PagiBtn';
-
 import IconChevron from '@/icons/common/IconChevron';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
-import { useRouter } from 'next/router';
+import plusIcon from '@/assets/icons/plus.svg';
+//dummy data
+import artwork from '../../../data/artdata.json';
 
 const ArtWork = () => {
   const path = usePathname();
+  const ref = useRef();
 
   const tableHeader = [
     'no',
@@ -26,13 +27,30 @@ const ArtWork = () => {
   ];
 
   const [page_number, setPageNumber] = useState<number>(1);
+
   const page_size = 10;
-  const pagiBtnQty = Math.ceil(artwork.length / page_size);
 
   const filterData = artwork.slice(
     (page_number - 1) * page_size,
     page_number * page_size,
   );
+  const [tableData, setTableData] = useState(filterData);
+  const pagiBtnQty = Math.ceil(artwork.length / page_size);
+
+  useEffect(() => {
+    setTableData(filterData);
+  }, [page_number]);
+
+  const handlerSearch = () => {
+    if (ref.current === '') {
+      setTableData(filterData);
+    } else {
+      const data = artwork.filter((d) =>
+        d.artist_name.toLowerCase().includes(ref.current || ''),
+      );
+      setTableData(data);
+    }
+  };
 
   const nextBtnFun = () => {
     // check the page is only one or the page_number reach to the end
@@ -66,15 +84,15 @@ const ArtWork = () => {
           </div>
         </div>
         <Link href={'/artworks/createartwork'}>
-          <CTAButton title="Create Artwork" />
+          <CTAButton title="Create Artwork" icon={plusIcon} />
         </Link>
       </nav>
 
       <main>
         {/* that gonna be CSR */}
-        <PageHeaderBox />
+        <PageHeaderBox handlerSearch={handlerSearch} searchText={ref} />
 
-        <TableCom path={path} tableHeader={tableHeader} data={filterData} />
+        <TableCom path={path} tableHeader={tableHeader} data={tableData} />
 
         <div className="py-2 mt-2 flex justify-end items-center gap-3">
           <button

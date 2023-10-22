@@ -1,13 +1,16 @@
 'use client';
 
+import { useRef } from 'react';
 import Header from '@/components/common/PageHeader';
 import Link from 'next/link';
 import CTAButton from '@/components/common/CTAButton';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 import TableCom from '@/components/table/TableCom';
 import { usePathname } from 'next/navigation';
+import plusIcon from '@/assets/icons/plus.svg';
 
 const Artist = () => {
+  const searchText = useRef();
   const path = usePathname();
   const tableHeader = [
     'no',
@@ -33,17 +36,20 @@ const Artist = () => {
       <nav className="flex justify-between">
         <div className="flex gap-5 items-center">
           <p className="text-primary font-serif">Total Artists</p>
-          <div className="w-12 rounded-md border border-grey h-7 flex justify-center items-center">
+          <div className="w-12 rounded-md border text-primary font-heading font-ariel h-7 flex justify-center items-center">
             15
           </div>
         </div>
         <Link href={'/artists/addartist'}>
-          <CTAButton title="Create Artists" />
+          <CTAButton icon={plusIcon} title="Create Artists" />
         </Link>
       </nav>
 
       <main>
-        <PageHeaderBox />
+        <PageHeaderBox
+          searchText={searchText}
+          handlerSearch={() => console.log('something ')}
+        />
         <TableCom path={path} tableHeader={tableHeader} data={data} />
       </main>
     </section>
