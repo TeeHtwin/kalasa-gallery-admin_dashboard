@@ -15,3 +15,9 @@ export const modalBoxQNAContact = {
   warning:
     'Please make sure to check the contact infos before deleting it. Because it will be wiped out permanently and there’s no way to recover it back.',
 };
+
+export const modalBoxQNAEvent = {
+  ques: 'Are you sure do you want to delete this event from your database?',
+  warning:
+    'Please make sure to check the event before deleting it. Because it will be wiped out permanently and there’s no way to recover it back.',
+};

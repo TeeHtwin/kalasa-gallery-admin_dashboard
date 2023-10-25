@@ -9,14 +9,19 @@ import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 import plusIcon from '@/assets/icons/plus.svg';
+import { handleArtworkSort } from '@/utils/Sorting';
+import { handleSelectedRow } from '@/utils/RowSelection';
 //dummy data
 import artwork from '../../../data/artdata.json';
 
 const ArtWork = () => {
   const path = usePathname();
   const ref = useRef();
+  const [quickAction, setQuickAction] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<string[]>([]);
 
   const tableHeader = [
+    'action',
     'no',
     'artwork_name',
     'artist_name',
@@ -34,6 +39,7 @@ const ArtWork = () => {
     (page_number - 1) * page_size,
     page_number * page_size,
   );
+
   const [tableData, setTableData] = useState(filterData);
   const pagiBtnQty = Math.ceil(artwork.length / page_size);
 
@@ -72,6 +78,15 @@ const ArtWork = () => {
     }
   };
 
+  const handleMultipleDeleteAction = () => {
+    const newData = artwork.filter(
+      (d) => !selectedRow.includes(d.artwork_name),
+    );
+    setQuickAction(false);
+    setSelectedRow([]);
+    setTableData(newData);
+  };
+
   return (
     <section className="min-h-full p-4">
       <Header title="Galleries" />
@@ -88,47 +103,58 @@ const ArtWork = () => {
         </Link>
       </nav>
 
-      <main>
-        {/* that gonna be CSR */}
-        <PageHeaderBox handlerSearch={handlerSearch} searchText={ref} />
+      {/* that gonna be CSR */}
+      <PageHeaderBox handlerSearch={handlerSearch} searchText={ref} />
 
-        <TableCom path={path} tableHeader={tableHeader} data={tableData} />
+      <TableCom
+        quickAction={quickAction}
+        path={path}
+        tableHeader={tableHeader}
+        data={tableData}
+        selectedRowCount={selectedRow}
+        emptySelectionRow={() => setSelectedRow([])}
+        handleSort={() => setTableData(handleArtworkSort(tableData))}
+        handleMultipleDeleteAction={handleMultipleDeleteAction}
+        setQuickAction={setQuickAction}
+        handleMultipleDelete={(idx: any) =>
+          setSelectedRow(handleSelectedRow(idx, selectedRow))
+        }
+      />
 
-        <div className="py-2 mt-2 flex justify-end items-center gap-3">
-          <button
-            disabled={page_number === 1}
-            className={`page_prev_btn w-7 h-7 text-2xl text-btnText center border rounded-md bg-secondary-200 ${
-              page_number === 1 && 'cursor-not-allowed bg-gray-100'
-            }`}
-            onClick={prevBtnFun}
-          >
-            <IconChevron />
-          </button>
+      <div className="py-2 mt-2 flex justify-end items-center gap-3">
+        <button
+          disabled={page_number === 1}
+          className={`page_prev_btn w-7 h-7 text-2xl text-btnText center border rounded-md bg-secondary-200 ${
+            page_number === 1 && 'cursor-not-allowed bg-gray-100'
+          }`}
+          onClick={prevBtnFun}
+        >
+          <IconChevron />
+        </button>
 
-          {Array.from({ length: pagiBtnQty }).map((_, idx) => (
-            <PagiBtn
-              key={idx}
-              title={String(idx + 1)}
-              fun={() => setPageNumber(idx + 1)}
-              containerStyle={
-                page_number === idx + 1
-                  ? 'border-primary bg-primary text-white'
-                  : undefined
-              }
-            />
-          ))}
+        {Array.from({ length: pagiBtnQty }).map((_, idx) => (
+          <PagiBtn
+            key={idx}
+            title={String(idx + 1)}
+            fun={() => setPageNumber(idx + 1)}
+            containerStyle={
+              page_number === idx + 1
+                ? 'border-primary bg-primary text-white'
+                : undefined
+            }
+          />
+        ))}
 
-          <button
-            disabled={page_number === pagiBtnQty}
-            className={`page_next_btn  w-7 h-7 text-2xl text-btnText center border rounded-md bg-secondary-200 ${
-              page_number === pagiBtnQty && 'cursor-not-allowed bg-gray-100'
-            }`}
-            onClick={nextBtnFun}
-          >
-            <IconChevron />
-          </button>
-        </div>
-      </main>
+        <button
+          disabled={page_number === pagiBtnQty}
+          className={`page_next_btn  w-7 h-7 text-2xl text-btnText center border rounded-md bg-secondary-200 ${
+            page_number === pagiBtnQty && 'cursor-not-allowed bg-gray-100'
+          }`}
+          onClick={nextBtnFun}
+        >
+          <IconChevron />
+        </button>
+      </div>
     </section>
   );
 };

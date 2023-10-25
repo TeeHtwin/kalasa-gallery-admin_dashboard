@@ -8,6 +8,7 @@ import ImageIconCom from '@/components/common/ImageIconCom';
 import searchIcon from '@/assets/icons/search.svg';
 import calendarIcon from '@/assets/icons/calendar.svg';
 import chevronDown from '@/assets/icons/chevrondown.svg';
+import PageHeaderBox from '@/components/common/PageHeaderBox';
 
 const Contact = () => {
   const [page_number, setPageNumber] = useState(1);
@@ -21,7 +22,6 @@ const Contact = () => {
   ];
   const data = [
     {
-      no: 1,
       customer_name: 'kaung khant min',
       subject: 'I want to know about detail...',
       email: 'text@test.gmail.com',
@@ -44,44 +44,19 @@ const Contact = () => {
         </div>
       </div>
 
-      <section className="w-full">
-        <article className="w-full min-h-[55px] max-h-[60px] flex flex-row-reverse justify-between gap-3 my-3 text-btnText">
-          <div className="w-[30%] border rounded flex  bg-[#f4f4f4]">
-            <button className="w-[45px] pl-1 block center h-full">
-              <ImageIconCom src={searchIcon} />
-            </button>
-            <input
-              type="text"
-              id="search_input"
-              placeholder="Search By Name"
-              className="flex-1 outline-none px-2 bg-transparent"
-            />
-          </div>
+      <PageHeaderBox
+        handlerSearch={() => console.log('contact search')}
+        searchText={() => console.log('contact search text')}
+      />
 
-          <button className="w-[30%] block border rounded gap-3 center py-1 px-3">
-            <ImageIconCom src={calendarIcon} />
-            <p className="flex-1 text-start">Sep 16th 2022 - Sep 27th 2022</p>
-          </button>
-        </article>
-
-        <div className="flex justify-between items-center text-primary py-2 text-btnText">
-          <div>
-            <label htmlFor="checkbox" className="ml-2 cursor-pointer">
-              <input
-                type="checkbox"
-                id="checkbox"
-                className="apperance-none mr-1"
-              />
-              Quick Action
-            </label>
-          </div>
-          <div className="center gap-2 text-primary">
-            Sort By <ImageIconCom src={chevronDown} />
-          </div>
-        </div>
-      </section>
-
-      <TableCom path="/contact" tableHeader={tableHeader} data={data} />
+      <TableCom
+        path="/contact"
+        tableHeader={tableHeader}
+        data={data}
+        quickAction={false}
+        setQuickAction={() => console.log('contact quick action')}
+        handleMultipleDelete={() => console.log('multiple deleteion')}
+      />
 
       <div className="py-2 mt-2 flex justify-end items-center gap-3">
         <button

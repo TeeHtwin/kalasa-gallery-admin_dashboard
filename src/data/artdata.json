@@ -1,6 +1,5 @@
 [
   {
-    "No": 1,
     "artwork_name": "ABC123DEF",
     "artist_name": "John Doe",
     "medium": "painting",
@@ -8,7 +7,6 @@
     "artwork_status": true
   },
   {
-    "No": 2,
     "artwork_name": "XYZ456GHI",
     "artist_name": "Jane Smith",
     "medium": "sculpture",
@@ -16,7 +14,6 @@
     "artwork_status": false
   },
   {
-    "No": 3,
     "artwork_name": "PQR789JKL",
     "artist_name": "Robert Johnson",
     "medium": "mixed media",
@@ -24,7 +21,6 @@
     "artwork_status": true
   },
   {
-    "No": 4,
     "artwork_name": "MNO123ABC",
     "artist_name": "Alice Williams",
     "medium": "drawing",
@@ -32,7 +28,6 @@
     "artwork_status": true
   },
   {
-    "No": 5,
     "artwork_name": "EFG456XYZ",
     "artist_name": "Michael Smith",
     "medium": "digital art",
@@ -40,7 +35,6 @@
     "artwork_status": false
   },
   {
-    "No": 6,
     "artwork_name": "LMN789XYZ",
     "artist_name": "Emily Davis",
     "medium": "photography",
@@ -48,7 +42,6 @@
     "artwork_status": true
   },
   {
-    "No": 7,
     "artwork_name": "HIJ123MNO",
     "artist_name": "David Brown",
     "medium": "collage",
@@ -56,7 +49,6 @@
     "artwork_status": true
   },
   {
-    "No": 8,
     "artwork_name": "UVW456PQR",
     "artist_name": "Linda Lee",
     "medium": "printmaking",
@@ -64,7 +56,6 @@
     "artwork_status": false
   },
   {
-    "No": 9,
     "artwork_name": "STU789RST",
     "artist_name": "Thomas Johnson",
     "medium": "ceramics",
@@ -72,7 +63,6 @@
     "artwork_status": true
   },
   {
-    "No": 10,
     "artwork_name": "JKL123HIJ",
     "artist_name": "Sophia Martinez",
     "medium": "oil painting",
@@ -80,7 +70,6 @@
     "artwork_status": true
   },
   {
-    "No": 11,
     "artwork_name": "OPQ456STU",
     "artist_name": "William Taylor",
     "medium": "watercolor",
@@ -88,7 +77,6 @@
     "artwork_status": false
   },
   {
-    "No": 12,
     "artwork_name": "VWX789ABC",
     "artist_name": "Sarah Wilson",
     "medium": "acrylic painting",
@@ -96,7 +84,6 @@
     "artwork_status": true
   },
   {
-    "No": 13,
     "artwork_name": "CDE123VWX",
     "artist_name": "Joseph Anderson",
     "medium": "pastel drawing",
@@ -104,7 +91,6 @@
     "artwork_status": true
   },
   {
-    "No": 14,
     "artwork_name": "GHI456CDE",
     "artist_name": "Olivia White",
     "medium": "sculpture",
@@ -112,7 +98,6 @@
     "artwork_status": false
   },
   {
-    "No": 15,
     "artwork_name": "LMN789XYZ",
     "artist_name": "Robert Johnson",
     "medium": "mixed media",

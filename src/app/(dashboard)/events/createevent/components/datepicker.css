@@ -1,0 +1,10 @@
+.react-datepicker-wrapper {
+  @apply w-full;
+}
+.react-datepicker__input-container {
+  @apply border;
+}
+
+.react-datepicker__input-container > input {
+  @apply max-w-[100%];
+}

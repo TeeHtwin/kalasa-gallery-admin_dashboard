@@ -1,12 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
-import Header from '@/components/common/PageHeader';
-import Link from 'next/link';
-import CTAButton from '@/components/common/CTAButton';
+import { useRef, useState } from 'react';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 import TableCom from '@/components/table/TableCom';
 import { usePathname } from 'next/navigation';
+import { handleArtworkSort } from '@/utils/Sorting';
+import Header from '@/components/common/PageHeader';
+import Link from 'next/link';
+import CTAButton from '@/components/common/CTAButton';
 import plusIcon from '@/assets/icons/plus.svg';
 
 const Artist = () => {
@@ -22,13 +23,26 @@ const Artist = () => {
   ];
   const data = [
     {
-      no: 1,
-      artist_name: 'Kaung Kaung',
+      artist_name: 'kaung Kaung',
+      added_date: '22.10.2023',
+      total_artworks: 250,
+      sold_artworks: 35,
+    },
+    {
+      artist_name: 'aung Kaung',
+      added_date: '22.10.2023',
+      total_artworks: 250,
+      sold_artworks: 35,
+    },
+    {
+      artist_name: 'willian',
       added_date: '22.10.2023',
       total_artworks: 250,
       sold_artworks: 35,
     },
   ];
+
+  const [artistData, setArtistData] = useState(data);
   return (
     <section className="min-h-full p-4">
       <Header title="Artists" />
@@ -44,14 +58,22 @@ const Artist = () => {
           <CTAButton icon={plusIcon} title="Create Artists" />
         </Link>
       </nav>
-
-      <main>
-        <PageHeaderBox
-          searchText={searchText}
-          handlerSearch={() => console.log('something ')}
-        />
-        <TableCom path={path} tableHeader={tableHeader} data={data} />
-      </main>
+      <PageHeaderBox
+        searchText={searchText}
+        handlerSearch={() => console.log('something ')}
+      />
+      <TableCom
+        path={path}
+        tableHeader={tableHeader}
+        data={artistData}
+        quickAction={false}
+        selectedRowCount={[12, 3, 4]}
+        emptySelectionRow={() => {}}
+        handleMultipleDelete={() => {}}
+        handleMultipleDeleteAction={() => {}}
+        setQuickAction={() => {}}
+        handleSort={() => setArtistData(handleArtworkSort(data))}
+      />
     </section>
   );
 };

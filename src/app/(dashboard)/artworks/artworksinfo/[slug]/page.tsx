@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import CTAButton from '@/components/common/CTAButton';
 import { usePathname } from 'next/navigation';
 import ImageCom from '@/components/common/ImageCom';
-import cn from 'classnames';
 import Link from 'next/link';
 import { Breadcrumbs, DataInfo } from '@/components/common';
 import galleryIcon from '@/assets/icons/gallery.svg';
 import { ModalBox } from '@/components';
 import { modalBoxQNA } from '@/constants/ques';
 import editIcon from '@/assets/icons/edit.svg';
+import { ModalBoxStyleFun } from '@/utils/ModalBox';
 
 const ArtworkInfo = () => {
   const currentPath = usePathname();
@@ -18,14 +18,13 @@ const ArtworkInfo = () => {
 
   const handleModalBox = () => setShowDeleteModalBox(!showDeleteModalBox);
 
-  const modalBoxStyle = cn({
-    'opacity-0 scale-0 invisible': !showDeleteModalBox,
-    'opacity-100 scale-100 visible': showDeleteModalBox,
-  });
-
   return (
     <section id="artworkinfo" className="pt-10 relative">
-      <ModalBox cn={modalBoxStyle} {...modalBoxQNA} closeFun={handleModalBox} />
+      <ModalBox
+        cn={ModalBoxStyleFun(showDeleteModalBox)}
+        {...modalBoxQNA}
+        closeFun={handleModalBox}
+      />
 
       <section className="px-3">
         <Breadcrumbs

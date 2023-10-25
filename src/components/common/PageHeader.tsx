@@ -3,7 +3,7 @@ import React from 'react';
 const Header = ({ title }: { title: string }) => {
   return (
     <h1
-      className="text-heading font-heading text-primary"
+      className="text-heading font-subheading text-primary"
       style={{
         //* just temporary
         fontFamily: 'cardo',

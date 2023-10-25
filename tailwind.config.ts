@@ -18,6 +18,7 @@ const config: Config = {
           100: '#F9F2E0',
           200: '#FFF1E8',
           300: '#FBEADF',
+          light: '#fff7f2',
         },
         white: {
           DEFAULT: '#FFFFFF',
@@ -27,6 +28,7 @@ const config: Config = {
           DEFAULT: '#1C1C1C',
           100: '#8A8A8A',
           200: '#4F5154',
+          300: '#414141',
         },
         red: {
           DEFAULT: '#D40000C7',
@@ -39,6 +41,9 @@ const config: Config = {
         },
         grey: {
           DEFAULT: '#4F5154',
+        },
+        purple: {
+          DEFAULT: '#7A0DBE',
         },
       },
       backgroundImage: {
