@@ -9,11 +9,11 @@ const Status = ({ status }: StatusProps) => {
   return (
     <div
       className={cn(
-        'h-[98px] rounded-2xl flex flex-col gap-1 py-[18px] px-[22px] justify-between',
+        'h-[98px] rounded-2xl flex flex-col gap-1 py-[18px] px-[22px] justify-between text-btnText',
         status.isHighlight ? 'bg-secondary' : 'bg-secondary-200',
       )}
     >
-      <span className="font-semibold text-sm text-black capitalize">
+      <span className="font-semibold text-small text- capitalize">
         {status.label}
       </span>
       <div className="flex items-baseline justify-between text-[22px]">

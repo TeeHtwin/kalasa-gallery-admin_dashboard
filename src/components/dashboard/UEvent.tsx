@@ -16,9 +16,12 @@ const UEvent = ({ event }: UEventProps) => {
       </div>
 
       <div className="flex flex-col justify-center">
-        <span className="text-black line-clamp-1">{event.name}</span>
-        <div className="flex gap-1 text-black-200 text-sm flex-nowrap">
-          <span className="tracking-tight">{event.startDate}</span>-
+        <span className="text-black text-btnText line-clamp-1">
+          {event.name}
+        </span>
+        <div className="text-black-200 text-toggleText whitespace-nowrap">
+          <span className="tracking-tight">{event.startDate}</span>
+          <span className="mx-2">-</span>
           <span className="tracking-tight">{event.endDate}</span>
         </div>
       </div>

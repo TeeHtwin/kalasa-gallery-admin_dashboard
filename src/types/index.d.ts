@@ -22,8 +22,7 @@ interface IPageheaderSN {
 }
 
 interface IContactTable {
-  no: number;
-  artist_name: string;
+  customer_name: string;
   subject: string;
   email: string;
   phone_number: string;

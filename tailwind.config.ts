@@ -18,6 +18,7 @@ const config: Config = {
           100: '#F9F2E0',
           200: '#FFF1E8',
           300: '#FBEADF',
+          400: '#ffebdd',
           light: '#fff7f2',
         },
         white: {
@@ -29,6 +30,7 @@ const config: Config = {
           100: '#8A8A8A',
           200: '#4F5154',
           300: '#414141',
+          calendar: '#535353',
         },
         red: {
           DEFAULT: '#D40000C7',
@@ -41,6 +43,7 @@ const config: Config = {
         },
         grey: {
           DEFAULT: '#4F5154',
+          light: '#B5BAC1',
         },
         purple: {
           DEFAULT: '#7A0DBE',
@@ -62,11 +65,13 @@ const config: Config = {
         btnText: '18px',
         medium: '16px',
         small: '14px',
+        xs: '10px',
         toggleText: '10px',
       },
       fontWeight: {
         heading: '600',
         subheading: '550',
+        normal: '500',
       },
       fontFamily: {
         primary: ['var(--font-cardo)'], //change actual font may be that gonna be Cardo font

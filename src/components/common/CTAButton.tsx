@@ -4,15 +4,16 @@ import Image, { StaticImageData } from 'next/image';
 interface ICTAButton {
   icon?: StaticImageData;
   title: string;
+  style?: string;
   fun?: () => void;
 }
 
-const CTAButton = ({ icon, title, fun }: ICTAButton) => {
+const CTAButton = ({ icon, title, style, fun }: ICTAButton) => {
   return (
     <button
       type="button"
       onClick={fun}
-      className="gap-2 bg-primary center capitalize text-btnText font-semibold rounded py-1.5 px-3 text-white"
+      className={`gap-2 bg-primary center capitalize text-btnText font-semibold rounded py-1.5 px-3 text-white ${style}`}
     >
       {icon && (
         <Image

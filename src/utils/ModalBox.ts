@@ -8,3 +8,12 @@ export const ModalBoxStyleFun = (value: boolean) => {
 
   return modalBoxStyle;
 };
+
+export const FilterBoxStyle = (value: boolean) => {
+  const modalBoxStyle = cn({
+    'opacity-0 invisible': !value,
+    'opacity-100 visible': value,
+  });
+
+  return modalBoxStyle;
+};

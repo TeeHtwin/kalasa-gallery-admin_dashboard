@@ -49,13 +49,7 @@ const statues = [
 const Statues = () => {
   return (
     <div className="flex flex-col gap-4">
-      <h1
-        className="text-heading font-heading text-primary"
-        style={{
-          //* just temporary
-          fontFamily: 'cardo',
-        }}
-      >
+      <h1 className="text-heading font-heading text-primary font-primary">
         Dashboard
       </h1>
 

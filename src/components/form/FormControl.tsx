@@ -19,8 +19,8 @@ const FormControl = ({
       <input
         name={name}
         type={type}
-        value={value}
-        className="w-full border py-0.5 border-grey-100 rounded-sm px-2 outline-none"
+        defaultValue={value}
+        className="w-full border py-0.5 border-grey-100 rounded-sm px-2 outline-none text-medium font-light"
       />
     </div>
   );

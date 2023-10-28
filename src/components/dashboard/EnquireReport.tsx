@@ -1,18 +1,28 @@
+import BarChart from './chars/BarChart';
+import ListBoxCom from '../common/ListBox';
+
 const EnquireReport = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <h2
-        className="text-heading font-heading text-primary"
-        style={{
-          //* just temporary
-          fontFamily: 'cardo',
-        }}
-      >
-        Enquire Report
-      </h2>
+    <main>
+      <div className="flex justify-between items-center">
+        <h2
+          className="m-0 p-0 text-heading font-heading text-primary"
+          style={{
+            //* just temporary
+            fontFamily: 'cardo',
+          }}
+        >
+          Enquire Report
+        </h2>
 
-      <section>Charts</section>
-    </div>
+        <div className="min-w-[160px] w-fit h-[45px] relative border rounded-full">
+          <ListBoxCom />
+        </div>
+      </div>
+      <section>
+        <BarChart />
+      </section>
+    </main>
   );
 };
 export default EnquireReport;

@@ -4,10 +4,6 @@ import Header from '@/components/common/PageHeader';
 import { TableCom } from '@/components';
 import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
-import ImageIconCom from '@/components/common/ImageIconCom';
-import searchIcon from '@/assets/icons/search.svg';
-import calendarIcon from '@/assets/icons/calendar.svg';
-import chevronDown from '@/assets/icons/chevrondown.svg';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 
 const Contact = () => {
@@ -45,6 +41,8 @@ const Contact = () => {
       </div>
 
       <PageHeaderBox
+        filterDate={null}
+        handleDatePicker={() => {}}
         handlerSearch={() => console.log('contact search')}
         searchText={() => console.log('contact search text')}
       />
@@ -56,6 +54,16 @@ const Contact = () => {
         quickAction={false}
         setQuickAction={() => console.log('contact quick action')}
         handleMultipleDelete={() => console.log('multiple deleteion')}
+        selectedRowCount={[]}
+        handleMultipleDeleteAction={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+        emptySelectionRow={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+        handleSort={function (): void {
+          throw new Error('Function not implemented.');
+        }}
       />
 
       <div className="py-2 mt-2 flex justify-end items-center gap-3">

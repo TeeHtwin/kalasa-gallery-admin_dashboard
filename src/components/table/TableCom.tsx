@@ -3,6 +3,7 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from 'react';
 import ToggleButton from '../common/ToggleButton';
 import ImageIconCom from '../common/ImageIconCom';
 import chevronDown from '@/assets/icons/chevrondown.svg';
+import deleteIcon from '@/assets/icons/trash.svg';
 import Link from 'next/link';
 
 const TableCom = ({
@@ -91,11 +92,19 @@ const TableCom = ({
       <div className="flex justify-between items-center text-primary py-2 text-btnText">
         <div>
           {quickAction ? (
-            <div className="flex gap-2 bg-secondary-light border border-primary py-1 rounded-full px-2">
-              <button onClick={handleMultipleDeleteAction}>
-                {selectedRowCount.length} multiple delete
+            <div className="flex gap-2 bg-red text-white py-1 rounded-full px-4 relative">
+              <button
+                className="center gap-2"
+                onClick={handleMultipleDeleteAction}
+              >
+                <span className="w-4 h-4 inline-block bg-white text-red rounded-full">
+                  {selectedRowCount.length}
+                </span>{' '}
+                Multiple delete{' '}
+                <ImageIconCom src={deleteIcon} width={30} height={30} />
               </button>
               <button
+                className="w-4 h-4 rounded-full absolute -top-1 -right-1 bg-black text-white"
                 onClick={() => {
                   setQuickAction(!quickAction);
                   emptySelectionRow();

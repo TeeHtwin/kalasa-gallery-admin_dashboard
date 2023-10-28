@@ -13,25 +13,18 @@ import { handleArtworkSort } from '@/utils/Sorting';
 import { handleSelectedRow } from '@/utils/RowSelection';
 //dummy data
 import artwork from '../../../data/artdata.json';
+import { tableHeader } from './constants';
+import DateFilterPopup from '@/components/box/DateFilterPopup';
+import { FilterBoxStyle } from '@/utils/ModalBox';
 
 const ArtWork = () => {
   const path = usePathname();
   const ref = useRef();
   const [quickAction, setQuickAction] = useState(false);
   const [selectedRow, setSelectedRow] = useState<string[]>([]);
-
-  const tableHeader = [
-    'action',
-    'no',
-    'artwork_name',
-    'artist_name',
-    'medium',
-    'upload_date',
-    'artwork_status',
-    ' ',
-  ];
-
   const [page_number, setPageNumber] = useState<number>(1);
+  const [showFilterBox, setShowFilterBox] = useState(false);
+  const [filterDate, setFilterDate] = useState(null);
 
   const page_size = 10;
 
@@ -103,8 +96,23 @@ const ArtWork = () => {
         </Link>
       </nav>
 
-      {/* that gonna be CSR */}
-      <PageHeaderBox handlerSearch={handlerSearch} searchText={ref} />
+      <div className="relative">
+        <PageHeaderBox
+          handleDatePicker={() => setShowFilterBox(!showFilterBox)}
+          handlerSearch={handlerSearch}
+          filterDate={filterDate}
+          searchText={ref}
+        />
+
+        <div className={`duration-200 ${FilterBoxStyle(showFilterBox)}`}>
+          <DateFilterPopup
+            setFilterDateToParent={(e: any) => {
+              setFilterDate(e);
+              setShowFilterBox(false);
+            }}
+          />
+        </div>
+      </div>
 
       <TableCom
         quickAction={quickAction}

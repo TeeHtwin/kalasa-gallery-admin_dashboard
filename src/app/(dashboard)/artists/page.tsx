@@ -9,6 +9,8 @@ import Header from '@/components/common/PageHeader';
 import Link from 'next/link';
 import CTAButton from '@/components/common/CTAButton';
 import plusIcon from '@/assets/icons/plus.svg';
+import PagiBtn from '@/components/common/PagiBtn';
+import IconChevron from '@/icons/common/IconChevron';
 
 const Artist = () => {
   const searchText = useRef();
@@ -42,6 +44,8 @@ const Artist = () => {
     },
   ];
 
+  const page_number = 1;
+
   const [artistData, setArtistData] = useState(data);
   return (
     <section className="min-h-full p-4">
@@ -60,6 +64,8 @@ const Artist = () => {
       </nav>
       <PageHeaderBox
         searchText={searchText}
+        filterDate={null}
+        handleDatePicker={() => {}}
         handlerSearch={() => console.log('something ')}
       />
       <TableCom
@@ -74,6 +80,42 @@ const Artist = () => {
         setQuickAction={() => {}}
         handleSort={() => setArtistData(handleArtworkSort(data))}
       />
+
+      <div className="py-2 mt-2 flex justify-end items-center gap-3">
+        <button
+          disabled={page_number === 1}
+          className={`page_prev_btn w-7 h-7 text-2xl text-btnText center border rounded-md bg-secondary-200 ${
+            page_number === 1 && 'cursor-not-allowed bg-gray-100'
+          }`}
+          // onClick={prevBtnFun}
+        >
+          <IconChevron />
+        </button>
+
+        {Array.from({ length: 2 }).map((_, idx) => (
+          <PagiBtn
+            key={idx}
+            title={String(idx + 1)}
+            // fun={() => setPageNumber(idx + 1)}
+            containerStyle={
+              page_number === idx + 1
+                ? 'border-primary bg-primary text-white'
+                : undefined
+            }
+          />
+        ))}
+
+        <button
+          // disabled={page_number === pagiBtnQty}
+          className={`page_next_btn  w-7 h-7 text-2xl text-btnText center border rounded-md bg-secondary-200 ${
+            // page_number === pagiBtnQty && 'cursor-not-allowed bg-gray-100'
+            ''
+          }`}
+          // onClick={nextBtnFun}
+        >
+          <IconChevron />
+        </button>
+      </div>
     </section>
   );
 };

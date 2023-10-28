@@ -1,17 +1,39 @@
 import ImageIconCom from './ImageIconCom';
 import searchIcon from '@/assets/icons/search.svg';
 import calendarIcon from '@/assets/icons/calendar.svg';
+import { FormatDate } from '@/utils/FormatDate';
 
+interface IFilterDate {
+  startDate: string;
+  endDate: string;
+}
 interface IPageHeaderBox {
+  handleDatePicker: () => void;
   handlerSearch: () => void;
   searchText: any;
+  filterDate: IFilterDate | null;
 }
 
-const PageHeaderBox = ({ handlerSearch, searchText }: IPageHeaderBox) => {
+const PageHeaderBox = ({
+  handlerSearch,
+  searchText,
+  filterDate,
+  handleDatePicker,
+}: IPageHeaderBox) => {
   return (
     <article className="w-full max-h-[60px] flex justify-between gap-3 my-3 text-btnText">
-      <button className="w-[30%] block border rounded center py-1 px-3">
-        <p className="flex-1 text-start">Sep 16th 2022 - Sep 27th 2022</p>
+      <button
+        onClick={handleDatePicker}
+        className="w-[30%] block border rounded center py-1 px-3"
+      >
+        <p className="flex-1 text-start text-grey">
+          {filterDate !== null
+            ? `${FormatDate(
+                filterDate.startDate,
+                'MMM do yyyy',
+              )} - ${FormatDate(filterDate.endDate, 'MMM do yyyy')}`
+            : 'From Date - To Date'}
+        </p>
         <ImageIconCom src={calendarIcon} />
       </button>
 
@@ -28,7 +50,6 @@ const PageHeaderBox = ({ handlerSearch, searchText }: IPageHeaderBox) => {
           placeholder="Search By Name"
           className="flex-1 outline-none px-2"
           ref={searchText}
-          defaultValue={searchText}
           onChange={(e) => (searchText.current = e.target.value.toLowerCase())}
         />
       </div>

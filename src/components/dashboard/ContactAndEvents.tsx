@@ -57,8 +57,10 @@ const ContactAndEvents = () => {
     <div className="basis-[300px] py-6 pl-4 pr-8 flex flex-col gap-12">
       <section className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-bold text-lg text-primary">Recent Contact</h2>
-          <Link href="#" className="text-black-200 text-sm ">
+          <h2 className="font-bold text-btnText text-primary">
+            Recent Contact
+          </h2>
+          <Link href="#" className="text-black-200 text-small">
             See more
           </Link>
         </div>
@@ -72,8 +74,10 @@ const ContactAndEvents = () => {
 
       <section className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-bold text-lg text-primary">Upcoming Events</h2>
-          <Link href="#" className="text-black-200 text-sm ">
+          <h2 className="font-bold text-btnText text-primary">
+            Upcoming Events
+          </h2>
+          <Link href="#" className="text-black-200 text-small">
             See more
           </Link>
         </div>

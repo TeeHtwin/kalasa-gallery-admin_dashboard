@@ -1,13 +1,21 @@
 import React from 'react';
 import Image from 'next/image';
 
-const ImageIconCom = ({ src }: any) => {
+const ImageIconCom = ({
+  src,
+  width = 20,
+  height = 20,
+}: {
+  src: any;
+  width?: number;
+  height?: number;
+}) => {
   return (
     <Image
       src={src}
       alt={`${src}_icon`}
-      width={20}
-      height={20}
+      width={width}
+      height={height}
       quality={100}
       objectFit="cover"
     />
