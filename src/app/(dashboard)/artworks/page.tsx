@@ -1,30 +1,39 @@
 'use client';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, FormEvent, useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import CTAButton from '@/components/common/CTAButton';
-import Header from '@/components/common/PageHeader';
 import Link from 'next/link';
-import TableCom from '@/components/table/TableCom';
-import PagiBtn from '@/components/common/PagiBtn';
+import {
+  TableCom,
+  PagiBtn,
+  CTAButton,
+  Header,
+  PageHeaderBox,
+  DateFilterPopup,
+} from '@/components';
 import IconChevron from '@/icons/common/IconChevron';
-import PageHeaderBox from '@/components/common/PageHeaderBox';
 import plusIcon from '@/assets/icons/plus.svg';
-import { handleArtworkSort } from '@/utils/Sorting';
-import { handleSelectedRow } from '@/utils/RowSelection';
+import { tableHeader } from './constants';
+import {
+  handleArtworkSort,
+  FilterBoxStyle,
+  handleSelectedRow,
+  TextSearchFun,
+} from '@/utils';
 //dummy data
 import artwork from '../../../data/artdata.json';
-import { tableHeader } from './constants';
-import DateFilterPopup from '@/components/box/DateFilterPopup';
-import { FilterBoxStyle } from '@/utils/ModalBox';
+import { useTableCustomHook } from '@/hook/useTablehook';
 
 const ArtWork = () => {
   const path = usePathname();
   const ref = useRef();
   const [quickAction, setQuickAction] = useState(false);
   const [selectedRow, setSelectedRow] = useState<string[]>([]);
-  const [page_number, setPageNumber] = useState<number>(1);
   const [showFilterBox, setShowFilterBox] = useState(false);
   const [filterDate, setFilterDate] = useState(null);
+  const [page_number, setPageNumber] = useState<number>(1);
+
+  // this is the custome hook ----> need to refactor upper code in custom hook
+  const { foundData } = useTableCustomHook(artwork);
 
   const page_size = 10;
 
@@ -36,20 +45,9 @@ const ArtWork = () => {
   const [tableData, setTableData] = useState(filterData);
   const pagiBtnQty = Math.ceil(artwork.length / page_size);
 
-  useEffect(() => {
+  useMemo(() => {
     setTableData(filterData);
   }, [page_number]);
-
-  const handlerSearch = () => {
-    if (ref.current === '') {
-      setTableData(filterData);
-    } else {
-      const data = artwork.filter((d) =>
-        d.artist_name.toLowerCase().includes(ref.current || ''),
-      );
-      setTableData(data);
-    }
-  };
 
   const nextBtnFun = () => {
     // check the page is only one or the page_number reach to the end
@@ -71,13 +69,18 @@ const ArtWork = () => {
     }
   };
 
-  const handleMultipleDeleteAction = () => {
+  const handleMultipleDeleteAction = useCallback(() => {
     const newData = artwork.filter(
       (d) => !selectedRow.includes(d.artwork_name),
     );
     setQuickAction(false);
     setSelectedRow([]);
     setTableData(newData);
+  }, [selectedRow]);
+
+  const handlerSearch = (e: FormEvent) => {
+    e.preventDefault();
+    setTableData(TextSearchFun(artwork, ref.current));
   };
 
   return (
@@ -103,7 +106,6 @@ const ArtWork = () => {
           filterDate={filterDate}
           searchText={ref}
         />
-
         <div className={`duration-200 ${FilterBoxStyle(showFilterBox)}`}>
           <DateFilterPopup
             setFilterDateToParent={(e: any) => {

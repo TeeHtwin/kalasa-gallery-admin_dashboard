@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import imgLogin from '@/assets/backgrounds/login-geo-shapes.png';
-import iconLogo from '@/assets/logo/nav-logo.svg';
+import iconLogo from '@/assets/logo/kalasalogo.svg';
 
 const LoginLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,18 +10,10 @@ const LoginLayout = ({ children }: { children: React.ReactNode }) => {
           <Image src={iconLogo} loading="eager" alt="logo" />
         </header>
 
-        <section className="w-[479px] h-[492px] bg-white rounded-lg px-10 py-[46px]">
-          {children}
-        </section>
+        <section className="bg-white rounded-lg">{children}</section>
 
         <footer className="p-8 fixed bottom-0 left-0 right-0">
-          <span
-            className="text-lg"
-            style={{
-              // * just temporary
-              fontFamily: 'cardo',
-            }}
-          >
+          <span className="text-primary text-light tracking-wider font-primary text-24">
             © Kalasa. Art Space.2023
           </span>
         </footer>

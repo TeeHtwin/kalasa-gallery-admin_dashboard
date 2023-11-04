@@ -25,6 +25,7 @@ const ForgotPassword = () => {
 
       <fieldset className="flex flex-col gap-4 justify-between">
         <FormInput
+          name="email"
           id="email"
           label="Email"
           type="email"

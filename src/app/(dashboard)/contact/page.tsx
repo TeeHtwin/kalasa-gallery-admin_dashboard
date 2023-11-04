@@ -1,13 +1,15 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Header from '@/components/common/PageHeader';
 import { TableCom } from '@/components';
 import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
+import { customerSearchFun } from '@/utils/macellanous';
 
 const Contact = () => {
   const [page_number, setPageNumber] = useState(1);
+  const searchText = useRef();
   const tableHeader = [
     'no',
     'customer_name',
@@ -24,6 +26,8 @@ const Contact = () => {
       phone_number: '09250344244',
     },
   ];
+
+  const [tableData, setTableData] = useState(data);
 
   const pagiBtnQty = 3;
   const prevBtnFun = () => {};
@@ -43,14 +47,16 @@ const Contact = () => {
       <PageHeaderBox
         filterDate={null}
         handleDatePicker={() => {}}
-        handlerSearch={() => console.log('contact search')}
-        searchText={() => console.log('contact search text')}
+        handlerSearch={() =>
+          setTableData(customerSearchFun(data, searchText.current))
+        }
+        searchText={searchText}
       />
 
       <TableCom
         path="/contact"
         tableHeader={tableHeader}
-        data={data}
+        data={tableData}
         quickAction={false}
         setQuickAction={() => console.log('contact quick action')}
         handleMultipleDelete={() => console.log('multiple deleteion')}

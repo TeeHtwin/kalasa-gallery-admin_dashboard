@@ -16,7 +16,7 @@ const NavLink = ({ menu, pathname }: NavLinkProps) => {
 
   return (
     <Link
-      href={menu.href}
+      href={`${menu.href}`}
       className="flex gap-4 text-btnText rounded-full bg-white py-1.5 pl-6 pr-4 items-center shadow-100"
     >
       <menu.icon fill={isActive ? '#803806' : '#8A8A8A'} />

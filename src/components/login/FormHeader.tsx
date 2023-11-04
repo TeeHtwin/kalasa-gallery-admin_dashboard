@@ -5,14 +5,8 @@ type FormHeaderType = {
 
 const FormHeader = ({ title, description }: FormHeaderType) => {
   return (
-    <div className="flex flex-col gap-1">
-      <legend
-        className="text-[30px] font-bold text-primary"
-        style={{
-          // * just temporary
-          fontFamily: 'cardo',
-        }}
-      >
+    <div className="flex flex-col gap-1 text-medium">
+      <legend className="text-[30px] font-bold text-primary font-primary">
         {title}
       </legend>
       <p>{description}</p>

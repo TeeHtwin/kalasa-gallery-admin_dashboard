@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
-import { Listbox } from '@headlessui/react';
+import React, { Dispatch, Fragment, SetStateAction } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 const monthNames = [
@@ -18,7 +18,12 @@ const monthNames = [
   'December',
 ];
 
-const ListBoxCom = () => {
+interface IListBoxProps {
+  reportMonth: string;
+  setReportMonth: Dispatch<SetStateAction<String>>;
+}
+
+const ListBoxCom = ({ reportMonth, setReportMonth }: any) => {
   return (
     <main
       style={{
@@ -26,13 +31,13 @@ const ListBoxCom = () => {
       }}
       className="w-full h-full absolute top-0 left-0"
     >
-      <Listbox value="" onChange={() => {}}>
+      <Listbox value={reportMonth} onChange={(e) => setReportMonth(e)}>
         <Listbox.Button
           className={
             'w-full h-full text-btnText flex  border px-3 rounded-full center'
           }
         >
-          <span className="flex-1">{'month' || 'selected.name'}</span>
+          <span className="flex-1">{reportMonth || 'Month'}</span>
           <span>
             <ChevronDownIcon
               className="h-5 w-5 text-gray-400"
@@ -40,21 +45,31 @@ const ListBoxCom = () => {
             />
           </span>
         </Listbox.Button>
-        <Listbox.Options
-          className={
-            'w-fit max-h-[240px] overflow-y-scroll bg-white drop-shadow-xl text-small'
-          }
+        <Transition
+          as={React.Fragment}
+          enter="transition duration-150 ease-in"
+          enterFrom="opactiy-0 translate-y-5"
+          enterTo="opactiy-100 translate-y-0"
+          leave="transition duration-150 ease-out"
+          leaveFrom="opactiy-100 translate-y-5"
+          leaveTo="opacity-0 translate-y-0"
         >
-          {monthNames.map((month, idx) => (
-            <Listbox.Option
-              key={`${month}_${idx}`}
-              value={month}
-              className={'cursor-pointer px-2 py-1 border-b mb-1'}
-            >
-              {month}
-            </Listbox.Option>
-          ))}
-        </Listbox.Options>
+          <Listbox.Options
+            className={
+              'w-fit max-h-[240px] overflow-y-scroll bg-white drop-shadow-xl text-small'
+            }
+          >
+            {monthNames.map((month, idx) => (
+              <Listbox.Option
+                key={`${month}_${idx}`}
+                value={month}
+                className={'cursor-pointer px-2 py-1 border-b mb-1'}
+              >
+                {month}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </Transition>
       </Listbox>
     </main>
   );

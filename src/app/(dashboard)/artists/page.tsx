@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 import TableCom from '@/components/table/TableCom';
 import { usePathname } from 'next/navigation';
@@ -11,6 +11,7 @@ import CTAButton from '@/components/common/CTAButton';
 import plusIcon from '@/assets/icons/plus.svg';
 import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
+import { TextSearchFun } from '@/utils/macellanous';
 
 const Artist = () => {
   const searchText = useRef();
@@ -44,6 +45,11 @@ const Artist = () => {
     },
   ];
 
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    setArtistData(TextSearchFun(data, searchText.current));
+  };
+
   const page_number = 1;
 
   const [artistData, setArtistData] = useState(data);
@@ -62,12 +68,14 @@ const Artist = () => {
           <CTAButton icon={plusIcon} title="Create Artists" />
         </Link>
       </nav>
+
       <PageHeaderBox
         searchText={searchText}
         filterDate={null}
         handleDatePicker={() => {}}
-        handlerSearch={() => console.log('something ')}
+        handlerSearch={handleSearch}
       />
+
       <TableCom
         path={path}
         tableHeader={tableHeader}

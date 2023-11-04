@@ -2,6 +2,7 @@ import ImageIconCom from './ImageIconCom';
 import searchIcon from '@/assets/icons/search.svg';
 import calendarIcon from '@/assets/icons/calendar.svg';
 import { FormatDate } from '@/utils/FormatDate';
+import { FormEvent } from 'react';
 
 interface IFilterDate {
   startDate: string;
@@ -9,7 +10,7 @@ interface IFilterDate {
 }
 interface IPageHeaderBox {
   handleDatePicker: () => void;
-  handlerSearch: () => void;
+  handlerSearch: (e: FormEvent) => void;
   searchText: any;
   filterDate: IFilterDate | null;
 }
@@ -37,8 +38,12 @@ const PageHeaderBox = ({
         <ImageIconCom src={calendarIcon} />
       </button>
 
-      <div className="border w-[30%] rounded overflow-hidden flex">
+      <form
+        onSubmit={handlerSearch}
+        className="border w-[30%] rounded overflow-hidden flex"
+      >
         <button
+          type="submit"
           onClick={handlerSearch}
           className="w-[45px] pl-1 block center h-full"
         >
@@ -52,7 +57,7 @@ const PageHeaderBox = ({
           ref={searchText}
           onChange={(e) => (searchText.current = e.target.value.toLowerCase())}
         />
-      </div>
+      </form>
     </article>
   );
 };

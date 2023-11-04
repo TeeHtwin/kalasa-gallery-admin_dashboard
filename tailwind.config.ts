@@ -1,3 +1,4 @@
+import { cardo } from '@/fonts/font';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -60,7 +61,7 @@ const config: Config = {
         '100': '0px 1px 4px 0px rgba(251, 234, 223, 1);',
       },
       fontSize: {
-        heading: '36px',
+        heading: '28px',
         24: '24px',
         btnText: '18px',
         medium: '16px',
@@ -74,8 +75,8 @@ const config: Config = {
         normal: '500',
       },
       fontFamily: {
-        primary: ['var(--font-cardo)'], //change actual font may be that gonna be Cardo font
-        ariel: 'serif', //should be change
+        primary: ['var(--font-cardo)', 'sans'],
+        ariel: ['var(--font-ariel)', 'serif'],
       },
     },
   },

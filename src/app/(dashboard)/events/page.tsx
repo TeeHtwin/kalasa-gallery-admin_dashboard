@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { EventCard, CTAButton } from '@/components';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import ImageIconCom from '@/components/common/ImageIconCom';
@@ -12,7 +12,9 @@ import plusIcon from '@/assets/icons/plus.svg';
 
 const Events = () => {
   const searchText = useRef();
+
   const page_number = 1;
+
   return (
     <section className="min-h-full p-4">
       <Header title="Events" />
@@ -30,7 +32,7 @@ const Events = () => {
       </nav>
       <section className="min-h-full p-4">
         <PageHeaderBox
-          searchText={searchText.current}
+          searchText={searchText}
           filterDate={null}
           handleDatePicker={() => {}}
           handlerSearch={() => console.log('hi')}

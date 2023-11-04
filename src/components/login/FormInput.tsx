@@ -13,20 +13,24 @@ type FormInputProps = {
   id: string;
   label: string;
   type: string;
+  name: string;
   placeholder: string;
 };
 
-const FormInput = ({ id, label, type, placeholder }: FormInputProps) => {
+const FormInput = ({ id, label, type, placeholder, name }: FormInputProps) => {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="flex flex-col gap-2 relative">
-      <label htmlFor="email">{label}</label>
+    <div className="flex flex-col gap-0.5 relative">
+      <label htmlFor="email" className="font-ariel text-small">
+        {label}
+      </label>
       <input
         type={type === 'password' ? (show ? 'text' : 'password') : type}
         id={id}
+        name={name}
         className={cn(
-          'h-11 border border-white-100 rounded-lg pl-4 focus-within:outline-primary-100',
+          'w-full py-1.5 text-medium border border-white-100 rounded-lg pl-2 focus-within:outline-primary-100',
           type === 'password' ? 'pr-12' : 'pr-4',
         )}
         placeholder={placeholder}
