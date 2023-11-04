@@ -1,17 +1,14 @@
 'use client';
 import { useState, useRef, FormEvent, useCallback, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import {
   TableCom,
   PagiBtn,
-  CTAButton,
   Header,
   PageHeaderBox,
   DateFilterPopup,
 } from '@/components';
 import IconChevron from '@/icons/common/IconChevron';
-import plusIcon from '@/assets/icons/plus.svg';
 import { tableHeader } from './constants';
 import {
   handleArtworkSort,
@@ -22,6 +19,7 @@ import {
 //dummy data
 import artwork from '../../../data/artdata.json';
 import { useTableCustomHook } from '@/hook/useTablehook';
+import { PageTotalListBox } from '@/components/common';
 
 const ArtWork = () => {
   const path = usePathname();
@@ -87,17 +85,12 @@ const ArtWork = () => {
     <section className="min-h-full p-4">
       <Header title="Galleries" />
 
-      <nav className="flex justify-between">
-        <div className="flex gap-5 items-center">
-          <p className="text-primary font-serif">Total Material Lists</p>
-          <div className="w-12 rounded-md border border-grey h-7 flex justify-center items-center">
-            15
-          </div>
-        </div>
-        <Link href={'/artworks/createartwork'}>
-          <CTAButton title="Create Artwork" icon={plusIcon} />
-        </Link>
-      </nav>
+      <PageTotalListBox
+        totalLabel="Total Material Lists"
+        totalValue={15}
+        path={'/artworks/createartwork'}
+        ctaBtnTitle="Create Artwork"
+      />
 
       <div className="relative">
         <PageHeaderBox

@@ -1,7 +1,7 @@
 .toggle_container {
-  width: 120px;
+  width: 100px;
   height: auto;
-  min-height: 45px;
+  min-height: 35px;
   position: relative;
   cursor: pointer;
   font-size: 12px !important;
@@ -33,7 +33,7 @@ input.toggle {
   position: absolute;
   top: 0;
   left: 0;
-  line-height: 45px;
+  line-height: 35px;
   transition: all 0.75s linear;
 }
 .toggle_text::before {

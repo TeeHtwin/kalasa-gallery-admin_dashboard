@@ -5,19 +5,20 @@ import Link from 'next/link';
 
 const CollectionCard = ({ poster }: { poster?: any }) => {
   return (
-    <Link href={`/dashboard/collections/collectioninfos/${132}`}>
+    <Link className='lg:h-[220px]' href={`/collections/collectioninfos/${132}`}>
       <article
-        className="mb-2 flex gap-2 border rounded-lg
+        className="mb-2 flex flex-col lg:flex-row gap-2 border rounded-lg
      p-2"
       >
-        <div className="h-[180px]">
+        <div className="overflow-hidden">
           <Image
             src={poster || collection}
             alt="collection_image"
-            width={650}
+            width={520}
             quality={100}
-            objectFit="cover"
-            height={180}
+            priority
+            height={1024}
+            className='object-cover'
           />
         </div>
         <div className="p-1">

@@ -17,7 +17,7 @@ const Breadcrumbs = ({
         <div className="flex w-fit gap-3 items-center capitalize">
           {breadcrumbs.map((i: string, idx: number) => (
             <div
-              className="font-medium text-small flex gap-3"
+              className="font-medium text-small flex items-center gap-3"
               key={`${i}_${idx}`}
             >
               <span className="text-primary font-primary">{i}</span>

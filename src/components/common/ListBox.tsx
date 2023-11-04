@@ -3,27 +3,14 @@ import React, { Dispatch, Fragment, SetStateAction } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
-const monthNames = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+const monthNames = [2019, 2020, 2021, 2022, 2023];
 
 interface IListBoxProps {
-  reportMonth: string;
-  setReportMonth: Dispatch<SetStateAction<String>>;
+  reportMonth: Number;
+  setReportMonth: any;
 }
 
-const ListBoxCom = ({ reportMonth, setReportMonth }: any) => {
+const ListBoxCom = ({ reportMonth, setReportMonth }: IListBoxProps) => {
   return (
     <main
       style={{
@@ -31,13 +18,15 @@ const ListBoxCom = ({ reportMonth, setReportMonth }: any) => {
       }}
       className="w-full h-full absolute top-0 left-0"
     >
-      <Listbox value={reportMonth} onChange={(e) => setReportMonth(e)}>
+      <Listbox value={reportMonth} onChange={setReportMonth}>
         <Listbox.Button
           className={
             'w-full h-full text-btnText flex  border px-3 rounded-full center'
           }
         >
-          <span className="flex-1">{reportMonth || 'Month'}</span>
+          <span className="flex-1 text-small">
+            {String(reportMonth) || 2023}
+          </span>
           <span>
             <ChevronDownIcon
               className="h-5 w-5 text-gray-400"
@@ -56,7 +45,7 @@ const ListBoxCom = ({ reportMonth, setReportMonth }: any) => {
         >
           <Listbox.Options
             className={
-              'w-fit max-h-[240px] overflow-y-scroll bg-white drop-shadow-xl text-small'
+              'w-full text-center max-h-[240px] overflow-y-scroll bg-white drop-shadow-xl text-small'
             }
           >
             {monthNames.map((month, idx) => (

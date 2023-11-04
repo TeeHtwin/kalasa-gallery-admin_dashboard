@@ -38,7 +38,9 @@ const Contact = () => {
       <Header title="Contacts" />
 
       <div className="flex gap-5 items-center mb-2">
-        <p className="text-primary font-serif">Total Contacts</p>
+        <p className="text-primary font-primary font-semibold text-20">
+          Total Contacts
+        </p>
         <div className="w-8 rounded-md border-2 h-7 flex justify-center text-medium items-center">
           15
         </div>

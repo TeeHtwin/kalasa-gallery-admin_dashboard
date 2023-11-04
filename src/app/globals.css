@@ -6,6 +6,16 @@ html {
   @apply text-black;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+  appearance: none;
+}
+::-webkit-scrollbar-track {
+  @apply bg-grey-light;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded;
+}
 .center {
   @apply flex justify-center items-center;
 }

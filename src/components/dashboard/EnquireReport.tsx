@@ -1,24 +1,27 @@
 'use client';
-import { useState } from 'react';
-import BarChart from './chars/BarChart';
+
+import dynamic from 'next/dynamic';
 import ListBoxCom from '../common/ListBox';
+import { useEnquiry } from '@/hook/useEnquiry';
+
+const BarChart = dynamic(() => import('./chars/BarChart'), { ssr: false });
 
 const EnquireReport = () => {
-  const [reportMonth, setReportMonth] = useState<String | null>('');
+  const {
+    data,
+    loading,
+    reportMonth,
+    handleEnquiryYear: setReportMonth,
+  } = useEnquiry();
+
   return (
     <main>
       <div className="flex justify-between items-center">
-        <h2
-          className="m-0 p-0 text-heading font-heading text-primary"
-          style={{
-            //* just temporary
-            fontFamily: 'cardo',
-          }}
-        >
+        <h2 className="m-0 p-0 text-heading font-heading text-primary font-primary">
           Enquire Report
         </h2>
 
-        <div className="min-w-[160px] w-fit h-[45px] relative border rounded-full">
+        <div className="min-w-[120px] w-fit h-[35px] relative border rounded-full">
           <ListBoxCom
             reportMonth={reportMonth}
             setReportMonth={setReportMonth}
@@ -26,7 +29,7 @@ const EnquireReport = () => {
         </div>
       </div>
       <section>
-        <BarChart />
+        {loading ? <h1>Loading...</h1> : <BarChart data={data} />}
       </section>
     </main>
   );

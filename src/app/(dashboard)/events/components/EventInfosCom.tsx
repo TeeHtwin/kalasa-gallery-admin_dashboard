@@ -15,7 +15,7 @@ const EventInfosCom = () => {
             width={1024}
             height={1024}
             quality={100}
-            className="object-cover"
+            className="max-h-[240px] object-contain"
           />
         </div>
 

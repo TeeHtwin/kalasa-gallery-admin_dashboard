@@ -61,8 +61,9 @@ const config: Config = {
         '100': '0px 1px 4px 0px rgba(251, 234, 223, 1);',
       },
       fontSize: {
-        heading: '28px',
+        heading: '36px',
         24: '24px',
+        20: '20px',
         btnText: '18px',
         medium: '16px',
         small: '14px',

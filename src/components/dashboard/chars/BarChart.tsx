@@ -1,7 +1,7 @@
 'use client';
 import Chart from 'react-apexcharts';
 
-const BarChart = () => {
+const BarChart = ({ data }: any) => {
   const dummyData = {
     options: {
       plotOptions: {
@@ -45,16 +45,18 @@ const BarChart = () => {
     series: [
       {
         name: 'data',
-        data: [850, 800, 750, 700, 650, 600, 650, 700, 750, 800, 850, 900],
+        data,
       },
     ],
   };
+
+  console.log(data);
   return (
     <Chart
       options={dummyData.options}
       series={dummyData.series}
       type="bar"
-      height={420}
+      height={500}
     />
   );
 };

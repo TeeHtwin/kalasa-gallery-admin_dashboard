@@ -1,15 +1,13 @@
 'use client';
 import { useRef } from 'react';
-import { CTAButton } from '@/components';
 import CollectionCard from '@/components/card/collections/Card';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import ImageIconCom from '@/components/common/ImageIconCom';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 import Header from '@/components/common/PageHeader';
-import Link from 'next/link';
 import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
-import plusIcon from '@/assets/icons/plus.svg';
+import { PageTotalListBox } from '@/components/common';
 
 const Collections = () => {
   const searchText = useRef();
@@ -18,17 +16,13 @@ const Collections = () => {
     <section className="min-h-full p-2">
       <Header title="Collections" />
 
-      <nav className="flex justify-between">
-        <div className="flex gap-5 items-center">
-          <p className="text-primary font-serif">Total Collections</p>
-          <div className="w-12 rounded-md border text-primary font-heading font-ariel h-7 flex justify-center items-center">
-            15
-          </div>
-        </div>
-        <Link href={'/collections/createcollection'}>
-          <CTAButton icon={plusIcon} title="Create Collection" />
-        </Link>
-      </nav>
+      <PageTotalListBox
+        totalLabel="Total Collections"
+        totalValue={14}
+        path="/collections/createcollection"
+        ctaBtnTitle="Create Collection"
+      />
+
       <section className="min-h-full py-1">
         <PageHeaderBox
           searchText={searchText.current}
@@ -64,7 +58,7 @@ const Collections = () => {
           </button>
         </div>
 
-        <div className="columns-2 gap-2">
+        <div className="columns-1 md:columns-2 gap-2">
           <CollectionCard />
           <CollectionCard />
           <CollectionCard />

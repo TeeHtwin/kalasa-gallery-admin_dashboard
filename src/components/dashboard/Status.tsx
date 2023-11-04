@@ -19,7 +19,7 @@ const Status = ({ status }: StatusProps) => {
       <div className="flex items-baseline justify-between text-[22px]">
         <span>{status.amount}</span>
 
-        <Link href={status.href} className="flex gap-2 text-xs capitalize">
+        <Link href={status.href} className="flex gap-2 text-small capitalize">
           see all &nbsp; &gt;
         </Link>
       </div>

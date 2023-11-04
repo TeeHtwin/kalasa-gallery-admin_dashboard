@@ -25,9 +25,9 @@ const PageHeaderBox = ({
     <article className="w-full max-h-[60px] flex justify-between gap-3 my-3 text-btnText">
       <button
         onClick={handleDatePicker}
-        className="w-[30%] block border rounded center py-1 px-3"
+        className="w-[20%] block border rounded center py-2 px-3"
       >
-        <p className="flex-1 text-start text-grey">
+        <p className="flex-1 text-start text-grey text-medium">
           {filterDate !== null
             ? `${FormatDate(
                 filterDate.startDate,
@@ -40,7 +40,7 @@ const PageHeaderBox = ({
 
       <form
         onSubmit={handlerSearch}
-        className="border w-[30%] rounded overflow-hidden flex"
+        className="border w-[20%] rounded overflow-hidden flex"
       >
         <button
           type="submit"
@@ -53,7 +53,7 @@ const PageHeaderBox = ({
           type="text"
           id="search_input"
           placeholder="Search By Name"
-          className="flex-1 outline-none px-2"
+          className="flex-1 outline-none px-2 text-medium"
           ref={searchText}
           onChange={(e) => (searchText.current = e.target.value.toLowerCase())}
         />

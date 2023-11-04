@@ -1,14 +1,13 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { EventCard, CTAButton } from '@/components';
+import { useRef } from 'react';
+import { EventCard } from '@/components';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import ImageIconCom from '@/components/common/ImageIconCom';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 import Header from '@/components/common/PageHeader';
-import Link from 'next/link';
 import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
-import plusIcon from '@/assets/icons/plus.svg';
+import { PageTotalListBox } from '@/components/common';
 
 const Events = () => {
   const searchText = useRef();
@@ -19,17 +18,13 @@ const Events = () => {
     <section className="min-h-full p-4">
       <Header title="Events" />
 
-      <nav className="flex justify-between">
-        <div className="flex gap-5 items-center">
-          <p className="text-primary font-serif">Total Events</p>
-          <div className="w-12 rounded-md border text-primary font-heading font-ariel h-7 flex justify-center items-center">
-            15
-          </div>
-        </div>
-        <Link href={'/events/createevent'}>
-          <CTAButton icon={plusIcon} title="Create Events" />
-        </Link>
-      </nav>
+      <PageTotalListBox
+        totalLabel="Total Events"
+        totalValue={14}
+        path="/events/createevent"
+        ctaBtnTitle="Create Events"
+      />
+
       <section className="min-h-full p-4">
         <PageHeaderBox
           searchText={searchText}

@@ -1,16 +1,14 @@
 'use client';
 import { useRef } from 'react';
-import { CTAButton } from '@/components';
 import CollectionCard from '@/components/card/collections/Card';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import ImageIconCom from '@/components/common/ImageIconCom';
 import PageHeaderBox from '@/components/common/PageHeaderBox';
 import Header from '@/components/common/PageHeader';
-import Link from 'next/link';
 import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
-import plusIcon from '@/assets/icons/plus.svg';
 import blogImage from '@/assets/dummy/blog.png';
+import { PageTotalListBox } from '@/components/common';
 
 const Blog = () => {
   const searchText = useRef();
@@ -19,17 +17,13 @@ const Blog = () => {
     <section className="min-h-full p-2">
       <Header title="Blogs" />
 
-      <nav className="flex justify-between">
-        <div className="flex gap-5 items-center">
-          <p className="text-primary font-serif">Total Blogs</p>
-          <div className="w-12 rounded-md border text-primary font-heading font-ariel h-7 flex justify-center items-center">
-            15
-          </div>
-        </div>
-        <Link href={'/blogs/createblog'}>
-          <CTAButton icon={plusIcon} title="Create blog" />
-        </Link>
-      </nav>
+      <PageTotalListBox
+        totalLabel="Total Blogs"
+        totalValue={15}
+        path="/blogs/createblog"
+        ctaBtnTitle="Create blog"
+      />
+
       <section className="min-h-full py-1">
         <PageHeaderBox
           searchText={searchText.current}
@@ -65,7 +59,7 @@ const Blog = () => {
           </button>
         </div>
 
-        <div className="columns-2 gap-2">
+        <div className="columns-1 md:columns-2 gap-2">
           <CollectionCard poster={blogImage} />
           <CollectionCard poster={blogImage} />
           <CollectionCard poster={blogImage} />

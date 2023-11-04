@@ -6,17 +6,19 @@ import Link from 'next/link';
 
 const EventCard = () => {
   return (
-    <article className="flex gap-8 border rounded-md p-3">
+    <article className="flex flex-col md:flex-row gap-8 border rounded-md p-3">
+      <div className="w-full md:w-[240px]">
       <Image
         src={gallery}
         quality={100}
         alt="gallery_image"
-        width={240}
+        width={1024}
         height={240}
       />
+      </div>
 
       <div className="desc flex-1">
-        <nav className="flex justify-between">
+        <nav className="flex justify-between flex-wrap">
           <h6 className="font-ariel">POSTer-colonial Rangoon</h6>
           <button className="bg-purple text-medium text-white px-4 py-1 rounded">
             Upcoming

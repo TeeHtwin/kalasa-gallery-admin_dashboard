@@ -1,8 +1,14 @@
 import Image from 'next/image';
 import imgLogin from '@/assets/backgrounds/login-geo-shapes.png';
 import iconLogo from '@/assets/logo/kalasalogo.svg';
+import { getServerSession } from 'next-auth/next';
+import { Options } from '../api/auth/protected/Protect';
+import { redirect } from 'next/navigation';
 
-const LoginLayout = ({ children }: { children: React.ReactNode }) => {
+const LoginLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getServerSession(Options);
+
+  if (session) return redirect('/');
   return (
     <div className="h-screen">
       <div className="h-screen w-[50vw] bg-secondary-100 flex items-center justify-center">
@@ -10,10 +16,12 @@ const LoginLayout = ({ children }: { children: React.ReactNode }) => {
           <Image src={iconLogo} loading="eager" alt="logo" />
         </header>
 
-        <section className="bg-white rounded-lg">{children}</section>
+        <section className="bg-white rounded-lg px-10 py-[46px] text-black">
+          {children}
+        </section>
 
-        <footer className="p-8 fixed bottom-0 left-0 right-0">
-          <span className="text-primary text-light tracking-wider font-primary text-24">
+        <footer className="text-black p-8 fixed bottom-0 left-0 right-0">
+          <span className="text-lg font-primary">
             © Kalasa. Art Space.2023
           </span>
         </footer>

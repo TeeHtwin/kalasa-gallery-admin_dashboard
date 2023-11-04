@@ -5,6 +5,8 @@ import ImageIconCom from '../common/ImageIconCom';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import deleteIcon from '@/assets/icons/trash.svg';
 import Link from 'next/link';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 const TableCom = ({
   path,
@@ -31,14 +33,14 @@ const TableCom = ({
 }) => {
   const headerTag = tableHeader.map((h, idx) =>
     quickAction && h === 'action' ? (
-      <td key={`${h}_${idx}`} className="min-w-[25px] max-w-[40px] py-1.5">
+      <Th key={`${h}_${idx}`} className="min-w-[25px] max-w-[40px] py-1.5">
         {h.replace('action', ' ')}
-      </td>
+      </Th>
     ) : (
       h !== 'action' && (
-        <td key={`${h}_${idx}`} className="min-w-[60px] py-1.5">
+        <Th key={`${h}_${idx}`} className="min-w-[60px] py-1.5">
           {h.replace('_', ' ')}
-        </td>
+        </Th>
       )
     ),
   );
@@ -46,44 +48,44 @@ const TableCom = ({
   const bodyTag = data.map((d: any, idx: number) => {
     const keys = Object.keys(d);
     return (
-      <tr key={idx} className={`text-center capitalize text-medium border-b`}>
+      <Tr key={idx} className={`text-center capitalize text-medium border-b`}>
         {quickAction && (
-          <td className="center h-[80px]">
+          <Td className="center">
             <input
               type="checkbox"
               checked={selectedRowCount.includes(d.artwork_name)}
-              className="accent-primary w-2 h-2 border cursor-pointer"
+              className="accent-primary border cursor-pointer"
               onChange={() => handleMultipleDelete(d.artwork_name)}
             />
-          </td>
+          </Td>
         )}
 
-        <td>{idx + 1}</td>
+        <Td className='py-4'>{idx + 1}</Td>
 
         {keys.map((k: string, i) =>
           k === 'artwork_status' ? (
-            <td key={`${k}_${i}`} className="h-[80px] center">
+            <Td key={`${k}_${i}`} className="center py-3">
               <ToggleButton checked={d[k]} toggleNum={`toggle-${idx}`} />
-            </td>
+            </Td>
           ) : (
-            <td
+            <Td
               key={`${k}_${i}`}
-              className={`h-[80px] ${
+              className={` ${
                 k === 'subject' || k === 'email' ? 'lowercase' : 'capitalize'
               }`}
             >
               {d[k]}
-            </td>
+            </Td>
           ),
         )}
-        <td className="px-2">
+        <Td className="px-2">
           <Link href={`${path}${path}info/${idx}`}>
             <span className="text-primary underline underline-offset-2">
               view
             </span>
           </Link>
-        </td>
-      </tr>
+        </Td>
+      </Tr>
     );
   });
 
@@ -97,14 +99,14 @@ const TableCom = ({
                 className="center gap-2"
                 onClick={handleMultipleDeleteAction}
               >
-                <span className="w-4 h-4 inline-block bg-white text-red rounded-full">
+                <span className="w-5 text-small font-bold h-5 inline-block bg-white text-red rounded-full">
                   {selectedRowCount.length}
                 </span>{' '}
                 Multiple delete{' '}
                 <ImageIconCom src={deleteIcon} width={30} height={30} />
               </button>
               <button
-                className="w-4 h-4 rounded-full absolute -top-1 -right-1 bg-black text-white"
+                className="w-5 h-5 text-small rounded-full absolute -top-1 -right-1 bg-black text-white"
                 onClick={() => {
                   setQuickAction(!quickAction);
                   emptySelectionRow();
@@ -132,15 +134,15 @@ const TableCom = ({
           Sort By <ImageIconCom src={chevronDown} />
         </button>
       </div>
-      <table className="w-full border">
-        <thead>
-          <tr className="text-center text-btnText capitalize font-ariel bg-primary text-white font-light">
+      <Table className="w-full border">
+        <Thead>
+          <Tr className="text-center text-btnText capitalize font-ariel bg-primary text-white font-light">
             {headerTag}
-          </tr>
-        </thead>
+          </Tr>
+        </Thead>
 
-        <tbody>{bodyTag}</tbody>
-      </table>
+        <Tbody>{bodyTag}</Tbody>
+      </Table>
     </>
   );
 };

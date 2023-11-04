@@ -1,16 +1,23 @@
 'use client';
 
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import navLogo from '@/assets/logo/kalasalogo.svg';
 import { menus } from '@/config/menus.config';
 import NavLink from './NavLink';
+import { signOut } from 'next-auth/react';
 import IconLogout from '@/icons/dashboard/IconLogout';
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogOut = () => {
+    signOut();
+    router.push('/login');
+  };
   return (
-    <aside className="w-[30%] xl:w-[20%] sticky top-0 p-4 h-full max-h-[851px] flex flex-col gap-4 py-6">
+    <aside className="w-[25%] md:w-[25%] lg:w-[18%] sticky top-0 p-4 h-full max-h-[851px] flex flex-col gap-4 py-6">
       <header>
         <Image
           src={navLogo}
@@ -32,11 +39,11 @@ const Sidebar = () => {
 
       <div className="mt-auto flex justify-between items-start border-t border-black-100 px-2 pt-4">
         <div className="flex flex-col text-sm">
-          <span className="font-bold text-24">Olivia Rhye</span>
+          <span className="font-bold text-medium">Olivia Rhye</span>
           <span className="text-grey text-medium">olivia@untitledui.com</span>
         </div>
 
-        <button aria-label="log out">
+        <button onClick={handleLogOut} aria-label="log out">
           <IconLogout />
         </button>
       </div>
