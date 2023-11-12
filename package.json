@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-super-responsive-table": "^5.2.2",
     "react-time-picker": "^6.5.2",
+    "tailwind-merge": "^2.0.0",
     "zustand": "^4.4.3"
   },
   "devDependencies": {

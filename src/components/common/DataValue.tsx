@@ -9,7 +9,7 @@ const DataInfo = ({
 }) => {
   return (
     <p className="flex gap-2 capitalize text-btnText">
-      <span className="min-w-[220px] font-ariel text-black-100 capitalize font-extralight flex justify-between items-center">
+      <span className="min-w-[220px] font-primary text-grey capitalize flex justify-between items-center">
         {label}
         <span className="ml-3 inline-block w-1.5 h-1.5 rounded-full bg-red" />
       </span>

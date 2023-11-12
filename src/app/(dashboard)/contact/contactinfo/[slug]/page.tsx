@@ -52,7 +52,7 @@ const ContactInfo = () => {
 
           <hr className="w-full bg-black-100 my-5" />
 
-          <h5 className="text-primary font-ariel font-heading">
+          <h5 className="text-primary font-arial font-heading">
             I want to know about the detail price of artwork
           </h5>
 

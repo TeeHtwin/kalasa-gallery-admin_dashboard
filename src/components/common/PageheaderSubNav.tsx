@@ -14,7 +14,9 @@ const PageheaderSubNav = ({
   return (
     <nav className="mt-4 capitalize">
       <div className="flex justify-between gap-5 items-center">
-        <p className="text-primary font-serif">{headerLabel}</p>
+        <p className="text-primary font-arial text-24 font-semibold">
+          {headerLabel}
+        </p>
         <Link href={link}>
           <CTAButton title={btnLabel} icon={icon || subIcon} />{' '}
           {/* the type of btn will change  */}

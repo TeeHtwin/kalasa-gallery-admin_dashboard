@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { AuthProvider } from './provider/Providers';
 
-import { cardo, arial } from '@/fonts/font';
+import { cardo, arial, inter } from '@/fonts/font';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +16,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${cardo.variable} ${arial.variable}`}>
+      <body className={`${cardo.variable} ${arial.variable} ${inter.variable}`}>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

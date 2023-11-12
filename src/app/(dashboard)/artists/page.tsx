@@ -1,58 +1,51 @@
 'use client';
-
-import { FormEvent, useRef, useState } from 'react';
 import TableCom from '@/components/table/TableCom';
-import { usePathname } from 'next/navigation';
-import { handleArtworkSort } from '@/utils/Sorting';
 import IconChevron from '@/icons/common/IconChevron';
-import { TextSearchFun } from '@/utils/macellanous';
+import { handleArtworkSort, FilterBoxStyle } from '@/utils';
 import {
   PageTotalListBox,
   PageHeaderBox,
   Header,
   PagiBtn,
 } from '@/components/common';
+import { DateFilterPopup } from '@/components';
+import { useArtist } from '@/hook/useArtist';
+
+const tableHeader = [
+  'no',
+  "artist's_name",
+  'added_date',
+  'total_artworks',
+  'sold_artworks',
+  ' ',
+];
+const data = [
+  {
+    artist_name: 'kaung Kaung',
+    added_date: '22.10.2023',
+    total_artworks: 250,
+    sold_artworks: 35,
+  },
+  {
+    artist_name: 'aung Kaung',
+    added_date: '22.10.2023',
+    total_artworks: 250,
+    sold_artworks: 35,
+  },
+  {
+    artist_name: 'willian',
+    added_date: '22.10.2023',
+    total_artworks: 250,
+    sold_artworks: 35,
+  },
+];
 
 const Artist = () => {
-  const searchText = useRef();
-  const path = usePathname();
-  const tableHeader = [
-    'no',
-    "artist's_name",
-    'added_date',
-    'total_artworks',
-    'sold_artworks',
-    ' ',
-  ];
-  const data = [
-    {
-      artist_name: 'kaung Kaung',
-      added_date: '22.10.2023',
-      total_artworks: 250,
-      sold_artworks: 35,
-    },
-    {
-      artist_name: 'aung Kaung',
-      added_date: '22.10.2023',
-      total_artworks: 250,
-      sold_artworks: 35,
-    },
-    {
-      artist_name: 'willian',
-      added_date: '22.10.2023',
-      total_artworks: 250,
-      sold_artworks: 35,
-    },
-  ];
-
-  const handleSearch = (e: FormEvent) => {
-    e.preventDefault();
-    setArtistData(TextSearchFun(data, searchText.current));
-  };
+  const { path, foundData, setFoundData, searchText, handleSearch } =
+    useArtist(data);
 
   const page_number = 1;
 
-  const [artistData, setArtistData] = useState(data);
   return (
     <section className="min-h-full p-4">
       <Header title="Artists" />
@@ -64,24 +57,29 @@ const Artist = () => {
         ctaBtnTitle="Create Artists"
       />
 
-      <PageHeaderBox
-        searchText={searchText}
-        filterDate={null}
-        handleDatePicker={() => {}}
-        handlerSearch={handleSearch}
-      />
+      <div className="relative">
+        <PageHeaderBox
+          searchText={searchText}
+          filterDate={null}
+          handleDatePicker={() => {}}
+          handlerSearch={handleSearch}
+        />
+        <div className={`duration-200 ${FilterBoxStyle(true)}`}>
+          <DateFilterPopup setFilterDateToParent={(e: any) => {}} />
+        </div>
+      </div>
 
       <TableCom
         path={path}
         tableHeader={tableHeader}
-        data={artistData}
+        data={foundData}
         quickAction={false}
         selectedRowCount={[12, 3, 4]}
         emptySelectionRow={() => {}}
         handleMultipleDelete={() => {}}
         handleMultipleDeleteAction={() => {}}
         setQuickAction={() => {}}
-        handleSort={() => setArtistData(handleArtworkSort(data))}
+        handleSort={() => setFoundData(handleArtworkSort(data))}
       />
 
       <div className="py-2 mt-2 flex justify-end items-center gap-3">

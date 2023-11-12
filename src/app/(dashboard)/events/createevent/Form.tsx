@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const CreateEventForm = ({ image }: any) => {
   return (
-    <article className="font-ariel mt-5">
+    <article className="font-arial mt-5">
       <main className="min-h-[340px]">
         <p className="text-medium capitalize">add a cover image</p>
 

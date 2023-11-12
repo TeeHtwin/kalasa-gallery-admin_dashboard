@@ -1,16 +1,16 @@
 'use client';
-import { useRef } from 'react';
 import { EventCard } from '@/components';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import ImageIconCom from '@/components/common/ImageIconCom';
-import PageHeaderBox from '@/components/common/PageHeaderBox';
-import Header from '@/components/common/PageHeader';
-import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
-import { PageTotalListBox } from '@/components/common';
+import { FilterBoxStyle } from '@/utils';
+import { PageTotalListBox, Header, PagiBtn } from '@/components/common';
+import EventHeaderBox from './components/EventHeaderBox';
+import { DateFilterPopup } from '@/components';
+import { useEvent } from '@/hook/useEvent';
 
 const Events = () => {
-  const searchText = useRef();
+  const { searchText, handleSearch } = useEvent();
 
   const page_number = 1;
 
@@ -26,12 +26,13 @@ const Events = () => {
       />
 
       <section className="min-h-full p-4">
-        <PageHeaderBox
-          searchText={searchText}
-          filterDate={null}
-          handleDatePicker={() => {}}
-          handlerSearch={() => console.log('hi')}
-        />
+        <div className="relative">
+          <EventHeaderBox />
+
+          <div className={`duration-200 ${FilterBoxStyle(true)}`}>
+            <DateFilterPopup setFilterDateToParent={(e: any) => {}} />
+          </div>
+        </div>
 
         <div className="flex justify-between items-center text-primary py-2 text-btnText">
           <div>

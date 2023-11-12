@@ -35,7 +35,7 @@ const EditProfile = () => {
           handleModalBox={() => setShowModalBox(true)}
         />
 
-        <article className="font-ariel">
+        <article className="font-arial">
           <div>
             <p>add a profile image</p>
             <div className="w-[300px] h-[300px]">

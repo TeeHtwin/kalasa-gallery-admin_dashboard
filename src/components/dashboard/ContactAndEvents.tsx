@@ -77,7 +77,7 @@ const ContactAndEvents = () => {
           <h2 className="font-bold text-btnText text-primary">
             Upcoming Events
           </h2>
-          <Link href="#" className="text-black-200 text-small">
+          <Link href="/events" className="text-black-200 text-small">
             See more
           </Link>
         </div>

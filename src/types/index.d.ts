@@ -37,3 +37,8 @@ interface ICTAButton {
 interface IPagiBtn extends ICTAButton {
   containerStyle?: string | undefined;
 }
+
+interface IFilterDate {
+  startDate: string;
+  endDate: string;
+}

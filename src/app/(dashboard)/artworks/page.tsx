@@ -1,6 +1,4 @@
 'use client';
-import { useState, useRef, FormEvent, useCallback, useMemo } from 'react';
-import { usePathname } from 'next/navigation';
 import {
   TableCom,
   PagiBtn,
@@ -10,76 +8,35 @@ import {
 } from '@/components';
 import IconChevron from '@/icons/common/IconChevron';
 import { tableHeader } from './constants';
-import {
-  handleArtworkSort,
-  FilterBoxStyle,
-  handleSelectedRow,
-  TextSearchFun,
-} from '@/utils';
+import { FilterBoxStyle, handleSelectedRow } from '@/utils';
 //dummy data
 import artwork from '../../../data/artdata.json';
-import { useTableCustomHook } from '@/hook/useTablehook';
 import { PageTotalListBox } from '@/components/common';
+import { useArtWork } from '@/hook/useArtwork';
 
 const ArtWork = () => {
-  const path = usePathname();
-  const ref = useRef();
-  const [quickAction, setQuickAction] = useState(false);
-  const [selectedRow, setSelectedRow] = useState<string[]>([]);
-  const [showFilterBox, setShowFilterBox] = useState(false);
-  const [filterDate, setFilterDate] = useState(null);
-  const [page_number, setPageNumber] = useState<number>(1);
-
-  // this is the custome hook ----> need to refactor upper code in custom hook
-  const { foundData } = useTableCustomHook(artwork);
-
-  const page_size = 10;
-
-  const filterData = artwork.slice(
-    (page_number - 1) * page_size,
-    page_number * page_size,
-  );
-
-  const [tableData, setTableData] = useState(filterData);
-  const pagiBtnQty = Math.ceil(artwork.length / page_size);
-
-  useMemo(() => {
-    setTableData(filterData);
-  }, [page_number]);
-
-  const nextBtnFun = () => {
-    // check the page is only one or the page_number reach to the end
-    if (page_number === pagiBtnQty) {
-      //disabled the next button
-      return null;
-    } else {
-      setPageNumber((prev) => prev + 1);
-    }
-  };
-
-  const prevBtnFun = () => {
-    // check the page is only one or the page_number reach to the end
-    if (page_number === 1) {
-      //disabled the next button
-      return null;
-    } else {
-      setPageNumber((prev) => prev - 1);
-    }
-  };
-
-  const handleMultipleDeleteAction = useCallback(() => {
-    const newData = artwork.filter(
-      (d) => !selectedRow.includes(d.artwork_name),
-    );
-    setQuickAction(false);
-    setSelectedRow([]);
-    setTableData(newData);
-  }, [selectedRow]);
-
-  const handlerSearch = (e: FormEvent) => {
-    e.preventDefault();
-    setTableData(TextSearchFun(artwork, ref.current));
-  };
+  const {
+    loading,
+    path,
+    ref,
+    quickAction,
+    showFilterBox,
+    setQuickAction,
+    filterDate,
+    tableData,
+    setFilterDate,
+    handleMultipleDeleteAction,
+    prevBtnFun,
+    nextBtnFun,
+    handlerSearch,
+    sortingFun,
+    setSelectedRow,
+    selectedRow,
+    page_number,
+    setPageNumber,
+    pagiBtnQty,
+    setShowFilterBox,
+  } = useArtWork(artwork);
 
   return (
     <section className="min-h-full p-4">
@@ -109,20 +66,22 @@ const ArtWork = () => {
         </div>
       </div>
 
-      <TableCom
-        quickAction={quickAction}
-        path={path}
-        tableHeader={tableHeader}
-        data={tableData}
-        selectedRowCount={selectedRow}
-        emptySelectionRow={() => setSelectedRow([])}
-        handleSort={() => setTableData(handleArtworkSort(tableData))}
-        handleMultipleDeleteAction={handleMultipleDeleteAction}
-        setQuickAction={setQuickAction}
-        handleMultipleDelete={(idx: any) =>
-          setSelectedRow(handleSelectedRow(idx, selectedRow))
-        }
-      />
+      {!loading ? (
+        <TableCom
+          quickAction={quickAction}
+          path={path}
+          tableHeader={tableHeader}
+          data={tableData}
+          selectedRowCount={selectedRow}
+          emptySelectionRow={() => setSelectedRow([])}
+          handleSort={sortingFun}
+          handleMultipleDeleteAction={handleMultipleDeleteAction}
+          setQuickAction={setQuickAction}
+          handleMultipleDelete={(idx: any) =>
+            setSelectedRow(handleSelectedRow(idx, selectedRow))
+          }
+        />
+      ) : null}
 
       <div className="py-2 mt-2 flex justify-end items-center gap-3">
         <button

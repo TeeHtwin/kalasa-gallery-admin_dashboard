@@ -34,7 +34,7 @@ const ArtworkInfo = () => {
 
         <nav className="flex justify-between mt-4">
           <div className="flex gap-5 items-center">
-            <p className="text-primary font-serif">Artwork Infos</p>
+            <p className="text-primary text-24 font-arial">Artwork Infos</p>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -57,7 +57,9 @@ const ArtworkInfo = () => {
               <ImageCom image="/nature.jpg" />
             </div>
             <div className="w-auto">
-              <h5 className="mb-3">Flower And A Frog</h5>
+              <h5 className="mb-3 text-24 text-primary font-primary font-semibold">
+                Flower And A Frog
+              </h5>
               <div className="w-[90%] flex gap-4 font-primary items-center">
                 <DataInfo label="content email" value={21} />
                 <button className="underline text-md text-primary capitalize">
@@ -68,7 +70,7 @@ const ArtworkInfo = () => {
           </main>
 
           <main className="mt-8 border-t-2 pt-3">
-            <h4 className="font-serif text-primary font-semibold">
+            <h4 className="font-primary text-24 text-primary font-semibold">
               Post Information
             </h4>
 

@@ -33,12 +33,12 @@ const TableCom = ({
 }) => {
   const headerTag = tableHeader.map((h, idx) =>
     quickAction && h === 'action' ? (
-      <Th key={`${h}_${idx}`} className="min-w-[25px] max-w-[40px] py-1.5">
+      <Th key={`${h}_${idx}`} className="min-w-[25px] max-w-[40px] py-3">
         {h.replace('action', ' ')}
       </Th>
     ) : (
       h !== 'action' && (
-        <Th key={`${h}_${idx}`} className="min-w-[60px] py-1.5">
+        <Th key={`${h}_${idx}`} className="min-w-[60px] py-3">
           {h.replace('_', ' ')}
         </Th>
       )
@@ -50,17 +50,17 @@ const TableCom = ({
     return (
       <Tr key={idx} className={`text-center capitalize text-medium border-b`}>
         {quickAction && (
-          <Td className="center">
+          <Td>
             <input
               type="checkbox"
               checked={selectedRowCount.includes(d.artwork_name)}
-              className="accent-primary border cursor-pointer"
+              className="accent-primary border cursor-pointer "
               onChange={() => handleMultipleDelete(d.artwork_name)}
             />
           </Td>
         )}
 
-        <Td className='py-4'>{idx + 1}</Td>
+        <Td className="py-4">{idx + 1}</Td>
 
         {keys.map((k: string, i) =>
           k === 'artwork_status' ? (

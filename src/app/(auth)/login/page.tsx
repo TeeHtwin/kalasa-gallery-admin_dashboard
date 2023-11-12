@@ -4,17 +4,29 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
 import FormInput from '@/components/login/FormInput';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { FORGOT_PASSWORD } from '@/constants/routes';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 const page = () => {
   const router = useRouter();
+  const [loginFail, setLoginFail] = useState({
+    status: false,
+    msg: '',
+  });
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
+
+    if (!data.get('email') || !data.get('password')) {
+      setLoginFail({
+        msg: 'Please provide valid email and password',
+        status: true,
+      });
+    }
+
     const respStatus = await signIn('credentials', {
       email: data.get('email'),
       password: data.get('password'),
@@ -23,14 +35,26 @@ const page = () => {
 
     if (respStatus && respStatus.status === 200) {
       router.push('/');
+      setLoginFail({ ...loginFail, status: false });
     } else {
-      console.log(respStatus);
+      setLoginFail({ msg: 'wrong email and password', status: true });
       router.push('/login');
     }
   };
 
   return (
     <form onSubmit={handleFormSubmit} className="flex flex-col gap-6 h-full">
+      {loginFail.status && (
+        <p className="bg-red flex justify-between items-center text-white p-1 rounded font-semibold tracking-wider font-ariel">
+          <span>{loginFail.msg}</span>
+          <button
+            onClick={() => setLoginFail({ status: false, msg: '' })}
+            className="bg-white hover:bg-slate-200 text-red inline-block p-1 rounded drop-shadow-md"
+          >
+            X
+          </button>
+        </p>
+      )}
       <FormHeader
         title="Login to the dashboard"
         description="Welcome back! Please enter your details."

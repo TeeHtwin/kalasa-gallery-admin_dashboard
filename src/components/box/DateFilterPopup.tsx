@@ -16,10 +16,10 @@ const DateFilterPopup = ({ setFilterDateToParent }: any) => {
   const [showCalendar, setShowCalendar] = useState({ from: false, to: false });
 
   return (
-    <div className="w-[30%] z-20 p-5 absolute top-[60px] left-0- bg-white drop-shadow-lg rounded">
+    <div className="w-[20%] z-20 p-5 absolute top-[60px] left-0- bg-white drop-shadow-lg rounded font-arial">
       <div className="relative">
         <fieldset className="rounded-full border px-2 text-small mb-4">
-          <legend className="ml-5 px-1 font-primary font-semibold text-toggleText text-grey">
+          <legend className="ml-5 px-1 font-primary font-semibold text-md text-grey tracking-wider">
             From
           </legend>
           <button
@@ -53,7 +53,7 @@ const DateFilterPopup = ({ setFilterDateToParent }: any) => {
 
       <div className="relative">
         <fieldset className="rounded-full border px-2 text-small">
-          <legend className="ml-5 px-1 font-primary font-semibold text-toggleText text-grey">
+          <legend className="ml-5 px-1 font-primary font-semibold text-toggleText text-grey text-md tracking-wider">
             To
           </legend>
           <button

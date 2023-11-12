@@ -3,15 +3,20 @@ import { useRef } from 'react';
 import CollectionCard from '@/components/card/collections/Card';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import ImageIconCom from '@/components/common/ImageIconCom';
-import PageHeaderBox from '@/components/common/PageHeaderBox';
-import Header from '@/components/common/PageHeader';
-import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
-import { PageTotalListBox } from '@/components/common';
+import { FilterBoxStyle, TextSearchFun } from '@/utils';
+import {
+  PageTotalListBox,
+  PageHeaderBox,
+  Header,
+  PagiBtn,
+} from '@/components/common';
+import { DateFilterPopup } from '@/components';
 
 const Collections = () => {
   const searchText = useRef();
   const page_number = 1;
+  const handleSearch = () => {};
   return (
     <section className="min-h-full p-2">
       <Header title="Collections" />
@@ -24,12 +29,17 @@ const Collections = () => {
       />
 
       <section className="min-h-full py-1">
-        <PageHeaderBox
-          searchText={searchText.current}
-          filterDate={null}
-          handleDatePicker={() => {}}
-          handlerSearch={() => console.log('hi')}
-        />
+        <div className="relative">
+          <PageHeaderBox
+            searchText={searchText}
+            filterDate={null}
+            handleDatePicker={() => {}}
+            handlerSearch={handleSearch}
+          />
+          <div className={`duration-200 ${FilterBoxStyle(true)}`}>
+            <DateFilterPopup setFilterDateToParent={(e: any) => {}} />
+          </div>
+        </div>
 
         <div className="flex justify-between items-center text-primary py-2 text-btnText">
           <div>

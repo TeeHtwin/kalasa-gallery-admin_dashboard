@@ -10,11 +10,12 @@ const RegisterArtist = () => {
       <Breadcrumbs icon={artIcon} breadcrumbs={['artists', "artist's infos"]} />
       <PageheaderSubnav
         link={''}
+        handleModalBox={() => {}}
         headerLabel="create artist"
         btnLabel="Submit"
       />
 
-      <article className="font-ariel mt-5">
+      <article className="font-arial mt-5">
         <div>
           <p className="text-medium capitalize">add a profile image</p>
           <div className="w-[300px] h-[300px] bg-black"></div>

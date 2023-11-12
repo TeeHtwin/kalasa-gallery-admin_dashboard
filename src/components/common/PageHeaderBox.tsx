@@ -1,18 +1,12 @@
-import ImageIconCom from './ImageIconCom';
-import searchIcon from '@/assets/icons/search.svg';
-import calendarIcon from '@/assets/icons/calendar.svg';
-import { FormatDate } from '@/utils/FormatDate';
 import { FormEvent } from 'react';
+import SearchForm from '../form/SearchForm';
+import DatePicker from './DatePicker';
 
-interface IFilterDate {
-  startDate: string;
-  endDate: string;
-}
 interface IPageHeaderBox {
   handleDatePicker: () => void;
+  filterDate: IFilterDate | null;
   handlerSearch: (e: FormEvent) => void;
   searchText: any;
-  filterDate: IFilterDate | null;
 }
 
 const PageHeaderBox = ({
@@ -22,42 +16,10 @@ const PageHeaderBox = ({
   handleDatePicker,
 }: IPageHeaderBox) => {
   return (
-    <article className="w-full max-h-[60px] flex justify-between gap-3 my-3 text-btnText">
-      <button
-        onClick={handleDatePicker}
-        className="w-[20%] block border rounded center py-2 px-3"
-      >
-        <p className="flex-1 text-start text-grey text-medium">
-          {filterDate !== null
-            ? `${FormatDate(
-                filterDate.startDate,
-                'MMM do yyyy',
-              )} - ${FormatDate(filterDate.endDate, 'MMM do yyyy')}`
-            : 'From Date - To Date'}
-        </p>
-        <ImageIconCom src={calendarIcon} />
-      </button>
+    <article className="w-full max-h-[60px] font-arial flex justify-between gap-3 my-3 text-btnText">
+      <DatePicker handleDatePicker={handleDatePicker} filterDate={filterDate} />
 
-      <form
-        onSubmit={handlerSearch}
-        className="border w-[20%] rounded overflow-hidden flex"
-      >
-        <button
-          type="submit"
-          onClick={handlerSearch}
-          className="w-[45px] pl-1 block center h-full"
-        >
-          <ImageIconCom src={searchIcon} />
-        </button>
-        <input
-          type="text"
-          id="search_input"
-          placeholder="Search By Name"
-          className="flex-1 outline-none px-2 text-medium"
-          ref={searchText}
-          onChange={(e) => (searchText.current = e.target.value.toLowerCase())}
-        />
-      </form>
+      <SearchForm handlerSearch={handlerSearch} searchText={searchText} />
     </article>
   );
 };

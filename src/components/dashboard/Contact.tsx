@@ -1,6 +1,7 @@
 import IconUser from '@/icons/dashboard/IconUser';
 import ImageIconCom from '../common/ImageIconCom';
 import arrow from '@/assets/icons/arrow2.svg';
+import Link from 'next/link';
 
 type RecentContactProps = {
   contact: {
@@ -21,7 +22,9 @@ const RecentContact = ({ contact }: RecentContactProps) => {
         <span className="text-black text-btnText">{contact.name}</span>
         <span className="text-black-200 text-small flex justify-between gap-5">
           {contact.email}
-          <ImageIconCom src={arrow} />
+          <Link href={`/contact/contactinfo/${contact.name}`}>
+            <ImageIconCom src={arrow} />
+          </Link>
         </span>
       </div>
     </div>

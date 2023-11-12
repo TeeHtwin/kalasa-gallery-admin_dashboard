@@ -31,6 +31,7 @@ const config: Config = {
           100: '#8A8A8A',
           200: '#4F5154',
           300: '#414141',
+          400: '#5f5d5c',
           calendar: '#535353',
         },
         red: {
@@ -44,6 +45,7 @@ const config: Config = {
         },
         grey: {
           DEFAULT: '#4F5154',
+          dark: '#e9e8e8',
           light: '#B5BAC1',
         },
         purple: {
@@ -67,8 +69,8 @@ const config: Config = {
         btnText: '18px',
         medium: '16px',
         small: '14px',
+        toggleText: '12px',
         xs: '10px',
-        toggleText: '10px',
       },
       fontWeight: {
         heading: '600',
@@ -77,7 +79,8 @@ const config: Config = {
       },
       fontFamily: {
         primary: ['var(--font-cardo)', 'sans'],
-        ariel: ['var(--font-ariel)', 'serif'],
+        arial: ['var(--font-ariel)', 'serif'],
+        inter: ['var(--font-inter)', 'monospace'],
       },
     },
   },

@@ -8,18 +8,20 @@ const EventCard = () => {
   return (
     <article className="flex flex-col md:flex-row gap-8 border rounded-md p-3">
       <div className="w-full md:w-[240px]">
-      <Image
-        src={gallery}
-        quality={100}
-        alt="gallery_image"
-        width={1024}
-        height={240}
-      />
+        <Image
+          src={gallery}
+          quality={100}
+          alt="gallery_image"
+          width={1024}
+          height={240}
+        />
       </div>
 
       <div className="desc flex-1">
         <nav className="flex justify-between flex-wrap">
-          <h6 className="font-ariel">POSTer-colonial Rangoon</h6>
+          <h6 className="font-primary text-20 font-bold">
+            POSTer-colonial Rangoon
+          </h6>
           <button className="bg-purple text-medium text-white px-4 py-1 rounded">
             Upcoming
           </button>
@@ -35,7 +37,7 @@ const EventCard = () => {
           <p>Feb 16 - Mar 6,2023</p>
         </div>
 
-        <p className="text-medium mt-2">
+        <p className="text-btnText mt-2">
           The Amazon CloudFront distribution is configured to block access from
           your country. We can't connect to the server for this app or website
           at this time. There might be too much traffic or a configuration.. see

@@ -1,11 +1,16 @@
 'use client';
 import { useRef, useState } from 'react';
-import Header from '@/components/common/PageHeader';
 import { TableCom } from '@/components';
-import PagiBtn from '@/components/common/PagiBtn';
 import IconChevron from '@/icons/common/IconChevron';
-import PageHeaderBox from '@/components/common/PageHeaderBox';
 import { customerSearchFun } from '@/utils/macellanous';
+import { FilterBoxStyle } from '@/utils';
+import {
+  PageTotalListBox,
+  PageHeaderBox,
+  Header,
+  PagiBtn,
+} from '@/components/common';
+import { DateFilterPopup } from '@/components';
 
 const Contact = () => {
   const [page_number, setPageNumber] = useState(1);
@@ -32,6 +37,7 @@ const Contact = () => {
   const pagiBtnQty = 3;
   const prevBtnFun = () => {};
   const nextBtnFun = () => {};
+  const handleSearch = () => {};
 
   return (
     <section className="min-h-full p-4">
@@ -46,14 +52,17 @@ const Contact = () => {
         </div>
       </div>
 
-      <PageHeaderBox
-        filterDate={null}
-        handleDatePicker={() => {}}
-        handlerSearch={() =>
-          setTableData(customerSearchFun(data, searchText.current))
-        }
-        searchText={searchText}
-      />
+      <div className="relative">
+        <PageHeaderBox
+          searchText={searchText}
+          filterDate={null}
+          handleDatePicker={() => {}}
+          handlerSearch={handleSearch}
+        />
+        <div className={`duration-200 ${FilterBoxStyle(true)}`}>
+          <DateFilterPopup setFilterDateToParent={(e: any) => {}} />
+        </div>
+      </div>
 
       <TableCom
         path="/contact"
