@@ -6,6 +6,15 @@ interface ITableData {
   artwork_status: boolean;
 }
 
+interface ArtworkCreateForm {
+  artwork_name: { value: string };
+  artist_name: { value: string };
+  artwork_year: { value: number | string };
+  medium: { value: string };
+  artwork_size: { value: string };
+  artwork_desciption: { value: string };
+}
+
 interface IArtistTable {
   artist_name: string;
   added_date: string;

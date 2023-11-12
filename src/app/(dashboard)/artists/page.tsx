@@ -1,5 +1,5 @@
 'use client';
-import TableCom from '@/components/table/TableCom';
+import { TableCom } from '@/components';
 import IconChevron from '@/icons/common/IconChevron';
 import { handleArtworkSort, FilterBoxStyle } from '@/utils';
 import {
@@ -59,10 +59,9 @@ const Artist = () => {
 
       <div className="relative">
         <PageHeaderBox
-          searchText={searchText}
+          setSearchKeyWord={(e) => console.log(e)}
           filterDate={null}
           handleDatePicker={() => {}}
-          handlerSearch={handleSearch}
         />
         <div className={`duration-200 ${FilterBoxStyle(true)}`}>
           <DateFilterPopup setFilterDateToParent={(e: any) => {}} />

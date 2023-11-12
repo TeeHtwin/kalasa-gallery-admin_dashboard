@@ -11,7 +11,7 @@ export { default as PagiBtn } from './common/PagiBtn';
 
 export { default as FormControl } from './form/FormControl';
 
-export { default as TableCom } from './table/TableCom';
+export { TableCom } from './table/TableCom';
 
 //data filter
 export { default as DateFilterPopup } from './box/DateFilterPopup';

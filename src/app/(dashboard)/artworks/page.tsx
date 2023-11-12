@@ -13,30 +13,32 @@ import { FilterBoxStyle, handleSelectedRow } from '@/utils';
 import artwork from '../../../data/artdata.json';
 import { PageTotalListBox } from '@/components/common';
 import { useArtWork } from '@/hook/useArtwork';
+import { useArtWorkStore } from '@/store/artStore';
 
 const ArtWork = () => {
   const {
-    loading,
     path,
-    ref,
     quickAction,
     showFilterBox,
     setQuickAction,
     filterDate,
-    tableData,
     setFilterDate,
     handleMultipleDeleteAction,
     prevBtnFun,
     nextBtnFun,
-    handlerSearch,
-    sortingFun,
     setSelectedRow,
     selectedRow,
-    page_number,
-    setPageNumber,
-    pagiBtnQty,
     setShowFilterBox,
-  } = useArtWork(artwork);
+    isLoading,
+    artworks,
+  } = useArtWork();
+  const {
+    handleSort,
+    setSearchKeyWord,
+    page_number,
+    total_page_size,
+    handlePagi,
+  } = useArtWorkStore();
 
   return (
     <section className="min-h-full p-4">
@@ -51,10 +53,9 @@ const ArtWork = () => {
 
       <div className="relative">
         <PageHeaderBox
+          setSearchKeyWord={(e: string) => setSearchKeyWord(e)}
           handleDatePicker={() => setShowFilterBox(!showFilterBox)}
-          handlerSearch={handlerSearch}
           filterDate={filterDate}
-          searchText={ref}
         />
         <div className={`duration-200 ${FilterBoxStyle(showFilterBox)}`}>
           <DateFilterPopup
@@ -66,15 +67,15 @@ const ArtWork = () => {
         </div>
       </div>
 
-      {!loading ? (
+      {!isLoading && artworks ? (
         <TableCom
           quickAction={quickAction}
           path={path}
           tableHeader={tableHeader}
-          data={tableData}
+          data={artworks}
           selectedRowCount={selectedRow}
           emptySelectionRow={() => setSelectedRow([])}
-          handleSort={sortingFun}
+          handleSort={handleSort}
           handleMultipleDeleteAction={handleMultipleDeleteAction}
           setQuickAction={setQuickAction}
           handleMultipleDelete={(idx: any) =>
@@ -94,11 +95,11 @@ const ArtWork = () => {
           <IconChevron />
         </button>
 
-        {Array.from({ length: pagiBtnQty }).map((_, idx) => (
+        {Array.from({ length: total_page_size }).map((_, idx) => (
           <PagiBtn
             key={idx}
             title={String(idx + 1)}
-            fun={() => setPageNumber(idx + 1)}
+            fun={() => handlePagi(idx + 1)}
             containerStyle={
               page_number === idx + 1
                 ? 'border-primary bg-primary text-white'
@@ -108,9 +109,9 @@ const ArtWork = () => {
         ))}
 
         <button
-          disabled={page_number === pagiBtnQty}
+          disabled={page_number === total_page_size}
           className={`page_next_btn  w-7 h-7 text-2xl text-btnText center border rounded-md bg-secondary-200 ${
-            page_number === pagiBtnQty && 'cursor-not-allowed bg-gray-100'
+            page_number === total_page_size && 'cursor-not-allowed bg-gray-100'
           }`}
           onClick={nextBtnFun}
         >

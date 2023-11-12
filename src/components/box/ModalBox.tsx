@@ -12,9 +12,9 @@ interface IModalBox {
 const ModalBox = ({ ques, warning, cn, confirmFun, closeFun }: IModalBox) => {
   return (
     <div onClick={closeFun} className={`modal_box ${cn}`}>
-      <article className="w-4/12 p-3 bg-white rounded-md">
-        <p className="text-primary text-medium font-primary">{ques}</p>
-        <p className="text-black-100 text-small font-ariel leading-6">
+      <article className="w-4/12 min-h-[220px] p-3 bg-white rounded-md">
+        <p className="text-primary text-btnText font-primary">{ques}</p>
+        <p className="text-black-100 text-btnText font-ariel leading-6">
           {warning}
         </p>
 

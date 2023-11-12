@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import CTAButton from '@/components/common/CTAButton';
 import { usePathname } from 'next/navigation';
 import ImageCom from '@/components/common/ImageCom';
@@ -19,7 +20,7 @@ const ArtworkInfo = () => {
   const handleModalBox = () => setShowDeleteModalBox(!showDeleteModalBox);
 
   return (
-    <section id="artworkinfo" className="pt-10 relative">
+    <section id="artworkinfo" className="pt-10 min-h-screen relative">
       <ModalBox
         cn={ModalBoxStyleFun(showDeleteModalBox)}
         {...modalBoxQNA}

@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { AuthProvider } from './provider/Providers';
-
+import { RQProvider } from './provider/RQProvider';
 import { cardo, arial, inter } from '@/fonts/font';
 
 export const metadata: Metadata = {
@@ -17,7 +17,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${cardo.variable} ${arial.variable} ${inter.variable}`}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <RQProvider>{children}</RQProvider>
+        </AuthProvider>
       </body>
     </html>
   );

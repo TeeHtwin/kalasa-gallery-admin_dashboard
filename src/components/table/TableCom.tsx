@@ -5,10 +5,8 @@ import ImageIconCom from '../common/ImageIconCom';
 import chevronDown from '@/assets/icons/chevrondown.svg';
 import deleteIcon from '@/assets/icons/trash.svg';
 import Link from 'next/link';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
-const TableCom = ({
+export const TableCom = ({
   path,
   tableHeader,
   data,
@@ -33,14 +31,14 @@ const TableCom = ({
 }) => {
   const headerTag = tableHeader.map((h, idx) =>
     quickAction && h === 'action' ? (
-      <Th key={`${h}_${idx}`} className="min-w-[25px] max-w-[40px] py-3">
+      <th key={`${h}_${idx}`} className="min-w-[25px] max-w-[40px] py-3">
         {h.replace('action', ' ')}
-      </Th>
+      </th>
     ) : (
       h !== 'action' && (
-        <Th key={`${h}_${idx}`} className="min-w-[60px] py-3">
+        <th key={`${h}_${idx}`} className="min-w-[60px] py-3">
           {h.replace('_', ' ')}
-        </Th>
+        </th>
       )
     ),
   );
@@ -48,44 +46,44 @@ const TableCom = ({
   const bodyTag = data.map((d: any, idx: number) => {
     const keys = Object.keys(d);
     return (
-      <Tr key={idx} className={`text-center capitalize text-medium border-b`}>
+      <tr key={idx} className={`text-center capitalize text-medium border-b`}>
         {quickAction && (
-          <Td>
+          <td>
             <input
               type="checkbox"
               checked={selectedRowCount.includes(d.artwork_name)}
               className="accent-primary border cursor-pointer "
               onChange={() => handleMultipleDelete(d.artwork_name)}
             />
-          </Td>
+          </td>
         )}
 
-        <Td className="py-4">{idx + 1}</Td>
+        <td className="py-4">{idx + 1}</td>
 
         {keys.map((k: string, i) =>
           k === 'artwork_status' ? (
-            <Td key={`${k}_${i}`} className="center py-3">
+            <td key={`${k}_${i}`} className="center py-3">
               <ToggleButton checked={d[k]} toggleNum={`toggle-${idx}`} />
-            </Td>
+            </td>
           ) : (
-            <Td
+            <td
               key={`${k}_${i}`}
               className={` ${
                 k === 'subject' || k === 'email' ? 'lowercase' : 'capitalize'
               }`}
             >
               {d[k]}
-            </Td>
+            </td>
           ),
         )}
-        <Td className="px-2">
+        <td className="px-2">
           <Link href={`${path}${path}info/${idx}`}>
             <span className="text-primary underline underline-offset-2">
               view
             </span>
           </Link>
-        </Td>
-      </Tr>
+        </td>
+      </tr>
     );
   });
 
@@ -134,17 +132,15 @@ const TableCom = ({
           Sort By <ImageIconCom src={chevronDown} />
         </button>
       </div>
-      <Table className="w-full border">
-        <Thead>
-          <Tr className="text-center text-btnText capitalize font-ariel bg-primary text-white font-light">
+      <table className="w-full border">
+        <thead>
+          <tr className="text-center text-btnText capitalize font-ariel bg-primary text-white font-light">
             {headerTag}
-          </Tr>
-        </Thead>
+          </tr>
+        </thead>
 
-        <Tbody>{bodyTag}</Tbody>
-      </Table>
+        <tbody>{bodyTag}</tbody>
+      </table>
     </>
   );
 };
-
-export default TableCom;

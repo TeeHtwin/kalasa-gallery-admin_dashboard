@@ -1,74 +1,59 @@
 import { usePathname } from 'next/navigation';
 import { useRef, useState, useMemo, useCallback, useEffect } from 'react';
-import { TextSearchFun } from '@/utils';
 import format from 'date-fns/format';
-import { handleArtworkSort } from '@/utils';
+import { useArtWorkStore } from '@/store/artStore';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
-export const useArtWork = (artwork: any) => {
+const URL = 'http://localhost:8000/artwork';
+
+export const useArtWork = () => {
+  const {
+    artworks,
+    allArtworks,
+    setAllWork,
+    setPageSize,
+    handleDateFilterData,
+  } = useArtWorkStore();
+
+  const fetchArtwork = async () => {
+    return await axios
+      .get(URL)
+      .then((resp) => resp.data)
+      .catch((err) => err);
+  };
+
+  const { data, isLoading, isFetching, refetch } = useQuery(
+    ['artworks'],
+    fetchArtwork,
+  );
+
+  //set to the state
+  useEffect(() => {
+    if (data !== undefined) {
+      setAllWork(data);
+      setPageSize(data.length);
+    }
+  }, [isLoading, isFetching]);
+
+  const multiDeleteArtwork = async (id: string[]) => {
+    // await axios.delete(`${URL}/1`);
+    // refetch();
+    alert('delete data is in comment condition');
+  };
+
   const path = usePathname();
   const ref = useRef();
   const [quickAction, setQuickAction] = useState(false);
   const [selectedRow, setSelectedRow] = useState<string[]>([]);
   const [showFilterBox, setShowFilterBox] = useState(false);
-  const [filterDate, setFilterDate] = useState<any>(null); //that have to be declared define type
-  const [page_number, setPageNumber] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const page_size = 10;
-
-  const [tableData, setTableData] = useState([]);
-  const [pagiBtnQty, setPagiBtnQty] = useState(
-    Math.ceil(artwork.length / page_size),
-  );
-
-  const filterData = (data: any) =>
-    data.slice((page_number - 1) * page_size, page_number * page_size);
-
-  useEffect(() => {
-    setLoading(true);
-    setTableData(filterData(artwork));
-    setLoading(false);
-  }, []);
-
-  const sortingFun = useCallback(() => {
-    setTableData(filterData(handleArtworkSort(artwork)));
-  }, []);
-
-  const handlerPaginQty = (datasize: number) =>
-    setPagiBtnQty(Math.ceil(datasize / page_size));
-
-  useMemo(() => {
-    setTableData(filterData(artwork));
-  }, [page_number]);
+  const [filterDate, setFilterDate] = useState<any>(null);
 
   useMemo(() => {
     if (filterDate) {
       const start = format(filterDate?.startDate, 'dd/MM/yy').split('/');
       const end = format(filterDate?.endDate, 'dd/MM/yy').split('/');
-      const start_date = new Date(
-        parseInt(start[2]),
-        parseInt(start[1]) - 1,
-        parseInt(start[0]),
-      );
-      const end_date = new Date(
-        parseInt(end[2]),
-        parseInt(end[1]) - 1,
-        parseInt(end[0]),
-      );
-
-      const dateData = artwork.filter((d: any) => {
-        const uploadDate = d?.upload_date.split('/');
-        const artworkUploadDate = new Date(
-          parseInt(uploadDate[2]),
-          parseInt(uploadDate[1]) - 1,
-          parseInt(uploadDate[0]),
-        );
-        if (artworkUploadDate >= start_date && artworkUploadDate <= end_date) {
-          return d;
-        }
-      });
-      handlerPaginQty(dateData.length);
-      setTableData(dateData);
+      handleDateFilterData(start, end);
     }
   }, [filterDate]);
 
@@ -93,42 +78,30 @@ export const useArtWork = (artwork: any) => {
   };
 
   const handleMultipleDeleteAction = useCallback(() => {
-    const newData = artwork.filter(
-      (d: any) => !selectedRow.includes(d.artwork_name),
-    );
-    setQuickAction(false);
-    setSelectedRow([]);
-    setTableData(filterData(newData));
-    handlerPaginQty(newData.length);
+    multiDeleteArtwork(selectedRow);
+    // const newData = artwork.filter(
+    //   (d: any) => !selectedRow.includes(d.artwork_name),
+    // );
+    // setQuickAction(false);
+    // setSelectedRow([]);
+    refetch();
   }, [selectedRow]);
 
-  const handlerSearch = (e: any) => {
-    e.preventDefault();
-    const foundData = TextSearchFun(artwork, ref.current);
-    setTableData(filterData(foundData));
-    handlerPaginQty(foundData.length);
-  };
-
   return {
+    artworks,
     path,
     ref,
     quickAction,
     showFilterBox,
     filterDate,
     selectedRow,
-    page_number,
-    pagiBtnQty,
-    tableData,
-    loading,
-    sortingFun,
-    setPageNumber,
+    isLoading,
     setSelectedRow,
     setQuickAction,
     setFilterDate,
     handleMultipleDeleteAction,
     prevBtnFun,
     nextBtnFun,
-    handlerSearch,
     setShowFilterBox,
   };
 };
