@@ -12,23 +12,7 @@ const page = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const result = await signIn('credentials-login', {
-        username: email,
-        password: password,
-        redirect: false,
-        callbackUrl: '/',
-      });
-
-      if (result.error) {
-        console.log(result?.error);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {};
 
   return (
     <form onSubmit={handleFormSubmit} className="flex flex-col gap-6 h-full">

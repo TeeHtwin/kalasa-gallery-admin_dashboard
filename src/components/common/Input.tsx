@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 export interface InputProps {
-  htmlFor: string;
   name: string;
   title: string;
   inputAttribute: React.InputHTMLAttributes<HTMLInputElement>;
@@ -12,26 +11,26 @@ export interface InputProps {
 }
 
 export default function Input({
-  htmlFor,
   name,
   title,
   onChange,
-  inputAttribute,
   size,
   isError,
   errorMessage,
+  ...inputAttribute
 }: InputProps) {
   return (
     <div className="flex flex-col gap-2">
       <label
         className={`text-base text-black  ${isError ? 'text-red-700' : ''} `}
-        htmlFor={htmlFor}
-        name={name}
+        htmlFor={name}
       >
         {title}
       </label>
       <div className="w-full flex flex-col">
         <input
+          id={name}
+          name={name}
           onChange={onChange}
           className={`p-2  border rounded focus:outline-none focus:ring-1 focus:ring-zinc-400 border-[#E9E8E8] ${
             size === 'normal' ? 'max-h-none' : 'h-36'
