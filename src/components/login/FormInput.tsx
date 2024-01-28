@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import cn from 'classnames';
 import IconEyeClosed from '@/icons/login/IconEyeClosed';
 
@@ -14,15 +14,23 @@ type FormInputProps = {
   label: string;
   type: string;
   placeholder: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const FormInput = ({ id, label, type, placeholder }: FormInputProps) => {
+const FormInput = ({
+  id,
+  label,
+  type,
+  placeholder,
+  onChange,
+}: FormInputProps) => {
   const [show, setShow] = useState(false);
 
   return (
     <div className="flex flex-col gap-2 relative">
       <label htmlFor="email">{label}</label>
       <input
+        onChange={onChange}
         type={type === 'password' ? (show ? 'text' : 'password') : type}
         id={id}
         className={cn(

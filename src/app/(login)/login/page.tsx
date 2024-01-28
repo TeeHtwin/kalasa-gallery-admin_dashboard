@@ -1,15 +1,33 @@
 'use client';
-
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
 import FormInput from '@/components/login/FormInput';
 import { FormEvent } from 'react';
 import { FORGOT_PASSWORD } from '@/constants/routes';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('not implemented yet');
+    try {
+      const result = await signIn('credentials-login', {
+        username: email,
+        password: password,
+        redirect: false,
+        callbackUrl: '/',
+      });
+
+      if (result.error) {
+        console.log(result?.error);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -21,12 +39,14 @@ const page = () => {
 
       <fieldset className="flex flex-col gap-4 grow justify-between">
         <FormInput
+          onChange={(e) => setEmail(e.target.value)}
           id="email"
           label="Email"
           type="email"
           placeholder="Enter your email"
         />
         <FormInput
+          onChange={(e) => setPassword(e.target.value)}
           id="password"
           label="Password"
           type="password"
