@@ -1,3 +1,5 @@
+import Chart from "./Chart";
+
 const EnquireReport = () => {
   return (
     <div className="flex flex-col gap-4">
@@ -8,10 +10,12 @@ const EnquireReport = () => {
           fontFamily: 'cardo',
         }}
       >
-        Enquire Report
+        Inquire Report
       </h2>
 
-      <section>Charts</section>
+      <section>
+        <Chart />
+      </section>
     </div>
   );
 };
