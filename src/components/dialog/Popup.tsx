@@ -48,7 +48,7 @@ const Alert = ({ trigger, title, description }: Alerttext) => {
           }}
         >
           <AlertDialogCancel className="rounded-xl w-32 ring-orange-800 ring-2 text-orange-800  h-14 text-lg font-bold hover:text-orange-900 hover:bg-transparent hover:ring-orange-900 ">
-            Go Back
+            go back
           </AlertDialogCancel>
           <AlertDialogAction className="rounded-xl h-14 w-32 bg-orange-800 mx-10 text-lg font-bold text-white hover:bg-orange-900">
             confrim
