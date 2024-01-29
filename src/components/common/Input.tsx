@@ -32,7 +32,7 @@ export default function Input({
           id={name}
           name={name}
           onChange={onChange}
-          className={`p-2  border rounded focus:outline-none focus:ring-1 focus:ring-zinc-400 border-[#E9E8E8] ${
+          className={`p-2  border rounded focus:outline-none focus:border focus:border-zinc-500 border-[#E9E8E8] ${
             size === 'normal' ? 'max-h-none' : 'h-36'
           } ${isError ? 'border-red-600' : ''}`}
           {...inputAttribute}
