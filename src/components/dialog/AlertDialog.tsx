@@ -51,7 +51,7 @@ const Alert = ({ trigger, title, description }: Alerttext) => {
             Go Back
           </AlertDialogCancel>
           <AlertDialogAction className="rounded-xl h-14 w-32 bg-orange-800 mx-10 text-lg font-bold text-white hover:bg-orange-900">
-            Confirm
+            confrim
           </AlertDialogAction>
         </div>
       </AlertDialogContent>
