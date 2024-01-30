@@ -1,13 +1,17 @@
 'use client';
 
-
 import ImgUpload from '@/components/artworks/ImgUpload';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const ArtWork = () => {
   const [file, setFile] = useState<File>();
+
+  
+
+
   return (
     <div>
+   
       <ImgUpload file={file} setFile={setFile} />
     </div>
   );
