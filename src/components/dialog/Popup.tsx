@@ -11,13 +11,14 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
-type Alerttext = {
+type PopUpText = {
   trigger: string;
-  title: string;
-  description: string;
+  // title: string;
+  // description: string;
 };
+// { trigger, title, description }: PopUpText
 
-const Alert = ({ trigger, title, description }: Alerttext) => {
+const Popup = ({ trigger }: PopUpText) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger>{trigger}</AlertDialogTrigger>
@@ -29,18 +30,9 @@ const Alert = ({ trigger, title, description }: Alerttext) => {
             style={{
               fontFamily: 'Cardo',
             }}
-          >
-            {title}
-          </AlertDialogTitle>
+          ></AlertDialogTitle>
         </AlertDialogHeader>
-        <AlertDialogDescription
-          className="text-gray-500 w-90 text-base"
-          style={{
-            fontFamily: 'Arial',
-          }}
-        >
-          {description}
-        </AlertDialogDescription>
+
         <div
           className="mt-4"
           style={{
@@ -48,15 +40,15 @@ const Alert = ({ trigger, title, description }: Alerttext) => {
           }}
         >
           <AlertDialogCancel className="rounded-xl w-32 ring-orange-800 ring-2 text-orange-800  h-14 text-lg font-bold hover:text-orange-900 hover:bg-transparent hover:ring-orange-900 ">
-            go back
+            Go Back
           </AlertDialogCancel>
-          <AlertDialogAction className="rounded-xl h-14 w-32 bg-orange-800 mx-10 text-lg font-bold text-white hover:bg-orange-900">
+          {/* <AlertDialogAction className="rounded-xl h-14 w-32 bg-orange-800 mx-10 text-lg font-bold text-white hover:bg-orange-900">
             confrim
-          </AlertDialogAction>
+          </AlertDialogAction> */}
         </div>
       </AlertDialogContent>
     </AlertDialog>
   );
 };
 
-export default Alert;
+export default Popup;
