@@ -6,8 +6,6 @@ import { useState, useEffect } from 'react';
 const ArtWork = () => {
   const [file, setFile] = useState<File>();
 
-  
-
 
   return (
     <div>
