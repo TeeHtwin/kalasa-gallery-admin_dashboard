@@ -1,7 +1,7 @@
 'use client';
 import { HiOutlinePlus } from "react-icons/hi";
 import { HiOutlinePencilAlt } from 'react-icons/hi';
-import CtaBtn from '@/components/CtaBtn';
+import CtaBtn from '@/components/ui/CtaBtn';
 
 const Artist = () => {
   const handleCreate = () => {

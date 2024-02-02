@@ -1,6 +1,6 @@
 'use client';
 
-import ImgUpload from '@/components/artworks/ImgUpload';
+import ImgUpload from '@/components/ui/ImgUpload';
 import { useState, useEffect } from 'react';
 
 const ArtWork = () => {
