@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
-import FormInput from '@/components/login/FormInput';
+import FormInput from '@/components/common/Input';
 import { LOGIN, RESET_PASSWORD } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
 

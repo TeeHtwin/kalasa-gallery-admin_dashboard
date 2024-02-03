@@ -1,44 +1,65 @@
-import * as React from 'react';
+'use client';
 
-export interface InputProps {
-  name: string;
+import { ChangeEvent, useState } from 'react';
+import cn from 'classnames';
+import IconEyeClosed from '@/icons/login/IconEyeClosed';
+import IconEyeOpened from '@/icons/login/IconEyeOpened';
+import { useCallback } from 'react';
+import { memo } from 'react';
+
+type InputProps = {
   title: string;
+  name: string;
   inputAttribute: React.InputHTMLAttributes<HTMLInputElement>;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  size: 'normal' | 'large';
-  isError: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
-}
+};
 
-export default function Input({
+const Input = ({
   name,
-  title,
   onChange,
-  size,
-  isError,
   errorMessage,
+  title,
   ...inputAttribute
-}: InputProps) {
+}: InputProps) => {
+  const [show, setShow] = useState(false);
+  const { type } = inputAttribute;
+  const handleClick = useCallback(() => {
+    setShow((prev) => !prev);
+  }, []);
+
   return (
-    <div className="flex flex-col gap-2">
-      <label
-        className={`text-base text-black  ${isError ? 'text-red-700' : ''} `}
-        htmlFor={name}
-      >
-        {title}
-      </label>
-      <div className="w-full flex flex-col">
-        <input
-          id={name}
-          name={name}
-          onChange={onChange}
-          className={`p-2  border rounded focus:outline-none focus:border focus:border-zinc-500 border-[#E9E8E8] ${
-            size === 'normal' ? 'max-h-none' : 'h-36'
-          } ${isError ? 'border-red-600' : ''}`}
-          {...inputAttribute}
-        />
-        {isError && <p className="text-red-600">{errorMessage}</p>}
-      </div>
+    <div
+      className={cn('flex flex-col gap-2', type === 'password' && 'relative')}
+    >
+      <label htmlFor={name}>{title}</label>
+      <input
+        {...inputAttribute}
+        onChange={onChange}
+        className={cn(
+          'h-11 border focus:outline-none focus:border focus:border-zinc-400/80 rounded-lg pl-4',
+          type === 'password' ? 'pr-12' : 'pr-4',
+          errorMessage && 'border-red-600',
+        )}
+      />
+
+      {type === 'password' && (
+        <button
+          type="button"
+          onClick={handleClick}
+          className={cn(
+            'absolute top-1/2',
+            errorMessage
+              ? 'right-2 transform -translate-y-1/2'
+              : 'right-2 -translate-x-1/2 translate-y-1/2',
+          )}
+        >
+          {show ? <IconEyeOpened /> : <IconEyeClosed />}
+        </button>
+      )}
+      {errorMessage && <p className="text-red-700 ">{errorMessage}</p>}
     </div>
   );
-}
+};
+
+export default memo(Input);

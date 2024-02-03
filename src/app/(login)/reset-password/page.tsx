@@ -1,7 +1,7 @@
 'use client';
 
 import FormHeader from '@/components/login/FormHeader';
-import FormInput from '@/components/login/FormInput';
+import FormInput from '@/components/common/Input';
 import { LOGIN } from '@/constants/routes';
 import Link from 'next/link';
 import { FormEvent } from 'react';

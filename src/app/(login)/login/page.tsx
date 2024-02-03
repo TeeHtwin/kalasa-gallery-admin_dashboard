@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react';
 import { loginFetcher } from '@/fetcher';
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
-import FormInput from '@/components/login/FormInput';
+import Input from '@/components/common/Input';
 import { FormEvent } from 'react';
 import { FORGOT_PASSWORD } from '@/constants/routes';
 import { useState } from 'react';
@@ -43,19 +43,25 @@ const page = () => {
       />
 
       <fieldset className="flex flex-col gap-4 grow justify-between">
-        <FormInput
+        <Input
+          title="Email"
           onChange={(e) => setEmail(e.target.value)}
           id="email"
           label="Email"
           type="email"
           placeholder="Enter your email"
+          name="Email"
+          require
         />
-        <FormInput
+        <Input
+          title="Password"
+          name="Password"
           onChange={(e) => setPassword(e.target.value)}
           id="password"
           label="Password"
           type="password"
           placeholder="Enter your password"
+          require
         />
 
         <div className="flex items-center justify-between">
