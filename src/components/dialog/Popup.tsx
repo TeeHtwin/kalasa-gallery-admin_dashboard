@@ -1,53 +1,65 @@
 'use client';
 import React from 'react';
+import { UserRound } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
 
 type PopUpText = {
   trigger: string;
-  // title: string;
-  // description: string;
+  name: string;
+  gmail: string;
+  phonenumber: string;
+  description: string;
 };
-// { trigger, title, description }: PopUpText
-
-const Popup = ({ trigger }: PopUpText) => {
+const Popup = ({
+  trigger,
+  name,
+  gmail,
+  phonenumber,
+  description,
+}: PopUpText) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger>{trigger}</AlertDialogTrigger>
-
-      <AlertDialogContent className="p-10 bg-white  rounded-2xl">
-        <AlertDialogHeader>
-          <AlertDialogTitle
-            className="text-orange-800 text-xl"
-            style={{
-              fontFamily: 'Cardo',
-            }}
-          ></AlertDialogTitle>
-        </AlertDialogHeader>
-
-        <div
-          className="mt-4"
+    <>
+      <Dialog>
+        <DialogTrigger>{trigger}</DialogTrigger>
+        <DialogContent
+          className="flex bg-white  p-8  h-64"
           style={{
             fontFamily: 'Arial',
           }}
         >
-          <AlertDialogCancel className="rounded-xl w-32 ring-orange-800 ring-2 text-orange-800  h-14 text-lg font-bold hover:text-orange-900 hover:bg-transparent hover:ring-orange-900 ">
-            Go Back
-          </AlertDialogCancel>
-          {/* <AlertDialogAction className="rounded-xl h-14 w-32 bg-orange-800 mx-10 text-lg font-bold text-white hover:bg-orange-900">
-            confrim
-          </AlertDialogAction> */}
-        </div>
-      </AlertDialogContent>
-    </AlertDialog>
+          <div>
+            <UserRound
+              className="bg-white shadow-md  shadow-orange-200 rounded-3xl w-14 h-14 p-4"
+              color="brown"
+            />
+          </div>
+          <div className="pl-2">
+            <DialogHeader className="font-bold text-lg">{name}</DialogHeader>
+            <DialogDescription className="text-gray-500 mt-2 text-md">
+              {gmail}
+            </DialogDescription>
+            <DialogDescription className="text-gray-500 mt-2 text-md">
+              {phonenumber}
+            </DialogDescription>
+            <Textarea
+              className=" mt-2 w-80 resize-none rounded-xl text-sm h-24"
+              disabled
+            >
+              {description}
+            </Textarea>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
