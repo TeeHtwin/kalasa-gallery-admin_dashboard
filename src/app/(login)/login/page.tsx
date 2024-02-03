@@ -12,6 +12,8 @@ const page = () => {
     alert('not implemented yet');
   };
 
+  console.log('login page:::');
+
   return (
     <form onSubmit={handleFormSubmit} className="flex flex-col gap-6 h-full">
       <FormHeader
