@@ -46,6 +46,7 @@ const FormInput = ({
           isError && 'border-red-600',
         )}
         placeholder={placeholder}
+        required
       />
 
       {type === 'password' && (

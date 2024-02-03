@@ -1,5 +1,6 @@
 'use client';
 import { signIn } from 'next-auth/react';
+import { loginFetcher } from '@/fetcher';
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
 import FormInput from '@/components/login/FormInput';
@@ -12,7 +13,27 @@ const page = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {};
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // const body = {
+    //   email,
+    //   password,
+    // };
+
+    // try {
+    //   const res: { success: boolean } = await loginFetcher('login', body);
+
+    //   if (res.success) {
+    //     router.push('/');
+    //   } else {
+    //     alert('Login failed. Please try again.');
+    //   }
+    // } catch (error) {
+
+    // }
+  };
 
   return (
     <form onSubmit={handleFormSubmit} className="flex flex-col gap-6 h-full">
@@ -63,4 +84,5 @@ const page = () => {
     </form>
   );
 };
+
 export default page;
