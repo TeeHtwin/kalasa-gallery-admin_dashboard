@@ -10,7 +10,7 @@ const ArtWork = () => {
   return (
     <div>
    
-      <ImgUpload file={file} imgUrl={'/vercel.svg'} setFile={setFile} />
+      <ImgUpload imgUrl={'/vercel.svg'} setFile={setFile} />
     </div>
   );
 };

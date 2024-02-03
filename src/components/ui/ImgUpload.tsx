@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useDropzone } from 'react-dropzone';
 
 interface Props {
-  file: File | undefined;
+  file?: File | undefined;
   imgUrl?: string;
   setFile: React.Dispatch<React.SetStateAction<File | undefined>>;
 }
