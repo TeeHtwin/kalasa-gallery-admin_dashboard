@@ -6,7 +6,7 @@ const Blogs = () => {
       Blogs
       <Breadcrumb
         items={[
-          { name: 'Blogs', url: '/' },
+          { name: 'Blogs', url: '/', icon: '/vercel.svg' },
           { name: 'Create a Blog'},
         ]}
       />
