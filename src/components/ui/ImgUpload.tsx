@@ -4,10 +4,11 @@ import { useDropzone } from 'react-dropzone';
 
 interface Props {
   file: File | undefined;
+  imgUrl?: string;
   setFile: React.Dispatch<React.SetStateAction<File | undefined>>;
 }
 
-const ImgUpload = ({ file, setFile }: Props) => {
+const ImgUpload = ({ file, imgUrl ,setFile }: Props) => {
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     accept: {
@@ -15,6 +16,7 @@ const ImgUpload = ({ file, setFile }: Props) => {
     },
 
     onDrop: (acceptedFiles) => {
+      imgUrl = undefined
       setFile(acceptedFiles[0]);
     },
   });
@@ -26,9 +28,9 @@ const ImgUpload = ({ file, setFile }: Props) => {
         className="border-dashed border-2 w-96 h-80 text-center"
       >
         <input {...getInputProps()} />
-        {file ? (
+        {(file || imgUrl) ? (
           <Image
-            src={URL.createObjectURL(file)}
+            src={`${file ? URL.createObjectURL(file) : imgUrl}`}
             width={384}
             height={320}
             alt="img"
