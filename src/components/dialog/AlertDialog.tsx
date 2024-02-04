@@ -18,9 +18,13 @@ type Alerttext = {
 };
 
 const Alert = ({ trigger, title, description }: Alerttext) => {
-  const handleClick = () => {
+  const handleConfirm = () => {
     console.log('This is button');
   };
+  const handleCancel = () => {
+    console.log('this is cancel button');
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>{trigger}</AlertDialogTrigger>
@@ -50,12 +54,15 @@ const Alert = ({ trigger, title, description }: Alerttext) => {
             fontFamily: 'Arial',
           }}
         >
-          <AlertDialogCancel className="rounded-xl w-32 ring-orange-800 ring-2 text-orange-800  h-14 text-lg font-bold hover:text-orange-900 hover:bg-transparent hover:ring-orange-900 ">
+          <AlertDialogCancel
+            className="rounded-xl w-32 ring-orange-800 ring-2 text-orange-800  h-14 text-lg font-bold hover:text-orange-900 hover:bg-transparent hover:ring-orange-900 "
+            onClick={handleCancel}
+          >
             Go Back
           </AlertDialogCancel>
           <AlertDialogAction
             className="rounded-xl h-14 w-32 bg-orange-800 mx-10 text-lg font-bold text-white hover:bg-orange-900"
-            onClick={handleClick}
+            onClick={handleConfirm}
           >
             confrim
           </AlertDialogAction>
