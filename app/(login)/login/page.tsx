@@ -8,15 +8,22 @@ import { FormEvent } from 'react';
 import { FORGOT_PASSWORD } from '../../../constants/routes';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useFormState } from 'react-dom';
+import { authenticate } from '@/app/lib/actions';
 
 const page = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [state, formAction] = useFormState(authenticate, undefined);
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    formAction({
+      email,
+      password,
+      callbackUrl: '/',
+    });
     // const body = {
     //   email,
     //   password,
