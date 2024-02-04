@@ -1,27 +1,26 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 import cn from 'classnames';
 import IconEyeClosed from '@/icons/login/IconEyeClosed';
 import IconEyeOpened from '@/icons/login/IconEyeOpened';
 import { useCallback } from 'react';
 import { memo } from 'react';
 
-type InputProps = {
+interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   name: string;
-  inputAttribute: React.InputHTMLAttributes<HTMLInputElement>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
-};
+}
 
-const Input = ({
+const CustomInput = ({
   name,
   onChange,
   errorMessage,
   title,
   ...inputAttribute
-}: InputProps) => {
+}: CustomInputProps) => {
   const [show, setShow] = useState(false);
   const { type } = inputAttribute;
   const handleClick = useCallback(() => {
@@ -34,13 +33,13 @@ const Input = ({
     >
       <label htmlFor={name}>{title}</label>
       <input
-        {...inputAttribute}
         onChange={onChange}
         className={cn(
           'h-11 border focus:outline-none focus:border focus:border-zinc-400/80 rounded-lg pl-4',
           type === 'password' ? 'pr-12' : 'pr-4',
           errorMessage && 'border-red-600',
         )}
+        {...inputAttribute}
       />
 
       {type === 'password' && (
@@ -62,4 +61,4 @@ const Input = ({
   );
 };
 
-export default memo(Input);
+export default memo(CustomInput);

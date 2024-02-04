@@ -1,10 +1,11 @@
 'use client';
 
 import FormHeader from '@/components/login/FormHeader';
-import FormInput from '@/components/common/Input';
+import FormInput from '@/components/common/CustomInput';
 import { LOGIN } from '@/constants/routes';
 import Link from 'next/link';
 import { FormEvent } from 'react';
+import CustomInput from '@/components/common/CustomInput';
 
 const page = () => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -19,17 +20,23 @@ const page = () => {
       />
 
       <fieldset className="flex flex-col gap-4 grow justify-between">
-        <FormInput
+        <CustomInput
           id="password"
-          label="New Password"
+          title="New Password"
+          name="password"
           type="password"
+          onChange={(e) => {}}
+          errorMessage=""
           placeholder="Enter your password"
         />
 
         <FormInput
           id="password"
-          label="Confirm New Password"
+          title="Confirm New Password"
+          name="password"
           type="password"
+          onChange={(e) => {}}
+          errorMessage=""
           placeholder="Confirm your password"
         />
 
