@@ -1,15 +1,38 @@
 'use client';
-
+import { signIn } from 'next-auth/react';
+import { loginFetcher } from '@/fetcher';
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
-import FormInput from '@/components/login/FormInput';
+import CustomInput from '@/components/common/CustomInput';
 import { FormEvent } from 'react';
 import { FORGOT_PASSWORD } from '@/constants/routes';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('not implemented yet');
+
+    // const body = {
+    //   email,
+    //   password,
+    // };
+
+    // try {
+    //   const res: { success: boolean } = await loginFetcher('login', body);
+
+    //   if (res.success) {
+    //     router.push('/');
+    //   } else {
+    //     alert('Login failed. Please try again.');
+    //   }
+    // } catch (error) {
+
+    // }
   };
 
   console.log('login page:::');
@@ -22,17 +45,25 @@ const page = () => {
       />
 
       <fieldset className="flex flex-col gap-4 grow justify-between">
-        <FormInput
+        <CustomInput
+          title="Email"
+          onChange={(e) => setEmail(e.target.value)}
           id="email"
-          label="Email"
           type="email"
           placeholder="Enter your email"
+          name="Email"
+          required
+          errorMessage=""
         />
-        <FormInput
+        <CustomInput
+          title="Password"
+          name="Password"
+          onChange={(e) => setPassword(e.target.value)}
           id="password"
-          label="Password"
           type="password"
           placeholder="Enter your password"
+          required
+          errorMessage=""
         />
 
         <div className="flex items-center justify-between">
@@ -61,4 +92,5 @@ const page = () => {
     </form>
   );
 };
+
 export default page;

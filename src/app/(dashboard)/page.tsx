@@ -1,5 +1,5 @@
 import ContactAndEvents from '@/components/dashboard/ContactAndEvents';
-import EnquireReport from '@/components/dashboard/EnquireReport';
+import InquireReport from '@/components/dashboard/InquireReport';
 import Statues from '@/components/dashboard/Statues';
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     <div className="flex min-h-screen">
       <div className="grow border-r border-l py-6 px-4 flex flex-col gap-14">
         <Statues />
-        <EnquireReport />
+        <InquireReport />
       </div>
 
       <ContactAndEvents />

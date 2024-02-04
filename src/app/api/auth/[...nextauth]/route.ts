@@ -2,10 +2,6 @@ import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOption: AuthOptions = {
-  // pages: {
-  //   signIn: '/login'
-  // },
-
   session: {
     strategy: 'jwt',
     maxAge: 14 * 24 * 60 * 60, // 14 days
@@ -14,12 +10,12 @@ export const authOption: AuthOptions = {
 
   providers: [
     CredentialsProvider({
-      id: 'credentials-login',
+      id: 'credentials',
       type: 'credentials',
       name: 'Credentials',
 
       credentials: {
-        username: { type: 'string' },
+        email: { type: 'string' },
         password: { type: 'password' },
       },
 
@@ -31,6 +27,9 @@ export const authOption: AuthOptions = {
       },
     }),
   ],
+  //   pages: {
+  //     signIn: '/login',
+  //   },
 };
 
 const handler = NextAuth(authOption);
