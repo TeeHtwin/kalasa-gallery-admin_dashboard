@@ -8,7 +8,6 @@ export async function authenticate(
   formData: LoginData,
 ) {
   try {
-    console.log('form data::', formData);
     await signIn('credentials', formData);
   } catch (error) {
     if (error instanceof AuthError) {

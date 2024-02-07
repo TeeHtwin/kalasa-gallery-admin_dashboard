@@ -10,6 +10,7 @@ import { memo } from 'react';
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   name: string;
+  inputType?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
 }
@@ -19,6 +20,7 @@ const CustomInput = ({
   onChange,
   errorMessage,
   title,
+  inputType = 'text',
   ...inputAttribute
 }: CustomInputProps) => {
   const [show, setShow] = useState(false);
@@ -29,7 +31,10 @@ const CustomInput = ({
 
   return (
     <div
-      className={cn('flex flex-col gap-2', type === 'password' && 'relative')}
+      className={cn(
+        'flex flex-col gap-2',
+        inputType === 'password' && 'relative',
+      )}
     >
       <label htmlFor={name}>{title}</label>
       <input
@@ -39,10 +44,11 @@ const CustomInput = ({
           type === 'password' ? 'pr-12' : 'pr-4',
           errorMessage && 'border-red-600',
         )}
+        type={inputType === 'password' && show ? 'text' : 'password'}
         {...inputAttribute}
       />
 
-      {type === 'password' && (
+      {inputType === 'password' && (
         <button
           type="button"
           onClick={handleClick}

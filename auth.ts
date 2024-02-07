@@ -17,12 +17,34 @@ export const { auth, signIn, signOut } = NextAuth({
           body: JSON.stringify({ email, password }),
         })
           .then((res) => res.json())
-          .catch((error) => console.log('error', error));
-
+          .then((user) => {
+            return user;
+          })
+          .catch((error) => {
+            return error;
+          });
         if (user.status === 'success') {
-          return user;
+          return { api_token: user.token, ...user.userData };
         }
+        return null;
       },
     }),
   ],
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return url.includes('callbackUrl') ? baseUrl : url;
+    },
+    async jwt({ token, user, account, profile, session }) {
+      if (account) {
+        token.api_token = user.api_token;
+      }
+      return token;
+    },
+    async session({ session, user, token }) {
+      if (token) {
+        session.api_token = token?.api_token;
+      }
+      return session;
+    },
+  },
 });

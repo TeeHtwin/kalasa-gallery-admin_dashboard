@@ -1,3 +1,4 @@
+import { SessionProvider } from 'next-auth/react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 
 const layout = ({ children }: { children: React.ReactNode }) => {

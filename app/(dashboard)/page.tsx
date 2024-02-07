@@ -1,8 +1,11 @@
+import { auth } from '@/auth';
 import ContactAndEvents from '../../components/dashboard/ContactAndEvents';
 import InquireReport from '../../components/dashboard/InquireReport';
 import Statues from '../../components/dashboard/Statues';
 
-const Home = () => {
+export default async function Home() {
+  const session = await auth();
+  console.log('next auth::', session);
   return (
     <div className="flex min-h-screen">
       <div className="grow border-r border-l py-6 px-4 flex flex-col gap-14">
@@ -13,5 +16,4 @@ const Home = () => {
       <ContactAndEvents />
     </div>
   );
-};
-export default Home;
+}

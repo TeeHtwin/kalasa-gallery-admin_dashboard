@@ -1,45 +1,26 @@
 'use client';
-import { signIn } from 'next-auth/react';
-import { loginFetcher } from '../../../fetcher';
+
 import Link from 'next/link';
 import FormHeader from '../../../components/login/FormHeader';
 import CustomInput from '../../../components/common/CustomInput';
 import { FormEvent } from 'react';
 import { FORGOT_PASSWORD } from '../../../constants/routes';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useFormState } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 
 const page = () => {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [state, formAction] = useFormState(authenticate, undefined);
 
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     formAction({
       email,
       password,
-      callbackUrl: '/',
+      callbackUrl: process.env.NEXT_PUBLIC_APP_URL ?? '/',
     });
-    // const body = {
-    //   email,
-    //   password,
-    // };
-
-    // try {
-    //   const res: { success: boolean } = await loginFetcher('login', body);
-
-    //   if (res.success) {
-    //     router.push('/');
-    //   } else {
-    //     alert('Login failed. Please try again.');
-    //   }
-    // } catch (error) {
-
-    // }
   };
 
   return (
@@ -58,14 +39,14 @@ const page = () => {
           placeholder="Enter your email"
           name="Email"
           required
-          errorMessage=""
+          errorMessage={''}
         />
         <CustomInput
           title="Password"
           name="Password"
           onChange={(e) => setPassword(e.target.value)}
           id="password"
-          type="password"
+          inputType="password"
           placeholder="Enter your password"
           required
           errorMessage=""
