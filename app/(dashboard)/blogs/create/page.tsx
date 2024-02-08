@@ -1,6 +1,6 @@
 'use client';
 
-import BlogCrateForm from '@/components/blog/BlogCrateForm';
+import BlogCrateForm from '@/components/blog/BlogForm';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import CtaBtn from '@/components/ui/CtaBtn';
 import TitleSection from '@/components/ui/TitleSection';

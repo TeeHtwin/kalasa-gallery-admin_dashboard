@@ -1,5 +1,5 @@
 import BlogTable from '@/components/blog/BlogTable';
-import Breadcrumb from '../../../components/ui/Breadcrumb';
+import Breadcrumb from '@/components/ui/Breadcrumb';
 
 const Blogs = () => {
   return (

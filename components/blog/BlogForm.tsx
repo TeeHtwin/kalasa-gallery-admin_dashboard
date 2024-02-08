@@ -27,15 +27,22 @@ const formSchema = z.object({
   }),
 });
 
-const BlogCrateForm = () => {
+interface BlogDetailsProps {
+  blogDetails?: {
+    title: string;
+    description: string;
+  };
+}
+
+const BlogCrateForm = ({ blogDetails }: BlogDetailsProps) => {
   const [file, setFile] = useState<File>();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: '',
-      descripiton: '',
+      title: blogDetails ? blogDetails.title : '',
+      descripiton: blogDetails ? blogDetails.description : '',
     },
   });
 
@@ -75,7 +82,7 @@ const BlogCrateForm = () => {
                   <Textarea
                     placeholder=""
                     {...field}
-                    className="max-w-[60rem]"
+                    className="max-w-[60rem] min-h-40"
                   />
                 </FormControl>
                 <FormMessage />
