@@ -73,9 +73,9 @@ const BlogCrateForm = () => {
                 <FormLabel>Description</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Tell us a little bit about yourself"
-                    className="resize-none"
+                    placeholder=""
                     {...field}
+                    className="max-w-[60rem]"
                   />
                 </FormControl>
                 <FormMessage />

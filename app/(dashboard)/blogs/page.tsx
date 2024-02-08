@@ -1,8 +1,9 @@
+import BlogTable from '@/components/blog/BlogTable';
 import Breadcrumb from '../../../components/ui/Breadcrumb';
 
 const Blogs = () => {
   return (
-    <div>
+    <main>
       Blogs
       <Breadcrumb
         items={[
@@ -10,7 +11,8 @@ const Blogs = () => {
           { name: 'Create a Blog' },
         ]}
       />
-    </div>
+      <BlogTable />
+    </main>
   );
 };
 export default Blogs;
