@@ -5,7 +5,7 @@ import {
   BLOGS,
   COLLECTIONS,
   EVENTS,
-} from '../../constants/routes';
+} from '../../constants/navRoutes';
 
 const statues = [
   {

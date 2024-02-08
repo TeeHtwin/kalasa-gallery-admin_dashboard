@@ -4,12 +4,12 @@ import Link from 'next/link';
 import FormHeader from '../../../components/login/FormHeader';
 import CustomInput from '../../../components/common/CustomInput';
 import { FormEvent } from 'react';
-import { FORGOT_PASSWORD } from '../../../constants/routes';
+import { FORGOT_PASSWORD } from '../../../constants/navRoutes';
 import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 
-const page = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [state, formAction] = useFormState(authenticate, undefined);
@@ -79,4 +79,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LoginPage;

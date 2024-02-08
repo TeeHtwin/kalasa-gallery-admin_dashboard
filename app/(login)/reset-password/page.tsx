@@ -2,7 +2,7 @@
 
 import FormHeader from '../../../components/login/FormHeader';
 import FormInput from '../../../components/common/CustomInput';
-import { LOGIN } from '../../../constants/routes';
+import { LOGIN } from '../../../constants/navRoutes';
 import Link from 'next/link';
 import { FormEvent } from 'react';
 import CustomInput from '../../../components/common/CustomInput';

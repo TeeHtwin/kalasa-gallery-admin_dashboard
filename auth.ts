@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { Session, User } from 'next-auth';
 import { authConfig } from './auth.config';
 import Credentials from 'next-auth/providers/credentials';
 
@@ -8,14 +8,17 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const { email, password } = credentials;
-        const user = await fetch(`https://staging.kalasa.gallery/api/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
+        const user = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/login`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({ email, password }),
           },
-          body: JSON.stringify({ email, password }),
-        })
+        )
           .then((res) => res.json())
           .then((user) => {
             return user;
@@ -40,11 +43,20 @@ export const { auth, signIn, signOut } = NextAuth({
       }
       return token;
     },
-    async session({ session, user, token }) {
-      if (token) {
-        session.api_token = token?.api_token;
+    async session(sessionArgs) {
+      // token only exists when the strategy is jwt and not database, so sessionArgs here will be { session, token }
+      // with a database strategy it would be { session, user }
+      if ('token' in sessionArgs) {
+        let session = sessionArgs.session;
+        if ('user' in sessionArgs.token) {
+          const tokenUser = sessionArgs.token.user as User;
+          if (tokenUser.id) {
+            session.api_token = tokenUser.id;
+            return session;
+          }
+        }
       }
-      return session;
+      return sessionArgs.session;
     },
   },
 });

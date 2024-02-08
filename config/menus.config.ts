@@ -13,7 +13,7 @@ import {
   COLLECTIONS,
   CONTACTS,
   EVENTS,
-} from '../constants/routes';
+} from '../constants/navRoutes';
 
 export const menus = [
   {

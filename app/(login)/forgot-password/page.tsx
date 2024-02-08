@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import FormHeader from '../../../components/login/FormHeader';
 import FormInput from '../../../components/common/CustomInput';
-import { LOGIN, RESET_PASSWORD } from '../../../constants/routes';
+import { LOGIN, RESET_PASSWORD } from '../../../constants/navRoutes';
 import { useRouter } from 'next/navigation';
 import CustomInput from '../../../components/common/CustomInput';
 
