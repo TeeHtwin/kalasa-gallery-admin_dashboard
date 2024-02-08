@@ -1,98 +1,96 @@
-'use client';
+import React, { useState } from 'react';
 
-import ImgUpload from '@/components/ui/ImgUpload';
-import { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+function UploadImageForm() {
+  // State variables to hold form data
+  const [profileImage, setProfileImage] = useState(null);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState(0);
 
-const formSchema = z.object({
-  title: z.string().min(2, {
-    message: 'Title must be at least 2 characters.',
-  }),
-  descripiton: z.string().min(2, {
-    message: 'Description must be at least 2 characters.',
-  }),
-});
+  // Function to handle form submission
+  async function handleSubmit(event) {
+    event.preventDefault(); // Prevent default form submission
 
-interface BlogDetailsProps {
-  blogDetails?: {
-    title: string;
-    description: string;
-  };
-}
+    const apiUrl = 'https://staging.kalasa.gallery/api/admin/artist'; // Replace this with your API endpoint
 
-const BlogCrateForm = ({ blogDetails }: BlogDetailsProps) => {
-  const [file, setFile] = useState<File>();
+    // Create FormData object to send form data
+    const formData = new FormData();
+    formData.append('profile_image', profileImage);
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('status', status);
 
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: blogDetails ? blogDetails.title : '',
-      descripiton: blogDetails ? blogDetails.description : '',
-    },
-  });
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData,
+      });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+      if (!response.ok) {
+        throw new Error('Error while sending data to the server.');
+      }
+
+      const responseData = await response.json();
+      console.log('Response from server:', responseData);
+      // Handle response data as needed
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
 
   return (
     <div>
-      <ImgUpload setFile={setFile} />
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input placeholder="" {...field} className="w-96" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+      <h2>Upload Image</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="imageInput">Image:</label>
+          <input
+            type="file"
+            id="profile_image"
+            name="profile_image"
+            accept="image/*"
+            required
+            onChange={(e) => setProfileImage(e.target.files[0])}
           />
-          <FormField
-            control={form.control}
-            name="descripiton"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder=""
-                    {...field}
-                    className="max-w-[60rem] min-h-40"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+        </div>
+        <div>
+          <label htmlFor="nameInput">Name:</label>
+          <input
+            type="text"
+            id="nameInput"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
+        </div>
+        <div>
+          <label htmlFor="descriptionInput">Description:</label><br />
+          <textarea
+            id="descriptionInput"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label htmlFor="flagInput">Flag (0 or 1):</label>
+          <input
+            type="number"
+            id="status"
+            name="status"
+            min="0"
+            max="1"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Upload</button>
+      </form>
     </div>
   );
-};
-export default BlogCrateForm;
+}
+
+export default UploadImageForm;
