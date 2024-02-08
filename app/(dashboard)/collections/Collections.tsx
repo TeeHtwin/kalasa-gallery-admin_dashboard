@@ -16,5 +16,7 @@ export default function Collections({ token }: CollectionsProps) {
       post(`${API.collections}`, { Authorization: `Bearer ${token}` }, ''),
   });
 
+  console.log('error::', error);
+
   return <div>Collections</div>;
 }

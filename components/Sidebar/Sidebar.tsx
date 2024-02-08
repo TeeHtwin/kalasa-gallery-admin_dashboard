@@ -9,7 +9,7 @@ export default async function Sidebar() {
   const session = await auth();
 
   return (
-    <aside className="w-[300px] fixed left-0 top-0 p-4 h-full max-h-[851px] flex flex-col gap-4 py-6">
+    <aside className="w-[300px] fixed left-0 top-0 p-4 h-full max-h-[851px] flex flex-col gap-4 py-6 border-r">
       <header>
         <Image src={navLogo} width={124} height={47} alt="logo" />
       </header>

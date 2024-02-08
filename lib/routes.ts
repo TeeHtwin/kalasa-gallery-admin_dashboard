@@ -1,3 +1,3 @@
 export const API = {
-  collections: '/admin/collections',
+  collections: '/admin/collection',
 };
