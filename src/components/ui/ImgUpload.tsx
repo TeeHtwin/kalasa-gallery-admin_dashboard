@@ -8,7 +8,7 @@ interface Props {
   setFile: React.Dispatch<React.SetStateAction<File | undefined>>;
 }
 
-const ImgUpload = ({ file, imgUrl ,setFile }: Props) => {
+const ImgUpload = ({ file, setFile, imgUrl }: Props) => {
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     accept: {
@@ -16,7 +16,6 @@ const ImgUpload = ({ file, imgUrl ,setFile }: Props) => {
     },
 
     onDrop: (acceptedFiles) => {
-      imgUrl = undefined
       setFile(acceptedFiles[0]);
     },
   });
@@ -28,7 +27,7 @@ const ImgUpload = ({ file, imgUrl ,setFile }: Props) => {
         className="border-dashed border-2 w-96 h-80 text-center"
       >
         <input {...getInputProps()} />
-        {(file || imgUrl) ? (
+        {file || imgUrl ? (
           <Image
             src={`${file ? URL.createObjectURL(file) : imgUrl}`}
             width={384}

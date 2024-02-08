@@ -1,11 +1,10 @@
 'use client';
 
+import CustomInput from '@/components/common/CustomInput';
 import FormHeader from '@/components/login/FormHeader';
-import FormInput from '@/components/common/CustomInput';
 import { LOGIN } from '@/constants/routes';
 import Link from 'next/link';
 import { FormEvent } from 'react';
-import CustomInput from '@/components/common/CustomInput';
 
 const page = () => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -23,20 +22,14 @@ const page = () => {
         <CustomInput
           id="password"
           title="New Password"
-          name="password"
           type="password"
-          onChange={(e) => {}}
-          errorMessage=""
           placeholder="Enter your password"
         />
 
-        <FormInput
+        <CustomInput
           id="password"
           title="Confirm New Password"
-          name="password"
           type="password"
-          onChange={(e) => {}}
-          errorMessage=""
           placeholder="Confirm your password"
         />
 

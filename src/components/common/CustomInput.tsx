@@ -12,12 +12,14 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
+  font?: 'normal' | 'serif';
 }
 
 const CustomInput = ({
   name,
   onChange,
   errorMessage,
+  font = 'normal',
   title,
   ...inputAttribute
 }: CustomInputProps) => {
@@ -31,9 +33,15 @@ const CustomInput = ({
     <div
       className={cn('flex flex-col gap-2', type === 'password' && 'relative')}
     >
-      <label htmlFor={name}>{title}</label>
+      <label
+        className={cn(font === 'normal' ? 'font-[arial] ' : 'font-[cardo] ')}
+        htmlFor={name}
+      >
+        {title}
+      </label>
       <input
         onChange={onChange}
+        name={name}
         className={cn(
           'h-11 border focus:outline-none focus:border focus:border-zinc-400/80 rounded-lg pl-4',
           type === 'password' ? 'pr-12' : 'pr-4',

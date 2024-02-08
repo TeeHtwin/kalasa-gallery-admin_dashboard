@@ -1,6 +1,6 @@
 'use client';
 import { signIn } from 'next-auth/react';
-import { loginFetcher } from '@/fetcher';
+import { POSTFetcher } from '@/fetcher';
 import Link from 'next/link';
 import FormHeader from '@/components/login/FormHeader';
 import CustomInput from '@/components/common/CustomInput';
@@ -17,22 +17,16 @@ const page = () => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // const body = {
-    //   email,
-    //   password,
-    // };
+    const body = {
+      email,
+      password,
+    };
 
-    // try {
-    //   const res: { success: boolean } = await loginFetcher('login', body);
-
-    //   if (res.success) {
-    //     router.push('/');
-    //   } else {
-    //     alert('Login failed. Please try again.');
-    //   }
-    // } catch (error) {
-
-    // }
+    try {
+      const res: { success: boolean } = await POSTFetcher('login', body);
+      router.push('/');
+      localStorage.setItem('token', res.token);
+    } catch (error) {}
   };
 
   return (
@@ -83,7 +77,10 @@ const page = () => {
             Forgot password
           </Link>
         </div>
-        <button className="font-bold text-white bg-primary rounded-lg h-11">
+        <button
+          type="submit"
+          className="font-bold text-white bg-primary rounded-lg h-11"
+        >
           Sign In
         </button>
       </fieldset>
