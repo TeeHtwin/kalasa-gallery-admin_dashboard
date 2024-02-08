@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function UploadImageForm() {
-  // State variables to hold form data
   const [profileImage, setProfileImage] = useState(null);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -9,11 +8,10 @@ function UploadImageForm() {
 
   // Function to handle form submission
   async function handleSubmit(event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
-    const apiUrl = 'https://staging.kalasa.gallery/api/admin/artist'; // Replace this with your API endpoint
+    const apiUrl = 'https://staging.kalasa.gallery/api/admin/artist'; 
 
-    // Create FormData object to send form data
     const formData = new FormData();
     formData.append('profile_image', profileImage);
     formData.append('name', name);
@@ -32,7 +30,6 @@ function UploadImageForm() {
 
       const responseData = await response.json();
       console.log('Response from server:', responseData);
-      // Handle response data as needed
     } catch (error) {
       console.error('Error:', error);
     }
