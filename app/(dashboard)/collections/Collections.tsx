@@ -6,6 +6,9 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import BaseTable from '@/components/common/BaseTable';
 import { CollectionColumnRef } from './Columns';
+import PageHeader from '@/components/common/PageHeader';
+import CtaBtn from '@/components/ui/CtaBtn';
+import Link from 'next/link';
 
 type CollectionsProps = {
   token: string;
@@ -32,15 +35,17 @@ const Collections = ({ token }: CollectionsProps) => {
   return (
     <div>
       <div className="px-4 min-h-screen">
-        <div className="grow py-6 flex flex-col gap-14">
-          <div className="flex flex-col gap-4">
-            <h1
-              className="text-heading font-heading text-primary text-3xl"
-              style={{ fontFamily: 'cardo' }}
-            >
-              Collections
-            </h1>
+        <PageHeader title="Collections" />
+        <div className="flex justify-between h-5 items-center mb-5">
+          <div>
+            Total Collections{' '}
+            <span className="border rounded-md text-primary px-4">
+              {collections?.total}
+            </span>
           </div>
+          <CtaBtn>
+            <Link href={`/collections/create`}>Create Collection</Link>
+          </CtaBtn>
         </div>
         <BaseTable
           columns={CollectionColumnRef}

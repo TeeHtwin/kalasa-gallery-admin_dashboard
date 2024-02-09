@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
 
 const axiosCreate = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL + '/api',
@@ -35,7 +36,9 @@ export const get = async (url: string, headers = {}) => {
         return res.data?.data;
       });
   } catch (err) {
-    alert(err);
+    toast.error(err as string, {
+      position: 'top-right',
+    });
   }
 };
 
