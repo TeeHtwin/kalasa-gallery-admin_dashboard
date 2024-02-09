@@ -1,25 +1,41 @@
+'use client';
 
+import { API } from '@/lib/routes';
+import { useQuery } from '@tanstack/react-query';
+import { get } from '@/utils/apiFetch';
+import BaseTable from '../common/BaseTable';
+import { BlogColumnRef } from './BlogColum';
 
+type TokenProps = {
+  token: string;
+};
 
+const BlogTable = ({ token }: TokenProps) => {
+  const {
+    isLoading,
+    data: blogs,
+    isError,
+  } = useQuery({
+    queryKey: ['collections'],
+    queryFn: () => get(`${API.blogs}`, { Authorization: `Bearer ${token}` }),
+  });
 
+  if (isLoading) {
+    return 'Retrieving data...';
+  }
 
-const BlogTable = async() => {
-
-  const res = await fetch('https://staging.kalasa.gallery/api/admin/blog')
-  const blogs: any[] = []
-
-  console.log(res);
-  
-
-  return <>
-    {blogs?.map(blog => (
-      <div key={blog.id}>
-        <p>{blog.id}</p>
-        <p>{blog.title}</p>
-        <hr />
-      </div>
-
-    ))}
-  </>;
+  return (
+    <>
+      <BaseTable
+        columns={BlogColumnRef}
+        data={blogs?.data}
+        pagination={{
+          current_page: blogs?.current_page,
+          total: blogs?.total,
+          pageCount: blogs?.to,
+        }}
+      />
+    </>
+  );
 };
 export default BlogTable;

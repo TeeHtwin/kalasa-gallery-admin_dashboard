@@ -1,7 +1,11 @@
 import BlogTable from '@/components/blog/BlogTable';
 import Breadcrumb from '@/components/ui/Breadcrumb';
+import { auth } from '@/auth';
 
-const Blogs = () => {
+
+const Blogs = async() => {
+  const session = await auth();
+
   return (
     <main>
       Blogs
@@ -11,7 +15,7 @@ const Blogs = () => {
           { name: 'Create a Blog' },
         ]}
       />
-      <BlogTable />
+      <BlogTable token={session?.api_token ?? ''}/>
     </main>
   );
 };
