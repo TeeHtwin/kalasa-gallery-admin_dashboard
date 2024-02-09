@@ -48,13 +48,7 @@ export const { auth, signIn, signOut } = NextAuth({
       // with a database strategy it would be { session, user }
       if ('token' in sessionArgs) {
         let session = sessionArgs.session;
-        if ('user' in sessionArgs.token) {
-          const tokenUser = sessionArgs.token.user as User;
-          if (tokenUser.id) {
-            session.api_token = tokenUser.id;
-            return session;
-          }
-        }
+        session.api_token = sessionArgs.token.api_token as string;
       }
       return sessionArgs.session;
     },

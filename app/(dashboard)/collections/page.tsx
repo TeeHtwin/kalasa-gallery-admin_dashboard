@@ -4,9 +4,5 @@ import Collections from './Collections';
 
 export default async function page() {
   const session = await auth();
-  return (
-    <div>
-      <Collections token={session?.api_token ?? ''} />
-    </div>
-  );
+  return <Collections token={session?.api_token ?? ''} />;
 }

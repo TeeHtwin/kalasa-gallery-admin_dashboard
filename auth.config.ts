@@ -13,8 +13,7 @@ export const authConfig = {
       auth: Session | null;
       request: NextRequest;
     }) {
-      console.log('auth::', auth);
-      const isLoggedIn = !!auth && nextUrl?.pathname !== '/login';
+      const isLoggedIn = !!auth?.user?.email && nextUrl?.pathname !== '/login';
       const isOnDashboard = nextUrl.pathname.startsWith('/');
       if (isOnDashboard) {
         if (isLoggedIn) return true;

@@ -28,10 +28,11 @@ axiosCreate.interceptors.response.use(
 
 export const get = async (url: string, headers = {}) => {
   try {
-    await axiosCreate
+    return await axiosCreate
       .get(url, { headers, cancelToken: source.token })
       .then((res) => {
-        return res.data;
+        console.log('response::', res);
+        return res.data?.data;
       });
   } catch (err) {
     alert(err);
