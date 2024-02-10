@@ -1,15 +1,8 @@
-import Popup from '../../../components/dialog/Popup';
-const Contact = () => {
-  return (
-    <div>
-      <Popup
-        trigger="view"
-        name="Hnin Cherry"
-        gmail="yukisaku1023@gmail.com"
-        phonenumber="09250720776"
-        description="Can you contact me back !!"
-      ></Popup>
-    </div>
-  );
-};
-export default Contact;
+import { auth } from '@/auth';
+import React from 'react';
+import Contacts from './Contacts';
+
+export default async function page() {
+  const session = await auth();
+  return <Contacts token={session?.api_token ?? ''} />;
+}
