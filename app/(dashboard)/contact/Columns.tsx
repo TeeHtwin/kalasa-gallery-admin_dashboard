@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
-import Link from 'next/link';
-import Image from 'next/image';
+import Popup from '@/components/dialog/Popup';
+import { get } from '@/utils/apiFetch';
 
 export const ContactColumnRef: ColumnDef<Contact>[] = [
   {
@@ -23,9 +23,16 @@ export const ContactColumnRef: ColumnDef<Contact>[] = [
     header: 'Action',
     accessorKey: 'id',
     id: 'action',
-    cell: ({ getValue }) => {
+    cell: ({ getValue, cell }) => {
       const rowId = getValue() as number;
-      return <Link href={`/collections/${rowId}`}>View</Link>;
+      return (
+        <Popup
+          trigger="view"
+          name="Hnin Cherry"
+          gmail="yukisaku1023@gmail.com"
+          description="Can you contact me back !!"
+        ></Popup>
+      );
     },
   },
 ];
