@@ -11,7 +11,7 @@ type BreadcrumbProps = {
 const Breadcrumb = ({ items }: BreadcrumbProps) => {
   return (
     <nav
-      className="hidden md:flex text-primary py-10 bg-neutral-light w-full"
+      className="hidden md:flex text-primary py-4 bg-neutral-light w-full"
       aria-label="Breadcrumb"
     >
       <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
