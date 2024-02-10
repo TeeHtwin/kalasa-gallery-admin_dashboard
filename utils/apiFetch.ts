@@ -1,4 +1,6 @@
-import axios, { AxiosError } from 'axios';
+'use client';
+
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
@@ -18,12 +20,12 @@ axiosCreate.interceptors.response.use(
     const errors = error.response;
     console.log('errors::', errors);
     if (errors?.status === 401) {
-      const { update } = useSession();
-      update({
-        user: null,
+      const { message } = errors?.data;
+      toast.error(message, {
+        position: 'top-right',
       });
     }
-    alert(error);
+    // alert(error);
   },
 );
 
@@ -33,7 +35,13 @@ export const get = async (url: string, headers = {}) => {
       .get(url, { headers, cancelToken: source.token })
       .then((res) => {
         console.log('response::', res);
-        return res.data?.data;
+        if (res) {
+          return res.data?.data;
+        }
+        return {
+          data: [],
+          total: 0,
+        };
       });
   } catch (err) {
     toast.error(err as string, {
@@ -44,16 +52,21 @@ export const get = async (url: string, headers = {}) => {
 
 export const post = async (url: string, headers = {}, body: unknown) => {
   try {
-    await axiosCreate
+    return await axiosCreate
       .post(url, body, {
         headers,
         cancelToken: source.token,
       })
       .then((res) => {
-        return res.data;
+        if (res) {
+          return res.data;
+        }
+        return null;
       });
   } catch (error) {
-    return error;
+    toast.error(error as string, {
+      position: 'top-right',
+    });
   }
 };
 

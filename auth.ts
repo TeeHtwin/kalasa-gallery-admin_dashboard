@@ -37,7 +37,10 @@ export const { auth, signIn, signOut } = NextAuth({
     async redirect({ url, baseUrl }) {
       return url.includes('callbackUrl') ? baseUrl : url;
     },
-    async jwt({ token, user, account, profile, session }) {
+    async jwt({ token, user, account, profile, session, trigger }) {
+      if (trigger === 'update') {
+        return { ...token, ...session };
+      }
       if (account) {
         token.api_token = user.api_token;
       }

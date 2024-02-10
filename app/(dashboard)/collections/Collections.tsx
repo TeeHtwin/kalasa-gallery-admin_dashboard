@@ -22,6 +22,10 @@ const Collections = ({ token }: CollectionsProps) => {
     isError,
   } = useQuery({
     queryKey: ['collections'],
+    initialData: {
+      data: [],
+      total: 0,
+    },
     queryFn: () =>
       get(`${API.collections}`, { Authorization: `Bearer ${token}` }),
   });
@@ -29,9 +33,6 @@ const Collections = ({ token }: CollectionsProps) => {
   if (isLoading) {
     return 'Retrieving data...';
   }
-
-  console.log('collections::', collections);
-
   return (
     <div>
       <div className="px-4 min-h-screen">

@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['staging.kalasa.gallery'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'staging.kalasa.gallery',
+      },
+    ],
   },
 };
 
