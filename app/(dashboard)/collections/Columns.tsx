@@ -24,6 +24,10 @@ export const CollectionColumnRef: ColumnDef<Collection>[] = [
   {
     header: 'Description',
     accessorKey: 'description',
+    cell: ({ getValue }) => {
+      const text = getValue() as string;
+      return <div>{text ?? ''}</div>;
+    },
   },
   {
     header: '',

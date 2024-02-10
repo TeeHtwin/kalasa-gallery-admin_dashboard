@@ -16,17 +16,18 @@ import { Textarea } from '@/components/ui/textarea';
 import { API } from '@/lib/routes';
 import { post } from '@/utils/apiFetch';
 import { FieldValues, useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 type CreateCollectionProps = {
   token: string;
 };
 
 export default function CreateCollection({ token }: CreateCollectionProps) {
+  const router = useRouter();
   const form = useForm();
   const [loading, setLoading] = useState(false);
 
   const onCreateCollection = async (data: FieldValues) => {
-    console.log('values::', data);
     setLoading(true);
     const fd = new FormData();
     Object.keys(data)?.map((key) => fd.append(key, data[key]));
@@ -41,7 +42,9 @@ export default function CreateCollection({ token }: CreateCollectionProps) {
 
     setLoading(false);
 
-    console.log('create response::', response);
+    if (response?.success) {
+      router.push('/collections');
+    }
   };
   return (
     <Form {...form}>

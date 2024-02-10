@@ -48,15 +48,17 @@ const Collections = ({ token }: CollectionsProps) => {
             <Link href={`/collections/create`}>Create Collection</Link>
           </CtaBtn>
         </div>
-        <BaseTable
-          columns={CollectionColumnRef}
-          data={collections?.data}
-          pagination={{
-            current_page: collections?.current_page,
-            total: collections?.total,
-            pageCount: collections?.to,
-          }}
-        />
+        {Array.isArray(collections?.data) && (
+          <BaseTable
+            columns={CollectionColumnRef}
+            data={collections?.data}
+            pagination={{
+              current_page: collections?.current_page,
+              total: collections?.total,
+              pageCount: collections?.to,
+            }}
+          />
+        )}
       </div>
     </div>
   );
