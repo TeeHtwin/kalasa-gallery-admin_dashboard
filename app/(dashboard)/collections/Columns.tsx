@@ -1,5 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const CollectionColumnRef: ColumnDef<Collection>[] = [
   {
@@ -26,8 +27,11 @@ export const CollectionColumnRef: ColumnDef<Collection>[] = [
   },
   {
     header: '',
-    accessorKey: '',
+    accessorKey: 'id',
     id: 'action',
-    cell: () => <button>View</button>,
+    cell: ({ getValue }) => {
+      const rowId = getValue() as number;
+      return <Link href={`/collections/${rowId}`}>View</Link>;
+    },
   },
 ];

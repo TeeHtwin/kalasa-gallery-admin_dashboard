@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import CtaBtn from '@/components/ui/CtaBtn';
