@@ -45,7 +45,7 @@ const Blogs = ({ token }: TokenProps) => {
             </span>
           </div>
           <CtaBtn>
-            <Link href={`/blogs/create`}>Create Collection</Link>
+            <Link href={`/blogs/create`}>Create Blog</Link>
           </CtaBtn>
         </div>
         {Array.isArray(blogs?.data) && (

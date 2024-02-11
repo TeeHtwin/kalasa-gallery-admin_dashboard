@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { API } from '@/lib/routes';
-import { get } from '@/utils/apiFetch';
+import { get, del } from '@/utils/apiFetch';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
 
 type CollectionDetailProps = {
   token: string;
@@ -13,6 +15,8 @@ type CollectionDetailProps = {
 
 const EventDetails = ({ token, id }: CollectionDetailProps) => {
   console.log(id);
+  const router = useRouter();
+
 
   const {
     data: event,
@@ -33,10 +37,20 @@ const EventDetails = ({ token, id }: CollectionDetailProps) => {
 
   if (isError) console.log(error);
 
+  const handleDelete = async () => {
+    const response = await del(`${API.collections}/${id}`, {
+      Authorization: `Bearer ${token}`,
+    });
+
+    if (response?.success) {
+      router.push('/collections');
+    }
+  };
+
   console.log('event::', event);
   return (
     <>
-      <button className="text-sm text-[#D40000C7] underline float-right m-4">
+      <button className="text-sm text-[#D40000C7] underline float-right m-4" onClick={handleDelete}>
         Delete Event
       </button>
       <div className="py-10">

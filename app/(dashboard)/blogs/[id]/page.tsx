@@ -3,13 +3,17 @@ import Breadcrumb from '@/components/ui/Breadcrumb';
 import CtaBtn from '@/components/ui/CtaBtn';
 import TitleSection from '@/components/ui/TitleSection';
 import Link from 'next/link';
+import { auth } from '@/auth';
 
-const page = ({ params }: { params: { id: string } }) => {
+
+const page = async({ params }: { params: { id: string } }) => {
+  const session = await auth();
+
   return (
     <main className="p-8">
       <Breadcrumb
         items={[
-          { name: 'Blogs', url: '/', icon: '/vercel.svg' },
+          { name: 'Blogs', url: '/blogs', icon: '/vercel.svg' },
           { name: 'Blog Info' },
         ]}
       />
@@ -18,7 +22,8 @@ const page = ({ params }: { params: { id: string } }) => {
           <Link href={`/blogs/${params.id}/edit`}>Edit Blog</Link>
         </CtaBtn>
       </TitleSection>
-      <DetailsSection />
+      <DetailsSection token={session?.api_token ?? ''}
+        id={params?.id}/>
     </main>
   );
 };

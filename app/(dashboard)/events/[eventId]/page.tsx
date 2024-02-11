@@ -10,7 +10,7 @@ const page = async ({ params }: { params: { eventId: string } }) => {
   const session = await auth();
 
   return (
-    <main className="p-4 min-h-screen">
+    <div className="p-4 min-h-screen">
       <Breadcrumb
         items={[
           { name: 'Event', url: '/events', icon: '/vercel.svg' },
@@ -23,7 +23,7 @@ const page = async ({ params }: { params: { eventId: string } }) => {
         </CtaBtn>
       </TitleSection>
       <EventDetails token={session?.api_token ?? ''} id={params?.eventId} />
-    </main>
+    </div>
   );
 };
 export default page;
