@@ -1,18 +1,10 @@
-import BlogTable from '@/components/blog/BlogTable';
-import Breadcrumb from '@/components/ui/Breadcrumb';
+import { auth } from '@/auth';
+import Blogs from './Blogs';
 
-const Blogs = () => {
-  return (
-    <main>
-      Blogs
-      <Breadcrumb
-        items={[
-          { name: 'Blogs', url: '/', icon: '/vercel.svg' },
-          { name: 'Create a Blog' },
-        ]}
-      />
-      <BlogTable />
-    </main>
-  );
+
+const page = async() => {
+  const session = await auth();
+  return <Blogs token={session?.api_token ?? ''} />;
+
 };
-export default Blogs;
+export default page;
