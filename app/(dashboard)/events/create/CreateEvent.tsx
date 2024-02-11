@@ -93,18 +93,59 @@ const CreateEvent = ({ token }: TokenProps) => {
               )}
             />
           </div>
-          <FormField
-            control={form.control}
-            name="opening_date"
-            render={({ field }) => (
-              <FormItem className="mb-4">
-                <FormLabel>Available Date</FormLabel>
-                <FormControl>
-                  <Input {...field} type="date" />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+          <div>Opening Hours</div>
+          <div className="flex justify-between">
+            <FormField
+              control={form.control}
+              name="opening_date"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel>Start Date</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="date" className="min-w-44" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="closing_date"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel>Close Date</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="date" className="min-w-44" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex justify-between">
+            <FormField
+              control={form.control}
+              name="opening_time"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel>Start Time</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="time" className="min-w-44" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="closing_time"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel>Close Time</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="time" className="min-w-44" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
           <FormField
             control={form.control}
             name="location"
