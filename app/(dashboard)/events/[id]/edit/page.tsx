@@ -9,8 +9,8 @@ export default async function page({}: Props) {
     <div className="px-4 overflow-scroll">
       <Breadcrumb
         items={[
-          { name: 'Collection', url: '/collections' },
-          { name: 'Edit Collection' },
+          { name: 'Event', url: '/events' },
+          { name: 'Edit Event' },
         ]}
       />
     </div>

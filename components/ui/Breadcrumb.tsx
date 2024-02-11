@@ -11,14 +11,14 @@ type BreadcrumbProps = {
 const Breadcrumb = ({ items }: BreadcrumbProps) => {
   return (
     <nav
-      className="hidden md:flex text-primary py-10 bg-neutral-light w-full"
+      className="hidden md:flex text-primary pb-10 bg-neutral-light w-full"
       aria-label="Breadcrumb"
     >
       <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         {items.map((item, index) => (
           <li key={index}>
             <div className="flex items-center">
-              <img
+              <Image
                 src={clsx(index === 0 ? `${item?.icon}` : '/vector.svg')}
                 width={15}
                 height={15}

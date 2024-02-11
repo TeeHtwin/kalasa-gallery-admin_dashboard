@@ -35,7 +35,7 @@ export const EventColumnRef: ColumnDef<Event>[] = [
     id: 'action',
     cell: ({ getValue }) => {
       const rowId = getValue() as number;
-      return <Link href={`/collections/${rowId}`}>View</Link>;
+      return <Link href={`/events/${rowId}`}>View</Link>;
     },
   },
 ];

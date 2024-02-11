@@ -12,7 +12,7 @@ export default async function layout({
       <div className="w-full flex-none md:w-64">
         <Sidebar session={session} />
       </div>
-      <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+      <div className="flex-grow md:overflow-y-auto md:px-12">{children}</div>
     </div>
   );
 }

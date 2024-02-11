@@ -1,0 +1,31 @@
+import { auth } from '@/auth';
+import React from 'react';
+import Breadcrumb from '@/components/ui/Breadcrumb';
+import TitleSection from '@/components/ui/TitleSection';
+import CtaBtn from '@/components/ui/CtaBtn';
+import Link from 'next/link';
+import EventDetails from './EventDetails';
+
+const page = async ({ params }: { params: { id: string } }) => {
+  const session = await auth();
+
+  return (
+    <main className='p-4 min-h-screen'>
+      <Breadcrumb
+        items={[
+          { name: 'Event', url: '/events', icon: '/vercel.svg' },
+          { name: 'Event Info' },
+        ]}
+      />
+      <TitleSection title="Event Infos">
+        <CtaBtn>
+          <Link href={`/events/${params?.id}/edit`}>
+            Edit Event
+          </Link>
+        </CtaBtn>
+      </TitleSection>
+      <EventDetails token={session?.api_token ?? ''} id={params?.id} />
+    </main>
+  );
+};
+export default page;

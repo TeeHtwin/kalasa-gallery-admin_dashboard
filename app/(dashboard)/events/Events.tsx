@@ -14,7 +14,6 @@ type EventsProps = {
 };
 
 const EventsTable = ({ token }: EventsProps) => {
-  
   const {
     isLoading,
     data: events,
@@ -25,8 +24,7 @@ const EventsTable = ({ token }: EventsProps) => {
       data: [],
       total: 0,
     },
-    queryFn: () =>
-      get(`${API.events}`, { Authorization: `Bearer ${token}` }),
+    queryFn: () => get(`${API.events}`, { Authorization: `Bearer ${token}` }),
   });
 
   if (isLoading) {
@@ -34,34 +32,30 @@ const EventsTable = ({ token }: EventsProps) => {
   }
 
   return (
-    <div>
-      <div className="px-4 min-h-screen">
-        <PageHeader title="Events" />
-        <div className="flex justify-between h-5 items-center mb-5">
-          <div>
-            Total Collections{' '}
-            <span className="border rounded-md text-primary px-4">
-              {events?.total}
-            </span>
-          </div>
-          <CtaBtn>
-            <Link href={`/events/create`}>Create Event</Link>
-          </CtaBtn>
+    <div className="px-4 min-h-screen">
+      <PageHeader title="Events" />
+      <div className="flex justify-between h-5 items-center mb-5">
+        <div>
+          Total Collections{' '}
+          <span className="border rounded-md text-primary px-4">
+            {events?.total}
+          </span>
         </div>
-        <BaseTable
-          columns={EventColumnRef}
-          data={events?.data}
-          pagination={{
-            current_page: events?.current_page,
-            total: events?.total,
-            pageCount: events?.to,
-          }}
-        />
+        <CtaBtn>
+          <Link href={`/events/create`}>Create Event</Link>
+        </CtaBtn>
       </div>
+      <BaseTable
+        columns={EventColumnRef}
+        data={events?.data}
+        pagination={{
+          current_page: events?.current_page,
+          total: events?.total,
+          pageCount: events?.to,
+        }}
+      />
     </div>
-  )
-
+  );
 };
 
 export default EventsTable;
-
