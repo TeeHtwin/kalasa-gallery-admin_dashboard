@@ -32,14 +32,14 @@ export const menus = [
     icon: IconArtist,
   },
   {
-    label: 'events',
-    href: EVENTS,
-    icon: IconEvent,
-  },
-  {
     label: 'collections',
     href: COLLECTIONS,
     icon: IconCollection,
+  },
+  {
+    label: 'events',
+    href: EVENTS,
+    icon: IconEvent,
   },
   {
     label: 'blogs',

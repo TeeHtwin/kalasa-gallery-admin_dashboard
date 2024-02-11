@@ -16,7 +16,7 @@ type PopUpText = {
   trigger: string;
   name: string;
   gmail: string;
-  phonenumber: string;
+  phonenumber?: string;
   description: string;
 };
 const Popup = ({

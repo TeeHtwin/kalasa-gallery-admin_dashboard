@@ -8,11 +8,11 @@ export default async function layout({
 }) {
   const session = await auth();
   return (
-    <>
-      <Sidebar session={session} />
-      <main className="sticky left-[300px] top-0 w-[calc(100vw-300px)] min-h-screen">
-        {children}
-      </main>
-    </>
+    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+      <div className="w-full flex-none md:w-64">
+        <Sidebar session={session} />
+      </div>
+      <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+    </div>
   );
 }

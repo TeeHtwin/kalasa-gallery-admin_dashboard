@@ -87,8 +87,11 @@ export const patch = async (url: string, headers = {}, body: unknown) => {
 
 export const del = async (url: string, headers = {}) => {
   try {
-    return await axiosCreate.delete(url);
+    return await axiosCreate.delete(url, { headers }).then((res) => {
+      return res.data;
+    });
   } catch (err) {
     console.log(err);
+    return err;
   }
 };

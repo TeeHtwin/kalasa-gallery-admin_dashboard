@@ -10,3 +10,7 @@ type Collection = {
   description: string;
   image: string;
 };
+
+type Contact = {
+  id: number;
+};
