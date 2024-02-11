@@ -11,7 +11,7 @@ const Provider = ({ children }: { children: ReactNode }) => {
           queries: {
             // cacheTime: 24 * 60 * (60 * 1000), // 1 day,
             // staleTime: 24 * 60 * (60 * 1000),
-            refetchOnWindowFocus: false,
+            // refetchOnWindowFocus: false,
           },
         },
       }),
