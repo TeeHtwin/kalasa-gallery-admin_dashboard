@@ -51,12 +51,7 @@ const ArtworkDetail = ({ token, id }: ArtworkDetailProps) => {
       </button>
       <div className="py-8">
         <div className="flex gap-8 pb-10">
-          <Image
-            src={`https://staging.kalasa.gallery/storage/${artwork?.image}`}
-            width={300}
-            height={300}
-            alt="image"
-          />
+          <Image src={artwork?.image} width={300} height={300} alt="image" />
           <div className="flex flex-col gap-3">
             <h1
               className="text-primary text-2xl font-semibold"

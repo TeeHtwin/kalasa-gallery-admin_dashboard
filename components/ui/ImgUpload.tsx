@@ -30,7 +30,7 @@ const ImgUpload = ({ file, imgUrl, setFile }: Props) => {
         <input {...getInputProps()} />
         {file || imgUrl ? (
           <Image
-            src={`${file ? URL.createObjectURL(file) : imgUrl}`}
+            src={`${file ? URL?.createObjectURL(file) : imgUrl}`}
             width={384}
             height={320}
             alt="img"

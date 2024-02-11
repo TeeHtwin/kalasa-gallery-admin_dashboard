@@ -44,7 +44,7 @@ export default function EditCollection({ token, id }: EditCollectionProps) {
   });
   const [loading, setLoading] = useState(false);
 
-  const onUpdateCollection = async (data: FieldValues) => {
+  const onUpdateArtwork = async (data: FieldValues) => {
     setLoading(true);
 
     const fd = new FormData();
@@ -72,12 +72,12 @@ export default function EditCollection({ token, id }: EditCollectionProps) {
   if (isError) {
     router.push(`/collections`);
   }
-
+  console.log(form.control._defaultValues);
   return (
     <Form {...form}>
       <form
         className="space-y-8 mt-4"
-        onSubmit={form.handleSubmit(onUpdateCollection)}
+        onSubmit={form.handleSubmit(onUpdateArtwork)}
       >
         <div className="flex justify-between items-center text-primary h-6">
           <h2 className="text-xl font-medium">Edit Collection</h2>

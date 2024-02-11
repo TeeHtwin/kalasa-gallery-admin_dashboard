@@ -34,7 +34,7 @@ export function Combobox({
   setVal: () => void;
   val: string;
   open: boolean;
-  setOpen: () => void;
+  setOpen: (open: boolean) => void;
 }) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -45,8 +45,8 @@ export function Combobox({
           aria-expanded={open}
           className="w-[200px]  justify-between"
         >
-          {val
-            ? Artists.find((item) => item.id == val)?.name
+          {val && Artists?.length >= 1
+            ? Artists?.find((item) => item.id == val)?.name
             : 'Select Artist...'}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

@@ -1,5 +1,5 @@
 'use client';
-import { get } from '@/utils/apiFetch';
+import { get, post } from '@/utils/apiFetch';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
@@ -15,26 +15,39 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { API } from '@/lib/routes';
-import { post } from '@/utils/apiFetch';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Combobox } from '@/components/ui/combobox';
 import { useRouter } from 'next/navigation';
 
-type CreateArtworkProps = {
+type EditArtworkProps = {
   token: string;
+  id: string;
 };
 
-export default function CreateArtwork({ token }: CreateArtworkProps) {
-  const form = useForm();
+export default function EditArtwork({ token, id }: EditArtworkProps) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
-  const [val, setVal] = React.useState('');
+
   const router = useRouter();
+
   const {
+    data: artwork,
     isLoading,
-    data: artists,
     isError,
   } = useQuery({
+    queryKey: ['artwork', id],
+    queryFn: () =>
+      get(`${API.artwork}/${id}`, {
+        Authorization: `Bearer ${token}`,
+      }),
+  });
+  const form = useForm({
+    defaultValues: {
+      ...artwork,
+    },
+  });
+
+  const { data: artists, isSuccess } = useQuery({
     queryKey: ['artist'],
     initialData: {
       data: [],
@@ -47,11 +60,13 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
     return 'Retrieving data...';
   }
 
-  const onCreateArtwork = async (data: FieldValues) => {
-    console.log('values::', data);
+  const onUpdateArtwork = async (data: FieldValues) => {
     setLoading(true);
+
     const fd = new FormData();
-    Object.keys(data)?.map((key) => fd.append(key, data[key]));
+    Object.keys(data)?.map(
+      (key) => key !== 'image' ?? fd.append(key, data[key]),
+    );
     const response = await post(
       `${API.artwork}`,
       {
@@ -60,23 +75,24 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
       },
       fd,
     );
-
     setLoading(false);
     if (response?.success) {
       router.push(`/artworks`);
     }
-
-    console.log('create response::', response);
   };
-  console.log(val);
+  if (isError) {
+    router.push(`/artworks`);
+  }
+
+  console.log(form.control._defaultValues);
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onCreateArtwork)}
+        onSubmit={form.handleSubmit(onUpdateArtwork)}
         className="space-y-8 mt-4"
       >
         <div className="flex justify-between items-center text-primary h-6">
-          <h2 className="text-xl font-medium">Create Artwork</h2>
+          <h2 className="text-xl font-medium">Edit Artwork</h2>
           <CtaBtn disabled={loading}>
             {loading ? <LoadingSpinner /> : 'Submit'}
           </CtaBtn>
@@ -90,7 +106,10 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
                 return (
                   <FormItem className="mb-4">
                     <FormLabel className="text-base">Add an Image</FormLabel>
-                    <ImgUpload file={field?.value} setFile={field?.onChange} />
+                    <ImgUpload
+                      imgUrl={field?.value}
+                      setFile={field?.onChange}
+                    />
                   </FormItem>
                 );
               }}
