@@ -36,7 +36,7 @@ const EventsTable = ({ token }: EventsProps) => {
       <PageHeader title="Events" />
       <div className="flex justify-between h-5 items-center mb-5">
         <div>
-          Total Collections{' '}
+          Total Events{' '}
           <span className="border rounded-md text-primary px-4">
             {events?.total}
           </span>

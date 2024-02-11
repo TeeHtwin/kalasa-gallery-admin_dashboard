@@ -33,7 +33,7 @@ const CollectionDetail = ({ token, id }: CollectionDetailProps) => {
       </button>
       <div className="py-10">
         <div className="flex gap-8 pb-10">
-          <Image src={'/next.svg'} width={300} height={300} alt="image" />
+          <Image src={collection?.image} width={300} height={300} alt="image" />
           <div className="flex flex-col gap-3">
             <h1
               className="text-primary text-2xl font-semibold"
