@@ -3,35 +3,47 @@
 import { get } from '@/utils/apiFetch';
 import { API } from '@/lib/routes';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import BaseTable from '@/components/common/BaseTable';
 import { CollectionColumnRef } from './Columns';
 import PageHeader from '@/components/common/PageHeader';
 import CtaBtn from '@/components/ui/CtaBtn';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type CollectionsProps = {
   token: string;
 };
 
 const Collections = ({ token }: CollectionsProps) => {
-  console.log('token:', token);
+  const router = useRouter();
+  const [pagination, setPagination] = useState({
+    totalCount: 0,
+    currentPage: 1,
+    totalPage: 1,
+  });
   const {
     isLoading,
     data: collections,
     isError,
   } = useQuery({
-    queryKey: ['collections'],
+    queryKey: ['collections', pagination?.currentPage],
     initialData: {
       data: [],
       total: 0,
     },
     queryFn: () =>
-      get(`${API.collections}`, { Authorization: `Bearer ${token}` }),
+      get(`${API.collections}?page=${pagination?.currentPage}`, {
+        Authorization: `Bearer ${token}`,
+      }),
   });
 
   if (isLoading) {
     return 'Retrieving data...';
+  }
+
+  if (isError) {
+    router.push('/collections');
   }
   return (
     <div>
@@ -56,6 +68,11 @@ const Collections = ({ token }: CollectionsProps) => {
               current_page: collections?.current_page,
               total: collections?.total,
               pageCount: collections?.to,
+            }}
+            onPageChange={(page) => {
+              setPagination((prev) => {
+                return { ...prev, currentPage: page };
+              });
             }}
           />
         )}

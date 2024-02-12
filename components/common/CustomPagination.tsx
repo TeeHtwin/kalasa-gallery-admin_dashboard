@@ -38,13 +38,13 @@ const CustomPagination = ({
     currentPage: page,
   });
 
-  if (currentPage === 0 || paginationRange?.length === 2) {
+  if (currentPage === 0 || paginationRange?.length === 1) {
     return null;
   }
 
   const handleChange = (page: number | string) => {
     if (typeof page === 'number') {
-      onPageChange(page - 1);
+      onPageChange(page);
       setPage(page);
     }
   };

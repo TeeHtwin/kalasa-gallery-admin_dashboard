@@ -1,6 +1,6 @@
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import React from 'react';
-import CreateArtwork from './CreateArtwork';
+import CreateArtist from './CreateArtist';
 import { auth } from '@/auth';
 
 export default async function page() {
@@ -9,12 +9,12 @@ export default async function page() {
     <div className="px-4 overflow-scroll">
       <Breadcrumb
         items={[
-          { name: 'Artworks', url: '/artworks' },
-          { name: 'Create Artwork' },
+          { name: 'Artist', url: '/artist' },
+          { name: 'Create an Artist' },
         ]}
       />
 
-      <CreateArtwork token={session?.api_token ?? ''} />
+      <CreateArtist token={session?.api_token ?? ''} />
     </div>
   );
 }
