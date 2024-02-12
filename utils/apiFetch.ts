@@ -1,6 +1,7 @@
 'use client';
 
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 
 const axiosCreate = axios.create({
@@ -24,6 +25,10 @@ axiosCreate.interceptors.response.use(
         position: 'top-right',
       });
     }
+    if (error?.status === 500) {
+      const router = useRouter();
+      router.push('/server-error');
+    }
     // alert(error);
   },
 );
@@ -33,10 +38,18 @@ export const get = async (url: string, headers = {}) => {
     return await axiosCreate
       .get(url, { headers, cancelToken: source.token })
       .then((res) => {
-        console.log('response::', res);
+        // if (res) {
+        //   console.log('response data:', res.data);
+        //   const responseData = res.data;
+        //   if (responseData?.success) {
+        //     return responseData;
+        //   }
+        //   return res.data?.data;
+        // }
         if (res) {
           return res.data?.data;
         }
+
         return {
           data: [],
           total: 0,

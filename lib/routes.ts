@@ -3,4 +3,5 @@ export const API = {
   artist: '/admin/artist',
   artwork: '/admin/artwork',
   contacts: '/admin/contact',
+  event: '/admin/event',
 };
