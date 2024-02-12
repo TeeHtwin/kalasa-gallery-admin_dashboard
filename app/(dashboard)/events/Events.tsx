@@ -7,7 +7,7 @@ import BaseTable from '@/components/common/BaseTable';
 import PageHeader from '@/components/common/PageHeader';
 import CtaBtn from '@/components/ui/CtaBtn';
 import Link from 'next/link';
-import { EventColumnRef } from './EventColumns';
+import { EventColumnRef } from './Columns';
 
 type EventsProps = {
   token: string;
@@ -45,15 +45,17 @@ const EventsTable = ({ token }: EventsProps) => {
           <Link href={`/events/create`}>Create Event</Link>
         </CtaBtn>
       </div>
-      <BaseTable
-        columns={EventColumnRef}
-        data={events?.data}
-        pagination={{
-          current_page: events?.current_page,
-          total: events?.total,
-          pageCount: events?.to,
-        }}
-      />
+      {Array.isArray(events?.data) && (
+        <BaseTable
+          columns={EventColumnRef}
+          data={events?.data}
+          pagination={{
+            current_page: events?.current_page,
+            total: events?.total,
+            pageCount: events?.to,
+          }}
+        />
+      )}
     </div>
   );
 };

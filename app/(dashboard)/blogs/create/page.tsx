@@ -7,27 +7,21 @@ import TitleSection from '@/components/ui/TitleSection';
 import { Title } from '@radix-ui/react-alert-dialog';
 import { HiOutlinePlus } from 'react-icons/hi';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
+import { auth } from '@/auth';
+import CreateBlog from './CreateBlog';
 
-const page = () => {
-  const handleCreate = () => {
-    console.log('Create Artist');
-  };
+const page = async() => {
+  const session = await auth();
 
   return (
     <main>
       <Breadcrumb
         items={[
-          { name: 'Blogs', url: '/', icon: '/vercel.svg' },
-          { name: 'Create a Blog' },
+          { name: 'Blogs', url: '/blogs', icon: '/vercel.svg' },
+          { name: 'Create Blog' },
         ]}
       />
-      <TitleSection title={'Create a Blog'}>
-        <CtaBtn onClick={handleCreate}>
-          <HiOutlinePlus />
-          Submit
-        </CtaBtn>
-      </TitleSection>
-      <BlogCrateForm />
+      <CreateBlog token={session?.api_token ?? ''} />
     </main>
   );
 };

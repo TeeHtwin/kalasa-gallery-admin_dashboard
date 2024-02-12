@@ -7,16 +7,13 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-
-type CollectionDetailProps = {
+type EventDetailProps = {
   token: string;
   id: string;
 };
 
-const EventDetails = ({ token, id }: CollectionDetailProps) => {
-  console.log(id);
+const EventDetails = ({ token, id }: EventDetailProps) => {
   const router = useRouter();
-
 
   const {
     data: event,
@@ -31,7 +28,7 @@ const EventDetails = ({ token, id }: CollectionDetailProps) => {
       }),
   });
 
-  if (isLoading) {
+  if (!event) {
     return 'Retrieving data...';
   }
 
@@ -50,7 +47,10 @@ const EventDetails = ({ token, id }: CollectionDetailProps) => {
   console.log('event::', event);
   return (
     <>
-      <button className="text-sm text-[#D40000C7] underline float-right m-4" onClick={handleDelete}>
+      <button
+        className="text-sm text-[#D40000C7] underline float-right m-4"
+        onClick={handleDelete}
+      >
         Delete Event
       </button>
       <div className="py-10">
@@ -76,7 +76,7 @@ const EventDetails = ({ token, id }: CollectionDetailProps) => {
                 >
                   Title
                 </p>
-                <Image src='/red_dot.svg' width={10} height={10} alt="icon" />
+                <Image src="/red_dot.svg" width={10} height={10} alt="icon" />
                 <p>{event?.title}</p>
               </div>
               <div className="flex gap-3 pb-4">
@@ -88,7 +88,7 @@ const EventDetails = ({ token, id }: CollectionDetailProps) => {
                 >
                   Event Status
                 </p>
-                <Image src='/red_dot.svg' width={10} height={10} alt="icon" />
+                <Image src="/red_dot.svg" width={10} height={10} alt="icon" />
                 <p>{event?.status}</p>
               </div>
               <div className="flex gap-3 pb-4">
@@ -100,7 +100,7 @@ const EventDetails = ({ token, id }: CollectionDetailProps) => {
                 >
                   Opening Hours
                 </p>
-                <Image src='/red_dot.svg' width={10} height={10} alt="icon" />
+                <Image src="/red_dot.svg" width={10} height={10} alt="icon" />
                 <span>{event?.opening_datetime}</span>
               </div>
               <div className="flex gap-3 pb-4">
@@ -124,7 +124,7 @@ const EventDetails = ({ token, id }: CollectionDetailProps) => {
                 >
                   Location
                 </p>
-                <Image src='/red_dot.svg' width={10} height={10} alt="icon" />
+                <Image src="/red_dot.svg" width={10} height={10} alt="icon" />
                 <span>{event?.location}</span>
               </div>
             </div>

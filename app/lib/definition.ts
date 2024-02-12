@@ -14,3 +14,18 @@ type Collection = {
 type Contact = {
   id: number;
 };
+
+type Exhibition = {
+  id: number;
+  title: string;
+  status: string;
+  location: string;
+  image: string
+}
+
+type Blog = {
+  id: number;
+  title: string;
+  image: string
+  description: string;
+}
