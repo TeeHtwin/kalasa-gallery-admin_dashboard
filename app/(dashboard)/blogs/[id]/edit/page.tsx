@@ -1,27 +1,27 @@
-import BlogForm from '@/components/blog/BlogForm';
+import { auth } from '@/auth';
 import Breadcrumb from '@/components/ui/Breadcrumb';
+import EditBlog from './EditBlog';
 
-const page = () => {
-  const blog = {
-    title: 'Blessing & Peace Among Chaos',
-    description: `Artist Htoo Aung Kyaw was born in Kyaukpadaung , a small town on the
-  way to Bagan , Mandalay Regain . He is a Bachelor’s degree holder in
-  philosophy and studied art , especially in paintings , at the State
-  School of Fine Art in Yangon . He has great interest in history and
-  philosophy . Since he was child , he usually goes to Bagan and studied
-  about See more...`,
-  };
+type Props = {};
+
+export default async function page({
+  params,
+}: {
+  params: { collectionId: string };
+}) {
+  const session = await auth();
   return (
-    <main>
+    <div className="px-4 overflow-scroll">
       <Breadcrumb
         items={[
-          { name: 'Blogs', url: '/', icon: '/vercel.svg' },
-          { name: 'Edit a Blog' },
+          { name: 'Blog', url: '/Blogs' },
+          { name: 'Edit Blog' },
         ]}
       />
-      <p className="text-xl text-primary pb-4">Edit the Blog</p>
-      <BlogForm blogDetails={blog} />
-    </main>
+      <EditBlog
+        token={session?.api_token ?? ''}
+        id={params?.collectionId}
+      />
+    </div>
   );
-};
-export default page;
+}
