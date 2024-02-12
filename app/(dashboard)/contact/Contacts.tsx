@@ -8,7 +8,7 @@ import { get } from '@/utils/apiFetch';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import { ContactColumnRef } from './Columns';
 
 type ContactsProps = {
@@ -16,6 +16,11 @@ type ContactsProps = {
 };
 
 export default function Contacts({ token }: ContactsProps) {
+  const [pagination, setPagination] = useState({
+    totalCount: 0,
+    currentPage: 1,
+    totalPage: 1,
+  });
   const router = useRouter();
   const {
     isLoading,
@@ -26,8 +31,11 @@ export default function Contacts({ token }: ContactsProps) {
       data: [],
       total: 0,
     },
-    queryKey: ['contacts'],
-    queryFn: () => get(`${API.contacts}`, { Authorization: `Bearer ${token}` }),
+    queryKey: ['contacts', pagination?.currentPage],
+    queryFn: () =>
+      get(`${API.contacts}?page=${pagination?.currentPage}`, {
+        Authorization: `Bearer ${token}`,
+      }),
   });
 
   if (isLoading) {
@@ -37,8 +45,6 @@ export default function Contacts({ token }: ContactsProps) {
   if (isError) {
     router.push(`/contacts`);
   }
-
-  console.log('contact::', contacts?.data);
 
   return (
     <div>
@@ -60,6 +66,14 @@ export default function Contacts({ token }: ContactsProps) {
               current_page: contacts?.current_page,
               total: contacts?.total,
               pageCount: contacts?.to,
+            }}
+            onPageChange={(page) => {
+              setPagination((prev) => {
+                return {
+                  ...prev,
+                  currentPage: page,
+                };
+              });
             }}
           />
         )}

@@ -24,11 +24,13 @@ interface BaseTableProps<TData, TValue> {
     total: number;
     pageCount: number;
   };
+  onPageChange: (page: number) => void;
 }
 export default function BaseTable<TData, TValue>({
   columns,
   data,
   pagination,
+  onPageChange,
 }: BaseTableProps<TData, TValue>) {
   const table = useReactTable({
     columns,
@@ -86,7 +88,7 @@ export default function BaseTable<TData, TValue>({
         totalCount={pagination?.total}
         currentPage={pagination?.current_page}
         pageCount={pagination?.pageCount}
-        onPageChange={table.setPageIndex}
+        onPageChange={onPageChange}
         previousPage={table.previousPage}
         nextPage={table.nextPage}
         getCanPreviousPage={table.getCanPreviousPage}

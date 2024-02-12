@@ -3,7 +3,7 @@
 import { get } from '@/utils/apiFetch';
 import { API } from '@/lib/routes';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import BaseTable from '@/components/common/BaseTable';
 import { ArtistColumnRef } from './Columns';
 import PageHeader from '@/components/common/PageHeader';
@@ -15,24 +15,31 @@ type ArtistProps = {
 };
 
 const Artist = ({ token }: ArtistProps) => {
-  console.log('token:', token);
+  const [pagination, setPagination] = useState({
+    totalCount: 0,
+    currentPage: 1,
+    totalPage: 1,
+  });
   const {
     isLoading,
     data: artists,
     isError,
   } = useQuery({
-    queryKey: ['artist'],
+    queryKey: ['artists', pagination?.currentPage],
     initialData: {
       data: [],
       total: 0,
     },
-    queryFn: () => get(`${API.artist}`, { Authorization: `Bearer ${token}` }),
+    queryFn: () =>
+      get(`${API.artist}?page=${pagination?.currentPage}`, {
+        Authorization: `Bearer ${token}`,
+      }),
   });
 
   if (isLoading) {
     return 'Retrieving data...';
   }
-  console.log(artists);
+
   return (
     <div>
       <div className="px-4 min-h-screen">
@@ -56,6 +63,11 @@ const Artist = ({ token }: ArtistProps) => {
             total: artists?.total,
             pageCount: artists?.to,
           }}
+          onPageChange={(page) =>
+            setPagination((prev) => {
+              return { ...prev, currentPage: page };
+            })
+          }
         />
       </div>
     </div>

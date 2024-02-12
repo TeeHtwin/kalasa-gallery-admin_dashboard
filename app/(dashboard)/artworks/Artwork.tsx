@@ -3,7 +3,7 @@
 import { get } from '@/utils/apiFetch';
 import { API } from '@/lib/routes';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import BaseTable from '@/components/common/BaseTable';
 import { ArtworkColumnRef } from './Columns';
 import PageHeader from '@/components/common/PageHeader';
@@ -15,24 +15,31 @@ type ArtworkProps = {
 };
 
 const Artwork = ({ token }: ArtworkProps) => {
-  console.log('token:', token);
+  const [pagination, setPagination] = useState({
+    totalCount: 0,
+    currentPage: 1,
+    totalPage: 1,
+  });
   const {
     isLoading,
     data: artworks,
     isError,
   } = useQuery({
-    queryKey: ['artwork'],
+    queryKey: ['artworks', pagination?.currentPage],
     initialData: {
       data: [],
-      total: 0,
+      ...pagination,
     },
-    queryFn: () => get(`${API.artwork}`, { Authorization: `Bearer ${token}` }),
+    queryFn: () =>
+      get(`${API.artwork}?page=${pagination?.currentPage}`, {
+        Authorization: `Bearer ${token}`,
+      }),
   });
 
   if (isLoading) {
     return 'Retrieving data...';
   }
-  console.log(artworks);
+
   return (
     <div>
       <div className="px-4 min-h-screen">
@@ -54,8 +61,13 @@ const Artwork = ({ token }: ArtworkProps) => {
           pagination={{
             current_page: artworks?.current_page,
             total: artworks?.total,
-            pageCount: artworks?.to,
+            pageCount: artworks?.per_page,
           }}
+          onPageChange={(page) =>
+            setPagination((prev) => {
+              return { ...prev, currentPage: page };
+            })
+          }
         />
       </div>
     </div>
