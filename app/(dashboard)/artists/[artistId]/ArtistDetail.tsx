@@ -5,6 +5,7 @@ import { API } from '@/lib/routes';
 import { get } from '@/utils/apiFetch';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import moment from 'moment';
 
 type ArtistDetailProps = {
   token: string;
@@ -24,6 +25,10 @@ const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
         Authorization: `Bearer ${token}`,
       }),
   });
+
+  const inputDateString = artist?.created_at;
+  const inputDate = new Date(inputDateString);
+  const formattedDate = moment(inputDate).format('MMM Do, YYYY');
 
   console.log('collection::', artist);
   return (
@@ -54,6 +59,45 @@ const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
               <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
               <p>{artist?.name}</p>
             </div>
+            <div className="flex gap-5">
+              <p
+                className="text-xl"
+                style={{
+                  //* just temporary
+                  fontFamily: 'cardo',
+                }}
+              >
+                Added Date
+              </p>
+              <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
+              <p>{formattedDate}</p>
+            </div>
+            <div className="flex gap-5">
+              <p
+                className="text-xl"
+                style={{
+                  //* just temporary
+                  fontFamily: 'cardo',
+                }}
+              >
+                Total Artworks
+              </p>
+              <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
+              <p>{artist?.total_artworks}</p>
+            </div>
+            <div className="flex gap-5">
+              <p
+                className="text-xl"
+                style={{
+                  //* just temporary
+                  fontFamily: 'cardo',
+                }}
+              >
+                Sold Artworks
+              </p>
+              <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
+              <p>{artist?.sold_artworks}</p>
+            </div>
           </div>
         </div>
         <hr />
@@ -65,9 +109,9 @@ const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
               fontFamily: 'cardo',
             }}
           >
-            added date
+            Artist Description
           </p>
-          <span className="leading-relaxed">{artist?.added_date}</span>
+          <span className="leading-relaxed">{artist?.description}</span>
         </div>
       </div>
     </>

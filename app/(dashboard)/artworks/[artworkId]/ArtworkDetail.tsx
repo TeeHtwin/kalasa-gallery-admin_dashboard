@@ -50,31 +50,8 @@ const ArtworkDetail = ({ token, id }: ArtworkDetailProps) => {
         Delete Artwork
       </button>
       <div className="py-8">
-        <div className="flex gap-8 pb-10">
-          <Image src={artwork?.image} width={300} height={300} alt="image" />
-          <div className="flex flex-col gap-3">
-            <h1
-              className="text-primary text-2xl font-semibold"
-              style={{
-                //* just temporary
-                fontFamily: 'cardo',
-              }}
-            >
-              {artwork?.name}
-            </h1>
-            <div className="flex gap-3">
-              <p
-                style={{
-                  //* just temporary
-                  fontFamily: 'cardo',
-                }}
-              >
-                Contact Emails
-              </p>
-              <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
-              <p>{artwork?.category_id}</p>
-            </div>
-          </div>
+        <div className="flex w-full justify-center gap-8 pb-10">
+          <Image src={artwork?.image} width={800} height={800} alt="image" />
         </div>
         <hr />
         <h1
@@ -146,22 +123,10 @@ const ArtworkDetail = ({ token, id }: ArtworkDetailProps) => {
                   fontFamily: 'cardo',
                 }}
               >
-                Post Status
-              </p>
-              <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
-              <p>{artwork?.status}</p>
-            </div>
-            <div className="flex gap-3">
-              <p
-                style={{
-                  //* just temporary
-                  fontFamily: 'cardo',
-                }}
-              >
                 Artist&apos;s Name
               </p>
               <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
-              <p>{artwork?.artist_id}</p>
+              <p>{artwork?.artist.name}</p>
             </div>
             <div className="flex gap-3">
               <p
