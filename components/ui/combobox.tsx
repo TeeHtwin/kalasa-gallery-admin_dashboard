@@ -31,7 +31,7 @@ export function Combobox({
   setOpen,
 }: {
   Artists: ArtistsProps[];
-  setVal: () => void;
+  setVal: (id: string) => void;
   val: string;
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -43,7 +43,7 @@ export function Combobox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px]  justify-between"
+          className="w-full  justify-between"
         >
           {val && Artists?.length >= 1
             ? Artists?.find((item) => item.id == val)?.name
@@ -51,7 +51,7 @@ export function Combobox({
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="p-0">
         <Command>
           <CommandInput placeholder="Search Artist..." className="h-9" />
           <CommandEmpty>No artist found.</CommandEmpty>
@@ -62,7 +62,7 @@ export function Combobox({
                   key={artist.id}
                   value={artist.id}
                   onSelect={() => {
-                    setVal(artist.id);
+                    setVal(artist?.id);
                     setOpen(false);
                   }}
                 >
