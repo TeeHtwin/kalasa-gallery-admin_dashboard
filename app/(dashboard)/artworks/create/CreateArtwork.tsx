@@ -25,17 +25,16 @@ type CreateArtworkProps = {
 };
 
 export default function CreateArtwork({ token }: CreateArtworkProps) {
-  const form = useForm();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [val, setVal] = React.useState('');
   const router = useRouter();
   const {
-    isLoading,
+    isFetching,
     data: artists,
     isError,
   } = useQuery({
-    queryKey: ['artist'],
+    queryKey: ['artists'],
     initialData: {
       data: [],
       total: 0,
@@ -43,7 +42,19 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
     queryFn: () => get(`${API.artist}`, { Authorization: `Bearer ${token}` }),
   });
 
-  if (isLoading) {
+  const form = useForm({
+    defaultValues: {
+      artist_id: artists?.length > 0 ? artists[0]?.id : null,
+      image: undefined,
+      name: '',
+      year: '',
+      category_id: '',
+      size: '',
+      description: '',
+    },
+  });
+
+  if (isFetching) {
     return 'Retrieving data...';
   }
 
@@ -112,7 +123,8 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
                 control={form.control}
                 name="artist_id"
                 render={({ field }) => (
-                  <FormItem className="mb-4">
+                  <FormItem className="mb-4 flex flex-col">
+                    <FormLabel className="mb-2">Artist Name</FormLabel>
                     <FormControl>
                       <Combobox
                         val={field?.value}

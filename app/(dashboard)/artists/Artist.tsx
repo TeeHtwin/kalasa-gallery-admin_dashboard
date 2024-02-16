@@ -57,7 +57,7 @@ const Artist = ({ token }: ArtistProps) => {
         </div>
         <BaseTable
           columns={ArtistColumnRef}
-          data={artists}
+          data={artists.data}
           pagination={{
             current_page: artists?.current_page,
             total: artists?.total,
