@@ -9,12 +9,18 @@ import { BlogColumnRef } from './BlogColumns';
 import PageHeader from '@/components/common/PageHeader';
 import CtaBtn from '@/components/ui/CtaBtn';
 import Link from 'next/link';
+import { useState } from 'react';
 
 type TokenProps = {
   token: string;
 };
 
 const Blogs = ({ token }: TokenProps) => {
+  const [pagination, setPagination] = useState({
+    totalCount: 0,
+    currentPage: 1,
+    totalPage: 1,
+  });
   console.log('token:', token);
   const {
     isLoading,
@@ -56,6 +62,11 @@ const Blogs = ({ token }: TokenProps) => {
               current_page: blogs?.current_page,
               total: blogs?.total,
               pageCount: blogs?.to,
+            }}
+            onPageChange={(page) => {
+              setPagination((prev) => {
+                return { ...prev, currentPage: page };
+              });
             }}
           />
         )}
