@@ -1,6 +1,7 @@
 'use client';
 
 import { get } from '@/utils/apiFetch';
+import React, { useState } from 'react';
 import { API } from '@/lib/routes';
 import { useQuery } from '@tanstack/react-query';
 import BaseTable from '@/components/common/BaseTable';
@@ -14,6 +15,11 @@ type EventsProps = {
 };
 
 const EventsTable = ({ token }: EventsProps) => {
+  const [pagination, setPagination] = useState({
+    totalCount: 0,
+    currentPage: 1,
+    totalPage: 1,
+  });
   const {
     isLoading,
     data: events,
@@ -53,6 +59,11 @@ const EventsTable = ({ token }: EventsProps) => {
             current_page: events?.current_page,
             total: events?.total,
             pageCount: events?.to,
+          }}
+          onPageChange={(page) => {
+            setPagination((prev) => {
+              return { ...prev, currentPage: page };
+            });
           }}
         />
       )}

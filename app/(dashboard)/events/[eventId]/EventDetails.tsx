@@ -10,49 +10,51 @@ import { useRouter } from 'next/navigation';
 type EventDetailProps = {
   token: string;
   id: string;
+  event: any
 };
 
-const EventDetails = ({ token, id }: EventDetailProps) => {
+const EventDetails = ({ token, id, event }: EventDetailProps) => {
   const router = useRouter();
 
-  const {
-    data: event,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ['events', id],
-    queryFn: () =>
-      get(`${API.events}/${id}`, {
-        Authorization: `Bearer ${token}`,
-      }),
-  });
+  // const {
+  //   data: event,
+  //   isLoading,
+  //   isError,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ['events', id],
+  //   queryFn: () =>
+  //     get(`${API.events}/${id}`, {
+  //       Authorization: `Bearer ${token}`,
+  //     }),
+  // });
 
-  if (!event) {
-    return 'Retrieving data...';
-  }
+  // if (!isLoading) {
+  //   console.log('event - ', event);
+    
+  // }
 
-  if (isError) console.log(error);
+  // if (isError) console.log(error);
 
-  const handleDelete = async () => {
-    const response = await del(`${API.collections}/${id}`, {
-      Authorization: `Bearer ${token}`,
-    });
+  // const handleDelete = async () => {
+  //   const response = await del(`${API.collections}/${id}`, {
+  //     Authorization: `Bearer ${token}`,
+  //   });
 
-    if (response?.success) {
-      router.push('/collections');
-    }
-  };
+  //   if (response?.success) {
+  //     router.push('/collections');
+  //   }
+  // };
 
-  console.log('event::', event);
+
   return (
     <>
-      <button
+      {/* <button
         className="text-sm text-[#D40000C7] underline float-right m-4"
         onClick={handleDelete}
       >
         Delete Event
-      </button>
+      </button> */}
       <div className="py-10">
         <div className="flex gap-8 pb-10">
           <Image src={event?.image} width={300} height={300} alt="image" />

@@ -21,7 +21,7 @@ type CreateArtistProps = {
   token: string;
 };
 
-export default function CreateArtist({ token }: CreateArtistProps) {
+export default function Page({ token }: CreateArtistProps) {
   const form = useForm();
   const [loading, setLoading] = useState(false);
 
