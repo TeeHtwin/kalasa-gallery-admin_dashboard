@@ -9,7 +9,7 @@ export default async function page() {
     <div className="px-4 overflow-scroll">
       <Breadcrumb
         items={[
-          { name: 'Artist', url: '/artist' },
+          { name: 'Artist', url: '/artists' },
           { name: 'Create an Artist' },
         ]}
       />
