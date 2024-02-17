@@ -8,24 +8,28 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const { email, password } = credentials;
-        const user = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/login`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({ email, password }),
+        // const url = 'https://api.kalasa.gallery/api/login';
+        const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/login`;
+        const user = await fetch(url, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
           },
-        )
-          .then((res) => res.json())
+          body: JSON.stringify({ email, password }),
+        })
+          .then((res) => {
+            console.log('login response::', res);
+            return res.json();
+          })
           .then((user) => {
             return user;
           })
           .catch((error) => {
             return error;
           });
+        console.log('user:', user);
         if (user.status === 'success') {
           return { api_token: user.token, ...user.userData };
         }
