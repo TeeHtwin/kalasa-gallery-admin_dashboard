@@ -59,17 +59,17 @@ const LoginPage = () => {
               type="checkbox"
               className="w-4 h-4 accent-primary-100"
             />
-            <label htmlFor="remember-me" className="text-sm">
+            {/* <label htmlFor="remember-me" className="text-sm">
               Remember for 30 days
-            </label>
+            </label> */}
           </div>
 
-          <Link
+          {/* <Link
             href={FORGOT_PASSWORD}
             className="text-sm font-bold text-primary"
           >
             Forgot password
-          </Link>
+          </Link> */}
         </div>
         <button className="font-bold text-white bg-primary rounded-lg h-11">
           Sign In
