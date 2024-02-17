@@ -30,7 +30,6 @@ const EventDetails = ({ token, id }: EventDetailProps) => {
 
   if (!isLoading) {
     console.log('event - ', event);
-    
   }
 
   if (isError) console.log(error);
@@ -44,7 +43,6 @@ const EventDetails = ({ token, id }: EventDetailProps) => {
       router.push('/events');
     }
   };
-
 
   return (
     <>

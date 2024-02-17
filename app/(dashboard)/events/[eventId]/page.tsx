@@ -6,22 +6,22 @@ import CtaBtn from '@/components/ui/CtaBtn';
 import Link from 'next/link';
 import EventDetails from './EventDetails';
 
-
-
 const page = async ({ params }: { params: { eventId: string } }) => {
   const session = await auth();
 
-  const data = await fetch(`https://staging.kalasa.gallery/api/admin/event/${params.eventId}`, {
-    headers: {
-     Authorization: `Bearer ${session?.api_token}`
-     
+  const data = await fetch(
+    `https://staging.kalasa.gallery/api/admin/event/${params.eventId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${session?.api_token}`,
+      },
     },
-  })
+  );
 
-  const event = await data.json()
+  const event = await data.json();
 
-  console.log('event',event.data);
-  
+  console.log('event', event.data);
+
   return (
     <div className="p-4 min-h-screen">
       <Breadcrumb
@@ -36,10 +36,9 @@ const page = async ({ params }: { params: { eventId: string } }) => {
         </CtaBtn>
       </TitleSection>
       <Suspense fallback={<div>Loading...</div>}>
-        {
-          event && 
-          <EventDetails token={session?.api_token ?? ''} id={params?.eventId} event={event} />
-        }
+        {event && (
+          <EventDetails token={session?.api_token ?? ''} id={params?.eventId} />
+        )}
       </Suspense>
     </div>
   );
