@@ -10,41 +10,40 @@ import { useRouter } from 'next/navigation';
 type EventDetailProps = {
   token: string;
   id: string;
-  event: any
 };
 
-const EventDetails = ({ token, id, event }: EventDetailProps) => {
+const EventDetails = ({ token, id }: EventDetailProps) => {
   const router = useRouter();
 
-  // const {
-  //   data: event,
-  //   isLoading,
-  //   isError,
-  //   error,
-  // } = useQuery({
-  //   queryKey: ['events', id],
-  //   queryFn: () =>
-  //     get(`${API.events}/${id}`, {
-  //       Authorization: `Bearer ${token}`,
-  //     }),
-  // });
+  const {
+    data: event,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['events', id],
+    queryFn: () =>
+      get(`${API.events}/${id}`, {
+        Authorization: `Bearer ${token}`,
+      }),
+  });
 
-  // if (!isLoading) {
-  //   console.log('event - ', event);
+  if (!isLoading) {
+    console.log('event - ', event);
     
-  // }
+  }
 
-  // if (isError) console.log(error);
+  if (isError) console.log(error);
 
-  // const handleDelete = async () => {
-  //   const response = await del(`${API.collections}/${id}`, {
-  //     Authorization: `Bearer ${token}`,
-  //   });
+  const handleDelete = async () => {
+    const response = await del(`${API.collections}/${id}`, {
+      Authorization: `Bearer ${token}`,
+    });
 
-  //   if (response?.success) {
-  //     router.push('/collections');
-  //   }
-  // };
+    if (response?.success) {
+      router.push('/events');
+    }
+  };
 
 
   return (

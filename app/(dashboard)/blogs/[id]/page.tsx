@@ -1,9 +1,10 @@
-import DetailsSection from '@/components/blog/DetailsSection';
+
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import CtaBtn from '@/components/ui/CtaBtn';
 import TitleSection from '@/components/ui/TitleSection';
 import Link from 'next/link';
 import { auth } from '@/auth';
+import  BlogDetails from './BlogDetails'
 
 
 const page = async({ params }: { params: { id: string } }) => {
@@ -22,7 +23,7 @@ const page = async({ params }: { params: { id: string } }) => {
           <Link href={`/blogs/${params.id}/edit`}>Edit Blog</Link>
         </CtaBtn>
       </TitleSection>
-      <DetailsSection token={session?.api_token ?? ''}
+      <BlogDetails token={session?.api_token ?? ''}
         id={params?.id}/>
     </main>
   );
