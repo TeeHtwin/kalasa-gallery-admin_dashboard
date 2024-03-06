@@ -9,11 +9,13 @@ import {
 } from '../../constants/navRoutes';
 import { get } from '@/utils/apiFetch';
 import { API } from '@/lib/routes';
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-const Statues = ({ token }: string) => {
-  // const [totalArtworks, setTotalArtwork] = useState(0);
+type TokenProps = {
+  token: string;
+};
+
+const Statues = ({ token }: TokenProps) => {
   const { data: totalArtworks } = useQuery({
     queryKey: ['totalArtworks'],
     queryFn: () =>

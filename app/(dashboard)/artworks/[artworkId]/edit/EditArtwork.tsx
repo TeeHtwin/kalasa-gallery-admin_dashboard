@@ -42,7 +42,7 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
       }),
   });
 
-  const form = useForm({
+  const form: any = useForm({
     defaultValues: {
       ...artwork,
     },
@@ -73,13 +73,13 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
-      fd,
+      form,
     );
     setLoading(false);
     if (response?.success) {
       router.push(`/artworks`);
     }
-    console.log(fd);
+    console.log(form);
   };
   if (isError) {
     router.push(`/artworks`);

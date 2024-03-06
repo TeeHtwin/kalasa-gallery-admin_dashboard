@@ -63,7 +63,7 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
   const onCreateArtwork = async (data: FieldValues) => {
     console.log('values::', data);
     setLoading(true);
-    const fd = new FormData();
+    const fd: FormData = new FormData();
     Object.keys(data)?.map((key) => fd.append(key, data[key]));
     const response = await post(
       `${API.artwork}`,
