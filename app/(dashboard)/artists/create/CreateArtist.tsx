@@ -16,12 +16,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { API } from '@/lib/routes';
 import { post } from '@/utils/apiFetch';
 import { FieldValues, useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 type CreateArtistProps = {
   token: string;
 };
 
 export default function CreateArtist({ token }: CreateArtistProps) {
+  const router = useRouter();
   const form = useForm();
   const [loading, setLoading] = useState(false);
 
@@ -40,6 +42,9 @@ export default function CreateArtist({ token }: CreateArtistProps) {
     );
 
     setLoading(false);
+    if (response?.success) {
+      router.push('/artists');
+    }
 
     console.log('create response::', response);
   };

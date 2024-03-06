@@ -1,3 +1,4 @@
+'use client';
 import Status from './Status';
 import {
   ARTISTS,
@@ -6,47 +7,73 @@ import {
   COLLECTIONS,
   EVENTS,
 } from '../../constants/navRoutes';
+import { get } from '@/utils/apiFetch';
+import { API } from '@/lib/routes';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-const statues = [
-  {
-    label: 'total enquires',
-    amount: 560,
-    href: '#',
-    isHighlight: true,
-  },
-  {
-    label: 'total artworks',
-    amount: 3400,
-    href: ARTWORKS,
-    isHighlight: false,
-  },
-  {
-    label: 'total artists',
-    amount: 500,
-    href: ARTISTS,
-    isHighlight: false,
-  },
-  {
-    label: 'total collections',
-    amount: 340,
-    href: COLLECTIONS,
-    isHighlight: false,
-  },
-  {
-    label: 'total blogs',
-    amount: 74,
-    href: BLOGS,
-    isHighlight: false,
-  },
-  {
-    label: 'total events',
-    amount: 50,
-    href: EVENTS,
-    isHighlight: true,
-  },
-];
+const Statues = ({ token }: string) => {
+  // const [totalArtworks, setTotalArtwork] = useState(0);
+  const { data: totalArtworks } = useQuery({
+    queryKey: ['totalArtworks'],
+    queryFn: () =>
+      get(`${API.artwork}/total`, { Authorization: `Bearer ${token}` }),
+  });
+  const { data: totalArtists } = useQuery({
+    queryKey: ['totalArtists'],
+    queryFn: () =>
+      get(`${API.artist}/total`, { Authorization: `Bearer ${token}` }),
+  });
+  const { data: totalEvents } = useQuery({
+    queryKey: ['totalEvents'],
+    queryFn: () =>
+      get(`${API.events}/total`, { Authorization: `Bearer ${token}` }),
+  });
+  const { data: totalBlogs } = useQuery({
+    queryKey: ['totalBlogs'],
+    queryFn: () =>
+      get(`${API.blogs}/total`, { Authorization: `Bearer ${token}` }),
+  });
+  const { data: totalCollections } = useQuery({
+    queryKey: ['totalCollections'],
+    queryFn: () =>
+      get(`${API.collections}/total`, { Authorization: `Bearer ${token}` }),
+  });
 
-const Statues = () => {
+  console.log(token);
+  console.log(totalEvents);
+  const statues = [
+    {
+      label: 'total artworks',
+      amount: totalArtworks,
+      href: ARTWORKS,
+      isHighlight: false,
+    },
+    {
+      label: 'total artists',
+      amount: totalArtists,
+      href: ARTISTS,
+      isHighlight: false,
+    },
+    {
+      label: 'total collections',
+      amount: totalCollections,
+      href: COLLECTIONS,
+      isHighlight: false,
+    },
+    {
+      label: 'total blogs',
+      amount: totalBlogs,
+      href: BLOGS,
+      isHighlight: false,
+    },
+    {
+      label: 'total events',
+      amount: totalEvents,
+      href: EVENTS,
+      isHighlight: true,
+    },
+  ];
   return (
     <div className="flex flex-col gap-4">
       <h1

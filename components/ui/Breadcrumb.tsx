@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import clsx from 'clsx';
-
 type BreadcrumbProps = {
   items: Array<{ name: string; url?: string; icon?: string }>;
 };
@@ -19,7 +18,7 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
           <li key={index}>
             <div className="flex items-center">
               <Image
-                src={clsx(index === 0 ? `${item?.icon}` : '/vector.svg')}
+                src={item.icon ? item.icon : '/vector.svg'}
                 width={15}
                 height={15}
                 alt="icon"
