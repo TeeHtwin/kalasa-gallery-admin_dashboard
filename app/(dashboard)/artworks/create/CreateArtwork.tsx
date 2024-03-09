@@ -25,10 +25,12 @@ type CreateArtworkProps = {
 };
 
 export default function CreateArtwork({ token }: CreateArtworkProps) {
+  const form = useForm();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [val, setVal] = React.useState('');
   const router = useRouter();
+
   const {
     isFetching,
     data: artists,
@@ -42,17 +44,17 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
     queryFn: () => get(`${API.artist}`, { Authorization: `Bearer ${token}` }),
   });
 
-  const form = useForm({
-    defaultValues: {
-      artist_id: artists?.length > 0 ? artists[0]?.id : null,
-      image: undefined,
-      name: '',
-      year: '',
-      category_id: '',
-      size: '',
-      description: '',
-    },
-  });
+  // const form = useForm({
+  //   defaultValues: {
+  //     artist_id: artists.data?.length > 0 ? artists[0]?.id : null,
+  //     image: undefined,
+  //     name: '',
+  //     year: '',
+  //     category_id: '',
+  //     size: '',
+  //     description: '',
+  //   },
+  // });
 
   if (isFetching) {
     return 'Retrieving data...';
@@ -61,7 +63,7 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
   const onCreateArtwork = async (data: FieldValues) => {
     console.log('values::', data);
     setLoading(true);
-    const fd = new FormData();
+    const fd: FormData = new FormData();
     Object.keys(data)?.map((key) => fd.append(key, data[key]));
     const response = await post(
       `${API.artwork}`,
@@ -131,7 +133,7 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
                         setVal={field?.onChange}
                         open={open}
                         setOpen={setOpen}
-                        Artists={artists}
+                        Artists={artists.data}
                       />
                     </FormControl>
                   </FormItem>

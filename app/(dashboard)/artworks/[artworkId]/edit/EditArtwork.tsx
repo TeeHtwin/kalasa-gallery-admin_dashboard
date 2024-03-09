@@ -41,7 +41,8 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
         Authorization: `Bearer ${token}`,
       }),
   });
-  const form = useForm({
+
+  const form: any = useForm({
     defaultValues: {
       ...artwork,
     },
@@ -63,9 +64,8 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
   const onUpdateArtwork = async (data: FieldValues) => {
     setLoading(true);
 
-    const fd = new FormData();
     Object.keys(data)?.map(
-      (key) => key !== 'image' ?? fd.append(key, data[key]),
+      (key) => key !== 'image' ?? form.append(key, data[key]),
     );
     const response = await post(
       `${API.artwork}`,
@@ -73,12 +73,13 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
-      fd,
+      form,
     );
     setLoading(false);
     if (response?.success) {
       router.push(`/artworks`);
     }
+    console.log(form);
   };
   if (isError) {
     router.push(`/artworks`);
@@ -138,7 +139,7 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
                         setVal={field?.onChange}
                         open={open}
                         setOpen={setOpen}
-                        Artists={artists}
+                        Artists={artists.data}
                       />
                     </FormControl>
                   </FormItem>

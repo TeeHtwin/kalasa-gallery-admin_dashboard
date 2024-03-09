@@ -44,21 +44,23 @@ export default function BaseTable<TData, TValue>({
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup?.headers?.map((header) => (
-                  <TableHead key={header.id}>
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
+            {table
+              ?.getHeaderGroups()
+              .map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup?.headers?.map((header) => (
+                    <TableHead key={header.id}>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                    </TableHead>
+                  ))}
+                </TableRow>
+              ))}
           </TableHeader>
           <TableBody>
-            {table?.getRowModel().rows?.length > 0 ? (
+            {table?.getRowModel()?.rows?.length > 0 ? (
               table.getRowModel().rows?.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (

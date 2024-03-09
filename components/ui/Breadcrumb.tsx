@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import clsx from 'clsx';
-
 type BreadcrumbProps = {
   items: Array<{ name: string; url?: string; icon?: string }>;
 };

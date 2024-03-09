@@ -39,7 +39,7 @@ const Artist = ({ token }: ArtistProps) => {
   if (isLoading) {
     return 'Retrieving data...';
   }
-
+  console.log(artists);
   return (
     <div>
       <div className="px-4 min-h-screen">

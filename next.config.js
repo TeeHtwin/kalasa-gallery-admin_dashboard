@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'staging.kalasa.gallery',
+        hostname: 'api.kalasa.gallery',
       },
     ],
   },

@@ -7,7 +7,7 @@ const LoginLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="h-screen">
       <div className="h-screen w-[50vw] bg-secondary-100 flex items-center justify-center">
         <header className="p-8 fixed top-0 left-0 right-0 flex">
-          <Image src={iconLogo} loading="eager" alt="logo" />
+          <Image src={iconLogo ?? ''} loading="eager" alt="logo" />
         </header>
 
         <section className="w-[479px] h-[492px] bg-white rounded-lg px-10 py-[46px]">
@@ -28,7 +28,7 @@ const LoginLayout = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       <Image
-        src={imgLogin}
+        src={imgLogin ?? ''}
         alt=""
         width={1440}
         height={960}

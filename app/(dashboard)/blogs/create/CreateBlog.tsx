@@ -53,7 +53,7 @@ export default function CreateBlog({ token }: CreateCollectionProps) {
         className="space-y-8 mt-4"
       >
         <div className="flex justify-between items-center text-primary h-6">
-          <h2 className="text-xl font-medium">Create Collection</h2>
+          <h2 className="text-xl font-medium">Create Blog</h2>
           <CtaBtn disabled={loading}>
             {loading ? <LoadingSpinner /> : 'Submit'}
           </CtaBtn>

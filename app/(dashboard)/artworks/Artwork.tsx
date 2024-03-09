@@ -39,6 +39,7 @@ const Artwork = ({ token }: ArtworkProps) => {
   if (isLoading) {
     return 'Retrieving data...';
   }
+  console.log(artworks);
 
   return (
     <div>
@@ -57,7 +58,7 @@ const Artwork = ({ token }: ArtworkProps) => {
         </div>
         <BaseTable
           columns={ArtworkColumnRef}
-          data={artworks?.data}
+          data={artworks}
           pagination={{
             current_page: artworks?.current_page,
             total: artworks?.total,
