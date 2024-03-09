@@ -44,56 +44,58 @@ export default function CreateArtist({ token }: CreateArtistProps) {
     console.log('create response::', response);
   };
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onCreateArtist)}
-        className="space-y-8 mt-4"
-      >
-        <div className="flex justify-between items-center text-primary h-6">
-          <h2 className="text-xl font-medium">Create Collection</h2>
-          <CtaBtn disabled={loading}>
-            {loading ? <LoadingSpinner /> : 'Submit'}
-          </CtaBtn>
-        </div>
-        <div className="max-w-lg">
-          <FormField
-            control={form.control}
-            name="profile_image"
-            render={({ field }) => {
-              return (
+    <>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onCreateArtist)}
+          className="space-y-8 mt-4"
+        >
+          <div className="flex justify-between items-center text-primary h-6">
+            <h2 className="text-xl font-medium">Create Collection</h2>
+            <CtaBtn disabled={loading}>
+              {loading ? <LoadingSpinner /> : 'Submit'}
+            </CtaBtn>
+          </div>
+          <div className="max-w-lg">
+            <FormField
+              control={form.control}
+              name="profile_image"
+              render={({ field }) => {
+                return (
+                  <FormItem className="mb-4">
+                    <FormLabel>Add an Image</FormLabel>
+                    <ImgUpload file={field?.value} setFile={field?.onChange} />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
                 <FormItem className="mb-4">
-                  <FormLabel>Add an Image</FormLabel>
-                  <ImgUpload file={field?.value} setFile={field?.onChange} />
+                  <FormLabel>Artist&apos; Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
                 </FormItem>
-              );
-            }}
-          />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem className="mb-4">
-                <FormLabel>Artist&apos; Name</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem className="mb-4">
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Textarea {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
-      </form>
-    </Form>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="mb-4">
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+        </form>
+      </Form>
+    </>
   );
 }

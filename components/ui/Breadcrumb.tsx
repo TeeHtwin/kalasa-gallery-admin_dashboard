@@ -18,12 +18,18 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
         {items.map((item, index) => (
           <li key={index}>
             <div className="flex items-center">
-              <Image
-                src={clsx(index === 0 ? `${item?.icon}` : '/vector.svg')}
-                width={15}
-                height={15}
-                alt="icon"
-              />
+              {
+                index !== 0 && (
+                  <Image
+                    // src={clsx(index === 0 ? `${item?.icon}` : '/vector.svg')}
+                    src={'/vector.svg'}
+                    width={15}
+                    height={15}
+                    alt="icon"
+                  />
+                )
+              }
+              
               {item.url ? (
                 <Link
                   href={item.url}
