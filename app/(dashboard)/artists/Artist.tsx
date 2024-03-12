@@ -31,7 +31,7 @@ const Artist = ({ token }: ArtistProps) => {
       total: 0,
     },
     queryFn: () =>
-      get(`${API.artist}?page=${pagination?.currentPage}`, {
+      get(`${API.artist}`, {
         Authorization: `Bearer ${token}`,
       }),
   });

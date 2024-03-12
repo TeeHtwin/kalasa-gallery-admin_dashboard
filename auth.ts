@@ -8,8 +8,8 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const { email, password } = credentials;
-        const url = 'https://api.kalasa.gallery/api/login';
-        // const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/login`;
+        //const url = 'https://staging.kalasa.gallery/api/login';
+        const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/login`;
         const user = await fetch(url, {
           method: 'POST',
           headers: {
