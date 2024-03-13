@@ -37,6 +37,9 @@ const EventsTable = ({ token }: EventsProps) => {
     return 'Retrieving data...';
   }
 
+  console.log('data - ', events);
+  
+
   return (
     <div className="px-4 min-h-screen">
       <PageHeader title="Events" />

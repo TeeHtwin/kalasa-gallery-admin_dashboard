@@ -1,7 +1,6 @@
 'use client';
-import { get } from '@/utils/apiFetch';
-import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import CtaBtn from '@/components/ui/CtaBtn';
 import ImgUpload from '@/components/ui/ImgUpload';
@@ -14,53 +13,27 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { API } from '@/lib/routes';
 import { post } from '@/utils/apiFetch';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Combobox } from '@/components/ui/combobox';
 import { useRouter } from 'next/navigation';
+import { API } from '@/lib/routes';
+import { get } from '@/utils/apiFetch';
 
 type CreateArtworkProps = {
   token: string;
+  artists: any
 };
 
-export default function CreateArtwork({ token }: CreateArtworkProps) {
+export default function CreateArtwork({ token, artists }: CreateArtworkProps) {
   const form = useForm();
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [val, setVal] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [val, setVal] = useState('');
   const router = useRouter();
 
-  const {
-    isFetching,
-    data: artists,
-    isError,
-  } = useQuery({
-    queryKey: ['artists'],
-    initialData: {
-      data: [],
-      total: 0,
-    },
-    queryFn: () => get(`${API.artist}`, { Authorization: `Bearer ${token}` }),
-  });
-
-  // const form = useForm({
-  //   defaultValues: {
-  //     artist_id: artists.data?.length > 0 ? artists[0]?.id : null,
-  //     image: undefined,
-  //     name: '',
-  //     year: '',
-  //     category_id: '',
-  //     size: '',
-  //     description: '',
-  //   },
-  // });
-
-  if (isFetching) {
-    return 'Retrieving data...';
-  }
-
-  const onCreateArtwork = async (data: FieldValues) => {
+  
+  const onCreateArtwork = async ( data: FieldValues) => {
     console.log('values::', data);
     setLoading(true);
     const fd: FormData = new FormData();
@@ -81,7 +54,7 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
 
     console.log('create response::', response);
   };
-  console.log(val);
+
   return (
     <Form {...form}>
       <form
@@ -133,7 +106,7 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
                         setVal={field?.onChange}
                         open={open}
                         setOpen={setOpen}
-                        Artists={artists.data}
+                        Artists={artists?.data}
                       />
                     </FormControl>
                   </FormItem>
@@ -153,7 +126,7 @@ export default function CreateArtwork({ token }: CreateArtworkProps) {
               />
               <FormField
                 control={form.control}
-                name="category_id"
+                name="medium"
                 render={({ field }) => (
                   <FormItem className="mb-4">
                     <FormLabel>Medium</FormLabel>

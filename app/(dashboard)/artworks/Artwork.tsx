@@ -58,7 +58,7 @@ const Artwork = ({ token }: ArtworkProps) => {
         </div>
         <BaseTable
           columns={ArtworkColumnRef}
-          data={artworks}
+          data={artworks?.data}
           pagination={{
             current_page: artworks?.current_page,
             total: artworks?.total,
