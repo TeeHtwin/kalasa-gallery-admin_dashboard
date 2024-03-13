@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { API } from '@/lib/routes';
-import { get } from '@/utils/apiFetch';
+import { get, del } from '@/utils/apiFetch';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
 
 type ArtistDetailProps = {
   token: string;
@@ -12,6 +14,8 @@ type ArtistDetailProps = {
 };
 
 const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
+  const router = useRouter();
+
   const {
     data: artist,
     isLoading,
@@ -25,10 +29,20 @@ const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
       }),
   });
 
+  const handleDelete = async () => {
+    const response = await del(`${API.artist}/${id}`, {
+      Authorization: `Bearer ${token}`,
+    });
+
+    if (response?.success) {
+      router.push('/artists');
+    }
+  };
+
   console.log('collection::', artist);
   return (
     <>
-      <button className="text-sm text-[#D40000C7] underline float-right m-4">
+      <button className="text-sm text-[#D40000C7] underline float-right m-4" onClick={handleDelete}>
         Delete Artist
       </button>
       <div className="py-10">
