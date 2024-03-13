@@ -10,7 +10,7 @@ const page = async ({ params }: { params: { eventId: string } }) => {
   const session = await auth();
 
   const data = await fetch(
-    `https://staging.kalasa.gallery/api/admin/event/${params.eventId}`,
+    `https://api.kalasa.gallery/api/admin/event/${params.eventId}`,
     {
       headers: {
         Authorization: `Bearer ${session?.api_token}`,
