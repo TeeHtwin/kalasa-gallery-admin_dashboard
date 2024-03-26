@@ -20,7 +20,6 @@ const page = async ({ params }: { params: { eventId: string } }) => {
 
   const event = await data.json();
 
-  console.log('event', event.data);
 
   return (
     <div className="p-4 min-h-screen">

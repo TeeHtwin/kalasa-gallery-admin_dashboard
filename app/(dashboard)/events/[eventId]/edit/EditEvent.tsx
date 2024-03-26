@@ -25,7 +25,11 @@ type EditEventProps = {
 };
 
 export default function EditEvent({ token, id }: EditEventProps) {
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
   const router = useRouter();
+
   const {
     data: event,
     isLoading,
@@ -37,19 +41,18 @@ export default function EditEvent({ token, id }: EditEventProps) {
         Authorization: `Bearer ${token}`,
       }),
   });
-  const form = useForm({
+
+  const form: any = useForm({
     defaultValues: {
       ...event,
     },
   });
-  const [loading, setLoading] = useState(false);
 
   const onUpdateEvent = async (data: FieldValues) => {
     setLoading(true);
 
-    const fd = new FormData();
     Object.keys(data)?.map(
-      (key) => key !== 'image' ?? fd.append(key, data[key]),
+      (key) => key !== 'image' ?? form.append(key, data[key]),
     );
     const response = await post(
       `${API.events}`,
@@ -57,7 +60,7 @@ export default function EditEvent({ token, id }: EditEventProps) {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
-      fd,
+      form,
     );
     setLoading(false);
     if (response?.success) {
@@ -66,7 +69,7 @@ export default function EditEvent({ token, id }: EditEventProps) {
   };
 
   if (isLoading) {
-    return 'Retrieving Collection Detailed Info..';
+    return 'Retrieving Event Detailed Info..';
   }
 
   if (isError) {
@@ -93,7 +96,7 @@ export default function EditEvent({ token, id }: EditEventProps) {
               return (
                 <FormItem className="mb-4">
                   <FormLabel>Add A Cover Image</FormLabel>
-                  <ImgUpload file={field?.value} setFile={field?.onChange} />
+                  <ImgUpload imgUrl={field?.value} setFile={field?.onChange} />
                 </FormItem>
               );
             }}
@@ -101,7 +104,7 @@ export default function EditEvent({ token, id }: EditEventProps) {
           <div className="flex justify-between">
             <FormField
               control={form.control}
-              name="event_name"
+              name="title"
               render={({ field }) => (
                 <FormItem className="mb-4">
                   <FormLabel>Exhibition name</FormLabel>

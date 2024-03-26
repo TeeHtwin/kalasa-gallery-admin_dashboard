@@ -79,8 +79,12 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
     if (response?.success) {
       router.push(`/artworks`);
     }
-    console.log(form);
   };
+
+  if (isLoading) {
+    return 'Retrieving Event Detailed Info..';
+  }
+
   if (isError) {
     router.push(`/artworks`);
   }

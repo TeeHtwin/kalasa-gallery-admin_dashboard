@@ -1,5 +1,4 @@
 import { auth } from '@/auth';
-import React from 'react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import EditArtwork from './EditArtwork';
 

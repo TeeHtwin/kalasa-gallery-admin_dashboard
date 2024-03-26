@@ -1,18 +1,23 @@
 import { auth } from '@/auth';
 import Breadcrumb from '@/components/ui/Breadcrumb';
+import EditEvent from './EditEvent';
 
-type Props = {};
 
-export default async function page({}: Props) {
+export default async function page({
+  params,
+}: {
+  params: { eventId: string };
+}) {
   const session = await auth();
   return (
     <div className="px-4 overflow-scroll">
       <Breadcrumb
         items={[
-          { name: 'Event', url: '/events' },
+          { name: 'Events', url: '/events' },
           { name: 'Edit Event' },
         ]}
       />
+      <EditEvent token={session?.api_token ?? ''} id={params?.eventId} />
     </div>
   );
 }
