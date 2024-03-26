@@ -37,6 +37,7 @@ const ArtworkDetail = ({ token, id }: ArtworkDetailProps) => {
       router.push('/artworks');
     }
   };
+  
   const inputDateString = artwork?.created_at;
   const inputDate = new Date(inputDateString);
   const formattedDate = moment(inputDate).format('MMM Do, YYYY');

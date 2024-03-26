@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import React from 'react';
 import { API } from '@/lib/routes';
@@ -28,16 +28,17 @@ const EventDetails = ({ token, id }: EventDetailProps) => {
       }),
   });
 
-  if (!isLoading) {
-    console.log('event - ', event);
-  }
 
   if (isError) console.log(error);
 
   const handleDelete = async () => {
-    const response = await del(`${API.collections}/${id}`, {
+    
+    const response = await del(`${API.events}/${id}`, {
       Authorization: `Bearer ${token}`,
     });
+
+    console.log('res', response);
+    
 
     if (response?.success) {
       router.push('/events');
@@ -46,12 +47,12 @@ const EventDetails = ({ token, id }: EventDetailProps) => {
 
   return (
     <>
-      {/* <button
+      <button
         className="text-sm text-[#D40000C7] underline float-right m-4"
         onClick={handleDelete}
       >
         Delete Event
-      </button> */}
+      </button>
       <div className="py-10">
         <div className="flex gap-8 pb-10">
           <Image src={event?.image} width={300} height={300} alt="image" />

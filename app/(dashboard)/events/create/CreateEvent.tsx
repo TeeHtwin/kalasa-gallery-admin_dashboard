@@ -16,6 +16,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { API } from '@/lib/routes';
 import { post } from '@/utils/apiFetch';
 import { FieldValues, useForm } from 'react-hook-form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 type TokenProps = {
   token: string;
@@ -84,11 +91,23 @@ const CreateEvent = ({ token }: TokenProps) => {
               control={form.control}
               name="status"
               render={({ field }) => (
-                <FormItem className="mb-4">
+                <FormItem>
                   <FormLabel>Exhibition Status</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="upcoming">upcoming</SelectItem>
+                      <SelectItem value="ongoing">ongoing</SelectItem>
+                      <SelectItem value="done">done</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormItem>
               )}
             />
