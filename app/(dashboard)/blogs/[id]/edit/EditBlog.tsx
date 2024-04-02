@@ -37,6 +37,7 @@ export default function EditBlog({ token, id }: EditBlogProps) {
         Authorization: `Bearer ${token}`,
       }),
   });
+    
   const form = useForm({
     defaultValues: {
       ...blog,
@@ -72,6 +73,7 @@ export default function EditBlog({ token, id }: EditBlogProps) {
   if (isError) {
     router.push(`/blogs`);
   }
+  console.log(form.control._defaultValues);
 
   return (
     <Form {...form}>

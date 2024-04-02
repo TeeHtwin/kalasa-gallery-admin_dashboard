@@ -1,5 +1,3 @@
-'use client';
-
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import CtaBtn from '@/components/ui/CtaBtn';
 import TitleSection from '@/components/ui/TitleSection';

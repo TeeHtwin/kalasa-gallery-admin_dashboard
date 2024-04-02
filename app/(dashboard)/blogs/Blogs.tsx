@@ -45,7 +45,7 @@ const Blogs = ({ token }: TokenProps) => {
         <PageHeader title="Blogs" />
         <div className="flex justify-between h-5 items-center mb-5">
           <div>
-            Total Collections{' '}
+            Total Blogs{' '}
             <span className="border rounded-md text-primary px-4">
               {blogs?.total}
             </span>

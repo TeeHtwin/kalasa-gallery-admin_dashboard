@@ -7,20 +7,20 @@ type Props = {};
 export default async function page({
   params,
 }: {
-  params: { collectionId: string };
+  params: { id: string };
 }) {
-  const session = await auth();
+  const session = await auth();  
   return (
     <div className="px-4 overflow-scroll">
       <Breadcrumb
         items={[
-          { name: 'Blog', url: '/Blogs' },
+          { name: 'Blog', url: '/blogs' },
           { name: 'Edit Blog' },
         ]}
       />
       <EditBlog
         token={session?.api_token ?? ''}
-        id={params?.collectionId}
+        id={params?.id}
       />
     </div>
   );
