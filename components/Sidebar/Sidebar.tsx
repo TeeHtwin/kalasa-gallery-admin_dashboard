@@ -8,10 +8,6 @@ import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 
 export default function Sidebar({ session }: { session: Session | null }) {
-  const handleSignOut = async () => {
-    await signOut();
-  };
-
   return (
     <aside className="w-[300px] fixed left-0 top-0 p-4 h-full max-h-[851px] flex flex-col gap-4 py-6 border-r">
       <header>
@@ -24,7 +20,7 @@ export default function Sidebar({ session }: { session: Session | null }) {
           <span className="font-bold">{session?.user?.name}</span>
           <span>{session?.user?.email}</span>
         </div>
-        <button onClick={handleSignOut}>
+        <button onClick={() => signOut()}>
           <IconLogout />
         </button>
       </div>

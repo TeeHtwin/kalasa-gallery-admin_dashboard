@@ -96,7 +96,7 @@ export default function EditEvent({ token, id }: EditEventProps) {
               return (
                 <FormItem className="mb-4">
                   <FormLabel>Add A Cover Image</FormLabel>
-                  <ImgUpload imgUrl={field?.value} setFile={field?.onChange} />
+                  <ImgUpload file={field?.value} setFile={field?.onChange} />
                 </FormItem>
               );
             }}

@@ -48,7 +48,7 @@ const Artist = ({ token }: ArtistProps) => {
           <div>
             Total Artists{' '}
             <span className="border rounded-md text-primary px-4">
-              {artists?.total}
+              {artists?.total_artist}
             </span>
           </div>
           <CtaBtn>

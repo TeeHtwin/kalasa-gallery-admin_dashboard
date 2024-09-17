@@ -63,17 +63,13 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
 
   const onUpdateArtwork = async (data: FieldValues) => {
     setLoading(true);
-
-    Object.keys(data)?.map(
-      (key) => key !== 'image' ?? form.append(key, data[key]),
-    );
     const response = await post(
-      `${API.artwork}`,
+      `${API.artwork}/${id}`,
       {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
-      form,
+      data,
     );
     setLoading(false);
     if (response?.success) {
@@ -111,10 +107,7 @@ export default function EditArtwork({ token, id }: EditArtworkProps) {
                 return (
                   <FormItem className="mb-4">
                     <FormLabel className="text-base">Add an Image</FormLabel>
-                    <ImgUpload
-                      imgUrl={field?.value}
-                      setFile={field?.onChange}
-                    />
+                    <ImgUpload file={field?.value} setFile={field?.onChange} />
                   </FormItem>
                 );
               }}

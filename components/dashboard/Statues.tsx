@@ -11,7 +11,7 @@ import { get } from '@/utils/apiFetch';
 import { API } from '@/lib/routes';
 import { useQuery } from '@tanstack/react-query';
 
-type TokenProps = {
+export type TokenProps = {
   token: string;
 };
 

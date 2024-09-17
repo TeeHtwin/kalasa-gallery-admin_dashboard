@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'api.kalasa.gallery',
       },
+      {
+        protocol: 'https',
+        hostname: 'staging.kalasa.gallery',
+      },
     ],
   },
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import CtaBtn from '@/components/ui/CtaBtn';
 import ImgUpload from '@/components/ui/ImgUpload';
@@ -16,6 +16,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { API } from '@/lib/routes';
 import { post } from '@/utils/apiFetch';
 import { FieldValues, useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+import { get } from '@/utils/apiFetch';
 
 type EditArtistProps = {
   token: string;
@@ -23,26 +25,51 @@ type EditArtistProps = {
 };
 
 export default function EditArtist({ artistId, token }: EditArtistProps) {
-  const form = useForm();
   const [loading, setLoading] = useState(false);
+  const {
+    data: artist,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['artist', artistId],
+    queryFn: () =>
+      get(`${API.artist}/${artistId}`, {
+        Authorization: `Bearer ${token}`,
+      }),
+  });
 
+  const form = useForm();
+
+  useEffect(() => {
+    if (!isLoading && !isError && artist) {
+      // Reset the form with fetched data
+      form.reset({
+        profile_image: artist.profile_image,
+        name: artist.name,
+        description: artist.description,
+      });
+    }
+  }, [isLoading, isError, artist, form]);
   const onCreateArtist = async (data: FieldValues) => {
     console.log('values::', data);
     setLoading(true);
-    const fd: FormData = new FormData();
-    Object.keys(data)?.map((key) => fd.append(key, data[key]));
+    // const fd: FormData = new FormData();
+    // Object.keys(data)?.map((key) => fd.append(key, data[key]));
     const response = await post(
-      `${API.artist}`,
+      `${API.artist}/${artistId}`,
       {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
-      fd,
+      data,
     );
+    console.log(response);
 
     setLoading(false);
 
-    console.log('create response::', response);
+    // console.log('create response::', response);
+    console.log(token);
   };
   return (
     <Form {...form}>

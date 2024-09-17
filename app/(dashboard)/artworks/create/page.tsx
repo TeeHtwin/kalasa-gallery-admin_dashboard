@@ -24,7 +24,7 @@ export default async function Page() {
   const artists = await getArtists();
 
   return (
-    <div className="px-4 overflow-scroll">
+    <div className="px-4 py-7 overflow-scroll">
       <Breadcrumb
         items={[
           { name: 'Artworks', url: '/artworks' },

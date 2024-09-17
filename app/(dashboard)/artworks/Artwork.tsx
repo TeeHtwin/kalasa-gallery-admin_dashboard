@@ -3,7 +3,7 @@
 import { get } from '@/utils/apiFetch';
 import { API } from '@/lib/routes';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import BaseTable from '@/components/common/BaseTable';
 import { ArtworkColumnRef } from './Columns';
 import PageHeader from '@/components/common/PageHeader';
@@ -14,32 +14,43 @@ type ArtworkProps = {
   token: string;
 };
 
-const Artwork = ({ token }: ArtworkProps) => {
+const Artwork = React.memo(({ token }: ArtworkProps) => {
   const [pagination, setPagination] = useState({
     totalCount: 0,
     currentPage: 1,
     totalPage: 1,
   });
+
   const {
     isLoading,
     data: artworks,
     isError,
   } = useQuery({
-    queryKey: ['artworks', pagination?.currentPage],
+    queryKey: ['artworks', pagination.currentPage],
     initialData: {
       data: [],
       ...pagination,
     },
     queryFn: () =>
-      get(`${API.artwork}?page=${pagination?.currentPage}`, {
+      get(`${API.artwork}?page=${pagination.currentPage}`, {
         Authorization: `Bearer ${token}`,
       }),
+    keepPreviousData: true,
   });
+
+  const handlePageChange = useCallback((page: number) => {
+    setPagination((prev) => ({ ...prev, currentPage: page }));
+  }, []);
+
+  const memoizedColumns = useMemo(() => ArtworkColumnRef(token), [token]);
 
   if (isLoading) {
     return 'Retrieving data...';
   }
-  console.log(artworks);
+
+  if (isError) {
+    return 'An error occurred while fetching data.';
+  }
 
   return (
     <div>
@@ -57,22 +68,20 @@ const Artwork = ({ token }: ArtworkProps) => {
           </CtaBtn>
         </div>
         <BaseTable
-          columns={ArtworkColumnRef}
-          data={artworks?.data}
+          columns={memoizedColumns}
+          data={artworks?.data || []}
           pagination={{
             current_page: artworks?.current_page,
             total: artworks?.total,
             pageCount: artworks?.per_page,
           }}
-          onPageChange={(page) =>
-            setPagination((prev) => {
-              return { ...prev, currentPage: page };
-            })
-          }
+          onPageChange={handlePageChange}
         />
       </div>
     </div>
   );
-};
+});
+
+Artwork.displayName = 'Artwork';
 
 export default Artwork;

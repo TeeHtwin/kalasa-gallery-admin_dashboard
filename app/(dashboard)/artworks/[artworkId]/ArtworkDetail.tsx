@@ -37,7 +37,7 @@ const ArtworkDetail = ({ token, id }: ArtworkDetailProps) => {
       router.push('/artworks');
     }
   };
-  
+
   const inputDateString = artwork?.created_at;
   const inputDate = new Date(inputDateString);
   const formattedDate = moment(inputDate).format('MMM Do, YYYY');
@@ -188,9 +188,9 @@ const ArtworkDetail = ({ token, id }: ArtworkDetailProps) => {
               </p>
               <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
               <p
-                className={`px-3 py-1 text-base ${artwork?.status ? 'bg-green-600' : 'bg-red-500'}`}
+                className={`px-3 py-1 text-white font-semibold text-base ${artwork?.sold ? 'bg-red-500' : 'bg-emerald-500'}`}
               >
-                {artwork?.status ? 'Available' : 'Sold'}
+                {artwork?.sold ? 'Sold' : 'Available'}
               </p>
             </div>
           </div>

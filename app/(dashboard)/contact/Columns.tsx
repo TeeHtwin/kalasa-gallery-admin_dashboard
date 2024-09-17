@@ -23,14 +23,14 @@ export const ContactColumnRef: ColumnDef<Contact>[] = [
     header: 'Action',
     accessorKey: 'id',
     id: 'action',
-    cell: ({ getValue, cell }) => {
+    cell: ({ getValue, cell, row }) => {
       const rowId = getValue() as number;
       return (
         <Popup
           trigger="view"
-          name="Hnin Cherry"
-          gmail="yukisaku1023@gmail.com"
-          description="Can you contact me back !!"
+          name={row.getValue('name')}
+          gmail={row.getValue('email')}
+          description={row.getValue('message')}
         ></Popup>
       );
     },

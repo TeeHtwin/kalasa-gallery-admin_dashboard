@@ -1,15 +1,14 @@
 import { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
 import Link from 'next/link';
-import Artist from './Artwork';
+import SwitchForm from '@/components/common/SwitchForm';
 
-export const ArtworkColumnRef: ColumnDef<any>[] = [
+export const ArtworkColumnRef = (token: string): ColumnDef<any>[] => [
   {
     header: 'No',
     accessorKey: 'id',
   },
   {
-    header: `Artwork Name`,
+    header: 'Artwork Name',
     accessorKey: 'name',
   },
   {
@@ -23,15 +22,24 @@ export const ArtworkColumnRef: ColumnDef<any>[] = [
   {
     header: 'Upload Date',
     accessorKey: 'updated_at',
+    cell: ({ getValue }) => new Date(getValue() as string).toLocaleDateString(),
   },
   {
     header: 'Artwork Status',
-    accessorKey: 'status',
+    accessorKey: 'is_sold',
+    id: 'action',
+    cell: ({ row }) => (
+      <SwitchForm
+        id={row.original.id}
+        token={token}
+        initialStatus={row.original.sold}
+      />
+    ),
   },
   {
     header: '',
     accessorKey: 'id',
-    id: 'action',
+    id: 'view',
     cell: ({ getValue }) => {
       const rowId = getValue() as number;
       return (
