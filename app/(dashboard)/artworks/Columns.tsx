@@ -22,7 +22,7 @@ export const ArtworkColumnRef = (token: string): ColumnDef<any>[] => [
   {
     header: 'Upload Date',
     accessorKey: 'updated_at',
-    cell: ({ getValue }) => new Date(getValue() as string).toLocaleDateString(),
+    cell: ({ getValue }) => new Date(getValue() as string).toDateString(),
   },
   {
     header: 'Artwork Status',
