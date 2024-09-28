@@ -6,7 +6,7 @@ import { get, del } from '@/utils/apiFetch';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
+import GalleryCard from '@/components/common/GalleryCard';
 
 type ArtistDetailProps = {
   token: string;
@@ -42,7 +42,10 @@ const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
   console.log('collection::', artist);
   return (
     <>
-      <button className="text-sm text-[#D40000C7] underline float-right m-4" onClick={handleDelete}>
+      <button
+        className="text-sm text-[#D40000C7] underline float-right m-4"
+        onClick={handleDelete}
+      >
         Delete Artist
       </button>
       <div className="py-10">
@@ -71,17 +74,13 @@ const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
           </div>
         </div>
         <hr />
+
         <div className="max-w-[60rem] py-10">
-          <p
-            className="text-primary text-2xl font-semibold pb-4"
-            style={{
-              //* just temporary
-              fontFamily: 'cardo',
-            }}
-          >
-            added date
-          </p>
-          <span className="leading-relaxed">{artist?.added_date}</span>
+          <div className="columns-2 xl:columns-3 md:columns-2 sm:columns-2 gap-2 space-y-4 mt-5 lg:mt-10">
+            {artist?.artworks.map((gallery: any) => (
+              <GalleryCard key={gallery.id} info={gallery} />
+            ))}
+          </div>
         </div>
       </div>
     </>

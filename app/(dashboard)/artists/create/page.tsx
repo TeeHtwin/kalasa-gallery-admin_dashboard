@@ -6,7 +6,7 @@ import { auth } from '@/auth';
 export default async function page() {
   const session = await auth();
   return (
-    <div className="px-4 overflow-scroll">
+    <div className="px-4 py-7 overflow-scroll">
       <Breadcrumb
         items={[
           { name: 'Artist', url: '/artists' },

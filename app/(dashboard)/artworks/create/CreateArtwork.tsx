@@ -22,7 +22,7 @@ import { get } from '@/utils/apiFetch';
 
 type CreateArtworkProps = {
   token: string;
-  artists: any
+  artists: any;
 };
 
 export default function CreateArtwork({ token, artists }: CreateArtworkProps) {
@@ -32,8 +32,7 @@ export default function CreateArtwork({ token, artists }: CreateArtworkProps) {
   const [val, setVal] = useState('');
   const router = useRouter();
 
-  
-  const onCreateArtwork = async ( data: FieldValues) => {
+  const onCreateArtwork = async (data: FieldValues) => {
     console.log('values::', data);
     setLoading(true);
     const fd: FormData = new FormData();
