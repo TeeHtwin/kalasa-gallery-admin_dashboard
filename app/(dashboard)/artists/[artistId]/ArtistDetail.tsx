@@ -71,6 +71,34 @@ const ArtistDetail = ({ token, id }: ArtistDetailProps) => {
               <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
               <p>{artist?.name}</p>
             </div>
+            <div>
+              <div className="flex gap-5">
+                <p
+                  className="text-xl"
+                  style={{
+                    //* just temporary
+                    fontFamily: 'cardo',
+                  }}
+                >
+                  Total Artworks
+                </p>
+                <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
+                <p>{artist?.total_artworks}</p>
+              </div>
+              <div className="flex gap-5">
+                <p
+                  className="text-xl"
+                  style={{
+                    //* just temporary
+                    fontFamily: 'cardo',
+                  }}
+                >
+                  Sold Artworks
+                </p>
+                <Image src={'/red_dot.svg'} width={10} height={10} alt="icon" />
+                <p>{artist?.sold_artworks}</p>
+              </div>
+            </div>
           </div>
         </div>
         <hr />
