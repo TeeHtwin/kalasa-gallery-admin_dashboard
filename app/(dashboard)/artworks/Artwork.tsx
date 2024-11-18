@@ -3,7 +3,7 @@
 import { get } from '@/utils/apiFetch';
 import { API } from '@/lib/routes';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import BaseTable from '@/components/common/BaseTable';
 import { ArtworkColumnRef } from './Columns';
 import PageHeader from '@/components/common/PageHeader';
@@ -23,6 +23,10 @@ const Artwork = React.memo(({ token }: ArtworkProps) => {
   });
 
   const [keyword, setKeyword] = useState<string>('');
+
+  useEffect(() => {
+    setPagination((prev) => ({ ...prev, currentPage: 1 }));
+  }, [keyword]);
   const {
     isLoading,
     data: artworks,

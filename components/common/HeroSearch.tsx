@@ -1,19 +1,37 @@
 'use client';
-
-import { useDebouncedCallback } from 'use-debounce';
 import Image from 'next/image';
 import searchIcon from '@/assets/icons/search.svg';
+import React, { useState, useCallback, useEffect } from 'react';
 
 type HeroSearchProps = {
   name: string;
   placeholder: string;
-  setKeyword: any;
+  setKeyword: (keyword: string) => void;
 };
 
 const HeroSearch = ({ name, placeholder, setKeyword }: HeroSearchProps) => {
-  const handleSearch = useDebouncedCallback((term) => {
-    setKeyword(term);
-  }, 500);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const debouncedSearch = useCallback(
+    (value: string) => {
+      const handler = setTimeout(() => {
+        setKeyword(value);
+      }, 300); // 300ms debounce time
+
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [setKeyword],
+  );
+
+  useEffect(() => {
+    return debouncedSearch(searchTerm);
+  }, [searchTerm, debouncedSearch]);
+
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+  };
 
   return (
     <div className="block relative sm:flex justify-between items-center gap-40 py-8">
@@ -30,4 +48,5 @@ const HeroSearch = ({ name, placeholder, setKeyword }: HeroSearchProps) => {
     </div>
   );
 };
+
 export default HeroSearch;
