@@ -9,6 +9,7 @@ import { ArtworkColumnRef } from './Columns';
 import PageHeader from '@/components/common/PageHeader';
 import CtaBtn from '@/components/ui/CtaBtn';
 import Link from 'next/link';
+import HeroSearch from '@/components/common/HeroSearch';
 
 type ArtworkProps = {
   token: string;
@@ -21,20 +22,24 @@ const Artwork = React.memo(({ token }: ArtworkProps) => {
     totalPage: 1,
   });
 
+  const [keyword, setKeyword] = useState<string>('');
   const {
     isLoading,
     data: artworks,
     isError,
   } = useQuery({
-    queryKey: ['artworks', pagination.currentPage],
+    queryKey: ['artworks', pagination.currentPage, keyword],
     initialData: {
       data: [],
       ...pagination,
     },
     queryFn: () =>
-      get(`${API.artwork}?page=${pagination.currentPage}`, {
-        Authorization: `Bearer ${token}`,
-      }),
+      get(
+        `${API.artwork}/search-by-name?page=${pagination.currentPage}&q=${keyword}`,
+        {
+          Authorization: `Bearer ${token}`,
+        },
+      ),
     keepPreviousData: true,
   });
 
@@ -63,6 +68,11 @@ const Artwork = React.memo(({ token }: ArtworkProps) => {
               {artworks?.total}
             </span>
           </div>
+          <HeroSearch
+            name="Search Artwork"
+            placeholder="Search Artwork"
+            setKeyword={setKeyword}
+          />
           <CtaBtn>
             <Link href={`/artworks/create`}>Create Artwork</Link>
           </CtaBtn>

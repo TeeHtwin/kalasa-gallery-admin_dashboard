@@ -51,8 +51,8 @@ export default function EditEvent({ token, id }: EditEventProps) {
   const onUpdateEvent = async (data: FieldValues) => {
     setLoading(true);
 
-    Object.keys(data)?.map(
-      (key) => key !== 'image' ?? form.append(key, data[key]),
+    Object.keys(data)?.map((key) =>
+      key !== 'image' ? form.append(key, data[key]) : null,
     );
     const response = await post(
       `${API.events}`,
