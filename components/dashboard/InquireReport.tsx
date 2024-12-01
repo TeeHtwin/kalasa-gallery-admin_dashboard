@@ -26,7 +26,9 @@ const InquireReport = () => {
         <YearBtn years={years} />
       </div>
 
-      <section>{/* <Chart series={series} />   */}</section>
+      <section>
+        <Chart series={series} />
+      </section>
     </div>
   );
 };

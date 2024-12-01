@@ -5,6 +5,7 @@ import {
   ARTWORKS,
   BLOGS,
   COLLECTIONS,
+  CONTACTS,
   EVENTS,
 } from '../../constants/navRoutes';
 import { get } from '@/utils/apiFetch';
@@ -41,6 +42,11 @@ const Statues = ({ token }: TokenProps) => {
     queryFn: () =>
       get(`${API.collections}/total`, { Authorization: `Bearer ${token}` }),
   });
+  const { data: totalContact } = useQuery({
+    queryKey: ['totalContact'],
+    queryFn: () =>
+      get(`${API.contacts}/total`, { Authorization: `Bearer ${token}` }),
+  });
 
   console.log(token);
   console.log(totalEvents);
@@ -73,6 +79,12 @@ const Statues = ({ token }: TokenProps) => {
       label: 'total events',
       amount: totalEvents,
       href: EVENTS,
+      isHighlight: true,
+    },
+    {
+      label: 'total contacts',
+      amount: totalContact,
+      href: CONTACTS,
       isHighlight: true,
     },
   ];

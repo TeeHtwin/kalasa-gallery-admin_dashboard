@@ -10,7 +10,7 @@ export default async function page() {
     <div className="flex min-h-screen">
       <div className="grow border-r border-l py-6 px-4 flex flex-col gap-14">
         <Statues token={session?.api_token ?? ''} />
-        {/* <InquireReport /> */}
+        <InquireReport />
       </div>
 
       <ContactAndEvents token={session?.api_token ?? ''} />

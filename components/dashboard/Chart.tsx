@@ -8,7 +8,6 @@ interface SeriesProp {
 }
 
 const Chart = ({ series }: { series: SeriesProp[] }) => {
-
   const options = {
     colors: ['#9B4205', '#A95419'],
     chart: {
