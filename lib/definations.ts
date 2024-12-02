@@ -1,5 +1,4 @@
-type LoginData = {
-  email: string;
+ype LoginData = { email: string;
   password: string;
   callbackUrl: string;
 };

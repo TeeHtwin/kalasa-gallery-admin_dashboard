@@ -35,16 +35,7 @@ const upcomingEvents = [
   },
 ];
 
-const ContactAndEvents = ({ token }: TokenProps) => {
-  const { data: contactData, isLoading } = useQuery({
-    queryKey: ['contactData'],
-    queryFn: () =>
-      get(`${API.contacts}`, {
-        Authorization: `Bearer ${token}`,
-      }),
-  });
-
-  console.log(contactData?.data);
+const ContactAndEvents = () => {
   return (
     <div className="basis-[300px] py-6 pl-4 pr-8 flex flex-col gap-12">
       <section className="flex flex-col gap-6">
@@ -55,20 +46,19 @@ const ContactAndEvents = ({ token }: TokenProps) => {
           </Link>
         </div>
 
-        {contactData ? (
-          <div className="flex flex-col gap-5">
-            {contactData?.data
-              .slice(0, 5)
-              .map((contact: any) => (
-                <RecentContact key={contact?.id} contact={contact} />
-              ))}
-          </div>
-        ) : (
-          ''
-        )}
-      </section>
+        {/* {contactData ? ( */}
+        {/*   <div className="flex flex-col gap-5"> */}
+        {/*     {contactData?.data */}
+        {/*       .slice(0, 5) */}
+        {/*       .map((contact: any) => ( */}
+        {/*         <RecentContact key={contact?.id} contact={contact} /> */}
+        {/*       ))} */}
+        {/*   </div> */}
+        {/* ) : ( */}
+        {/* '' */}
 
-      {/* <section className="flex flex-col gap-6">
+        {/**/}
+        {/* <section className="flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-lg text-primary">Upcoming Events</h2>
           <Link href="#" className="text-black-200 text-sm ">
@@ -80,8 +70,8 @@ const ContactAndEvents = ({ token }: TokenProps) => {
           {upcomingEvents.map((event) => (
             <UEvent key={event.id} event={event} />
           ))}
-        </div>
-      </section> */}
+        </div>*/}
+      </section>
     </div>
   );
 };
