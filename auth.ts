@@ -2,16 +2,10 @@
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import { authConfig } from './auth.config';
-import NextAuth, {type DefaultSession } from 'next-auth';
-import { JWT } from 'next-auth/jwt';
+import NextAuth, { type DefaultSession, Session } from 'next-auth';
 
-declare module 'next-auth' {
-  interface Session {
-    user: {
-      api_token: string;
-    } & DefaultSession['user'];
-  }
-}
+
+
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -36,13 +30,7 @@ export const { auth, signIn, signOut } = NextAuth({
             body: JSON.stringify({ email, password }),
           });
 
-          const response = await res.json();
-          const user = {
-            name: response.userData.name,
-            email: response.userData.email,
-            api_token: response.token,
-          };
-          console.log(user);
+          const user = await res.json();
           return user;
         }
         console.log('Invalid credentials');
@@ -51,10 +39,23 @@ export const { auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-
-    async session({session, token }) {
-      session.user.api_token = await token.api_token
-      return session
+    async jwt({ token, user, account, profile, session, trigger }) {
+      if (trigger === 'update') {
+        return { ...token, ...session };
+      }
+      if (account) {
+        token.api_token = user.api_token;
+      }
+      return token;
+    },
+    async session(sessionArgs) {
+      // token only exists when the strategy is jwt and not database, so sessionArgs here will be { session, token }
+      // with a database strategy it would be { session, user }
+      if ('token' in sessionArgs) {
+        let session = sessionArgs.session;
+        session.api_token = sessionArgs.token.api_token as string;
+      }
+      return sessionArgs.session;
     },
   }
 });

@@ -6,7 +6,7 @@ export const authConfig = {
     signIn: '/login',
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }: {auth: Session|null; request: NextRequest  }) {
+    authorized({ auth, request: { nextUrl }}:{auth:Session | null; request: NextRequest}) {
       console.log('auth user :::: ', auth);
       const isLoggedIn = !!auth?.user;
       console.log('is loggendIN??????', isLoggedIn);
