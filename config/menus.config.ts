@@ -14,7 +14,6 @@ import {
   CONTACTS,
   EVENTS,
 } from '../constants/navRoutes';
-
 export const menus = [
   {
     label: 'dashboard',

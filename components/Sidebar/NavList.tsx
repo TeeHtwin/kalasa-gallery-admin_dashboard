@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 
 const NavList = () => {
   const pathname = usePathname();
+  console.log('pathname:', pathname);
   return (
     <nav>
       <ul className="flex flex-col gap-2">

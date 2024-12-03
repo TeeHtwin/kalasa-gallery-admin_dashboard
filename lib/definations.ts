@@ -1,7 +1,4 @@
-ype LoginData = { email: string;
-  password: string;
-  callbackUrl: string;
-};
+type LoginData = { email: string; password: string; callbackUrl: string };
 
 type Collection = {
   id: number;
@@ -19,12 +16,12 @@ type Exhibition = {
   title: string;
   status: string;
   location: string;
-  image: string
-}
+  image: string;
+};
 
 type Blog = {
   id: number;
   title: string;
-  image: string
+  image: string;
   description: string;
-}
+};
